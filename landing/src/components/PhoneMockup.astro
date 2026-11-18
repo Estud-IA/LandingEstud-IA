@@ -1,0 +1,128 @@
+---
+/**
+ * Mockup de teléfono con el estilo táctil (.telefono de la maqueta). Tres modos:
+ * - imagen:  una captura de la app (390 × 844) optimizada con astro:assets.
+ * - video:   la captura hace de póster (RF-17, cuando exista el video real).
+ * - slot:    una pantalla en HTML dibujada a 390 × 844 y escalada al ancho del teléfono
+ *            (fase 04, para animar sus partes). Sin `imagen`, se usa el slot.
+ */
+import type { ImageMetadata } from 'astro';
+import { Picture, getImage } from 'astro:assets';
+
+interface Props {
+  imagen?: ImageMetadata;
+  alt?: string;
+  /** Ancho de la pantalla, en px, en escritorio. La altura sale de la proporción 390:844. */
+  ancho?: number;
+  /** Ancho en pantallas chicas (< 30rem). */
+  anchoMovil?: number;
+  prioridad?: boolean;
+  video?: string;
+  class?: string;
+}
+
+const {
+  imagen,
+  alt = '',
+  ancho = 304,
+  anchoMovil = 258,
+  prioridad = false,
+  video,
+  class: clase,
+} = Astro.props;
+
+const sizes = `(width < 30rem) ${anchoMovil}px, ${ancho}px`;
+// 1×, 2×, 2,7× (muchos Android tienen DPR 2,625) y 3× de cada ancho. Las capturas no tienen
+// transparencia, así que el respaldo es JPG: el PNG pesaba hasta 1,2 MB (fase 07).
+const anchos = [
+  ...new Set([1, 2, 2.7, 3].flatMap((f) => [Math.round(anchoMovil * f), Math.round(ancho * f)])),
+].sort((a, b) => a - b);
+const poster =
+  video && imagen ? (await getImage({ src: imagen, width: ancho * 2, format: 'webp' })).src : '';
+const estilo = [
+  `--pantalla-ancho: ${ancho}px`,
+  `--pantalla-ancho-movil: ${anchoMovil}px`,
+  `--escala: ${ancho / 390}`,
+  `--escala-movil: ${anchoMovil / 390}`,
+].join('; ');
+---
+
+<div class:list={['telefono', clase]} style={estilo}>
+  {imagen && video ? (
+    <video
+      class="telefono-pantalla"
+      src={video}
+      poster={poster}
+      muted
+      loop
+      playsinline
+      autoplay
+      preload="none"
+      aria-label={alt}
+    />
+  ) : imagen ? (
+    <Picture
+      class="telefono-pantalla"
+      src={imagen}
+      alt={alt}
+      formats={['avif', 'webp']}
+      fallbackFormat="jpg"
+      quality={80}
+      widths={anchos}
+      sizes={sizes}
+      loading={prioridad ? 'eager' : 'lazy'}
+      fetchpriority={prioridad ? 'high' : 'auto'}
+      decoding={prioridad ? 'sync' : 'async'}
+    />
+  ) : (
+    <div class="telefono-lienzo">
+      <slot />
+    </div>
+  )}
+</div>
+
+<style>
+  @layer componentes {
+    .telefono {
+      --marco: 10px;
+      --ancho-actual: var(--pantalla-ancho);
+      --escala-actual: var(--escala);
+      position: relative;
+      flex: none;
+      inline-size: calc(var(--ancho-actual) + 2 * var(--marco));
+      block-size: calc(var(--ancho-actual) * 844 / 390 + 2 * var(--marco));
+      border: var(--marco) solid var(--negro);
+      border-radius: calc(var(--radio-telefono) * 0.78 + var(--marco));
+      background: var(--negro);
+      box-shadow: 0 10px 0 var(--sombra-color, var(--color-tinta));
+      outline: var(--borde) solid var(--telefono-contorno, var(--color-tinta));
+      overflow: clip;
+
+      @media (width < 30rem) {
+        --ancho-actual: var(--pantalla-ancho-movil);
+        --escala-actual: var(--escala-movil);
+      }
+    }
+
+    .telefono :global(.telefono-pantalla),
+    .telefono :global(.telefono-pantalla img) {
+      display: block;
+      inline-size: 100%;
+      block-size: 100%;
+      aspect-ratio: 390 / 844;
+      object-fit: cover;
+      border-radius: calc(var(--radio-telefono) * 0.78 - 2px);
+    }
+
+    /* Pantalla en HTML: se dibuja a 390 × 844 y se escala al ancho del teléfono. */
+    .telefono-lienzo {
+      position: relative;
+      inline-size: 390px;
+      block-size: 844px;
+      scale: var(--escala-actual);
+      transform-origin: 0 0;
+      border-radius: calc(var(--radio-telefono) / var(--escala-actual) * 0.78);
+      overflow: clip;
+    }
+  }
+</style>

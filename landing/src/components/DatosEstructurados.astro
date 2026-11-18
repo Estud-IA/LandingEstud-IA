@@ -1,0 +1,18 @@
+---
+/**
+ * Datos estructurados JSON-LD (schema.org) para buscadores (RF-15). Recibe un objeto y lo escribe
+ * en un <script type="application/ld+json">. Se escapa "<" para que ningún texto pueda cerrar la
+ * etiqueta <script>.
+ */
+interface Props {
+  datos: Record<string, unknown>;
+}
+
+const { datos } = Astro.props;
+const json = JSON.stringify({ '@context': 'https://schema.org', ...datos }).replace(
+  /</g,
+  '\\u003c',
+);
+---
+
+<script type="application/ld+json" set:html={json} is:inline />

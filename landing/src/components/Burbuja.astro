@@ -1,0 +1,58 @@
+---
+/** Burbuja de chat de la app (normal, destacada o del sistema), con su avatar. */
+import Avatar from './Avatar.astro';
+
+interface Props {
+  iniciales: string;
+  color?: 'amarillo' | 'menta' | 'lavanda' | 'rosa' | 'gris' | 'cielo';
+  autor: string;
+  tipo?: 'normal' | 'destacado' | 'sistema';
+}
+
+const { iniciales, color = 'amarillo', autor, tipo = 'normal' } = Astro.props;
+---
+
+<div class="burbuja" data-tipo={tipo}>
+  <Avatar iniciales={iniciales} color={color} tam="36px" />
+  <p class="burbuja-cuerpo">
+    <span class="burbuja-autor">{autor}</span>
+    <slot />
+  </p>
+</div>
+
+<style>
+  @layer componentes {
+    .burbuja {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--espacio-2);
+    }
+
+    .burbuja-cuerpo {
+      padding: 0.55em 0.9em;
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: 16px;
+      background: var(--color-superficie);
+      color: var(--color-texto);
+      box-shadow: var(--sombra-dura-chica);
+      font-size: 0.9rem;
+      line-height: 1.35;
+    }
+
+    .burbuja-autor {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-texto-suave);
+    }
+
+    .burbuja[data-tipo='destacado'] .burbuja-cuerpo {
+      background: var(--color-acento);
+    }
+
+    .burbuja[data-tipo='sistema'] .burbuja-cuerpo {
+      background: var(--color-marca);
+      font-weight: 600;
+    }
+  }
+</style>

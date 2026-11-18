@@ -1,0 +1,52 @@
+---
+/**
+ * Barra de XP. `progreso` va de 0 a 1 y se aplica con `scale` (solo transform). Con `animar`,
+ * motion/fill.ts la llena desde 0 al entrar en pantalla; sin JS se ve ya llena.
+ */
+interface Props {
+  progreso: number;
+  etiqueta: string;
+  animar?: boolean;
+}
+
+const { progreso, etiqueta, animar = false } = Astro.props;
+---
+
+<div
+  class="barra-xp"
+  role="progressbar"
+  aria-label={etiqueta}
+  aria-valuemin="0"
+  aria-valuemax="100"
+  aria-valuenow={Math.round(progreso * 100)}
+  style={`--progreso: ${progreso}`}
+>
+  <span data-motion={animar ? 'fill' : undefined}></span>
+</div>
+
+<style>
+  @layer componentes {
+    .barra-xp {
+      block-size: 16px;
+      border: 2px solid var(--color-tinta);
+      border-radius: var(--radio-pildora);
+      background: var(--gris-200);
+      overflow: hidden;
+
+      & span {
+        display: block;
+        block-size: 100%;
+        inline-size: 100%;
+        background: linear-gradient(90deg, var(--color-accion), var(--color-acento));
+        transform-origin: left center;
+        scale: var(--progreso) 1;
+
+        /* Colores forzados (Windows): el sistema quita los fondos; el relleno usa el color del texto. */
+        @media (forced-colors: active) {
+          background: CanvasText;
+          forced-color-adjust: none;
+        }
+      }
+    }
+  }
+</style>

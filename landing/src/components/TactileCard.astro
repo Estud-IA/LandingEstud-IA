@@ -1,0 +1,48 @@
+---
+/**
+ * Tarjeta táctil: fondo blanco (o de color), borde negro de 2,5 px, esquinas de 18 px y sombra dura.
+ */
+interface Props {
+  tono?: 'blanco' | 'amarillo' | 'menta' | 'lavanda' | 'negro';
+  as?: 'article' | 'div' | 'section' | 'aside' | 'li';
+  class?: string;
+  [atributo: `aria-${string}`]: string | undefined;
+}
+
+const { tono = 'blanco', as: Etiqueta = 'article', class: clase, ...resto } = Astro.props;
+---
+
+<Etiqueta class:list={['tarjeta', clase]} data-tono={tono} {...resto}>
+  <slot />
+</Etiqueta>
+
+<style>
+  @layer componentes {
+    .tarjeta {
+      background: var(--color-superficie);
+      color: var(--color-texto);
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: var(--radio-tarjeta);
+      box-shadow: 0 4px 0 var(--sombra-color, var(--color-tinta));
+      padding: var(--espacio-5);
+
+      &[data-tono='amarillo'] {
+        background: var(--color-marca);
+      }
+
+      &[data-tono='menta'] {
+        background: var(--color-acento);
+      }
+
+      &[data-tono='lavanda'] {
+        background: var(--lavanda-100);
+      }
+
+      &[data-tono='negro'] {
+        background: var(--color-tinta);
+        color: var(--gris-50);
+        border-color: var(--gris-50);
+      }
+    }
+  }
+</style>

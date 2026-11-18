@@ -1,0 +1,42 @@
+---
+/** Insignia amarilla de nivel, como en el perfil de la app. */
+interface Props {
+  nivel: number;
+  class?: string;
+  style?: string;
+}
+
+const { nivel, class: clase, style } = Astro.props;
+---
+
+<span class:list={['insignia-nivel', clase]} style={style}>
+  <small>NIVEL</small>
+  <strong>{nivel}</strong>
+</span>
+
+<style>
+  @layer componentes {
+    .insignia-nivel {
+      display: inline-grid;
+      justify-items: center;
+      padding: 0.35em 1em 0.3em;
+      border: var(--borde) solid var(--color-marca-borde);
+      border-radius: var(--radio-pildora);
+      background: var(--color-marca);
+      color: var(--color-tinta);
+      box-shadow: var(--sombra-marca);
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+      line-height: 1;
+
+      & small {
+        font-size: 0.6em;
+        letter-spacing: var(--tracking-etiqueta);
+      }
+
+      & strong {
+        font-size: 1.2em;
+      }
+    }
+  }
+</style>

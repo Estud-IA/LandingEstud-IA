@@ -1,0 +1,60 @@
+---
+/**
+ * Código QR generado al compilar (SVG, sin JS en el navegador). Por defecto apunta a
+ * /descargar?origen=qr en el dominio del sitio (RF-03). Mientras no haya dominio (A3), usa la URL
+ * provisional de src/content/site.ts.
+ */
+import QRCode from 'qrcode';
+import { sitio } from '../content/site';
+import { rutaDescarga } from '../content/release';
+
+interface Props {
+  url?: string;
+  etiqueta?: string;
+  tam?: string;
+  class?: string;
+}
+
+const {
+  url = new URL(rutaDescarga('qr'), Astro.site ?? sitio.url).toString(),
+  etiqueta = 'Código QR para descargar Estud-IA en Android',
+  tam = '7.5rem',
+  class: clase,
+} = Astro.props;
+
+const svg = await QRCode.toString(url, {
+  type: 'svg',
+  errorCorrectionLevel: 'M',
+  margin: 0,
+  color: { dark: '#000000', light: '#ffffff' },
+});
+---
+
+<div
+  class:list={['qr', clase]}
+  role="img"
+  aria-label={etiqueta}
+  data-url={url}
+  style={`--qr-tam: ${tam}`}
+  set:html={svg}
+/>
+
+<style>
+  @layer componentes {
+    .qr {
+      inline-size: var(--qr-tam);
+      aspect-ratio: 1;
+      padding: 0.6rem;
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: 14px;
+      background: var(--gris-50);
+      box-shadow: var(--sombra-dura);
+    }
+
+    .qr :global(svg) {
+      display: block;
+      inline-size: 100%;
+      block-size: 100%;
+    }
+  }
+</style>

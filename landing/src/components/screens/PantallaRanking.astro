@@ -1,0 +1,131 @@
+---
+/**
+ * Ranking de la clase en HTML (390 × 844), basado en maqueta/pantallas/ranking. La fila propia
+ * (data-fila-propia) es la que sube de puesto en motion/pinnedPhone.ts. Decorativo.
+ */
+import Avatar from '../Avatar.astro';
+import Icon from '../Icon.astro';
+import ChipXp from '../ChipXp.astro';
+
+const podio = [
+  {
+    ini: 'LU',
+    color: 'lavanda',
+    nombre: 'luciana',
+    puesto: 2,
+    alto: '78px',
+    c: 'var(--lavanda-100)',
+    tam: '56px',
+  },
+  {
+    ini: 'SR',
+    color: 'menta',
+    nombre: 'sofi.rios',
+    puesto: 1,
+    alto: '104px',
+    c: 'var(--color-marca)',
+    tam: '64px',
+  },
+  {
+    ini: 'MA',
+    color: 'rosa',
+    nombre: 'mateo_22',
+    puesto: 3,
+    alto: '62px',
+    c: 'var(--color-acento)',
+    tam: '52px',
+  },
+] as const;
+
+const filas = [
+  { pos: 4, ini: 'AT', color: 'amarillo', nombre: 'Tú · ana.torres', xp: '1.240', propia: true },
+  { pos: 5, ini: 'JD', color: 'cielo', nombre: 'jdiaz', xp: '1.180' },
+  { pos: 6, ini: 'CQ', color: 'rosa', nombre: 'camila.q', xp: '1.025' },
+  { pos: 7, ini: 'RP', color: 'gris', nombre: 'rodri_p', xp: '990' },
+] as const;
+---
+
+<div class="app" data-pantalla="ranking">
+  <div class="barra-estado">
+    <span>9:41</span>
+    <span class="estado-iconos">
+      <span class="senal"></span>
+      <span class="bateria"></span>
+    </span>
+  </div>
+
+  <div class="app-contenido">
+    <div class="app-cabecera">
+      <span class="boton-icono">
+        <Icon name="arrow-left" />
+      </span>
+      <strong class="ranking-titulo">Ranking</strong>
+      <span></span>
+    </div>
+    <div class="segmentado">
+      <span data-actual>Esta clase</span>
+      <span>Semana</span>
+      <span>General</span>
+    </div>
+    <div class="podio">
+      {podio.map((p) => (
+        <div class="podio-puesto">
+          <Avatar iniciales={p.ini} color={p.color} tam={p.tam} />
+          {p.nombre}
+          <span class="podio-bloque" style={`--alto: ${p.alto}; --c: ${p.c}`}>
+            {p.puesto}
+          </span>
+        </div>
+      ))}
+    </div>
+    <ol class="lista-ranking">
+      {filas.map((f) => (
+        <li
+          data-fila-propia={'propia' in f ? '' : undefined}
+          data-fila-desplazada={f.pos === 5 || f.pos === 6 ? '' : undefined}
+        >
+          <span class="posicion">{f.pos}</span>
+          <Avatar iniciales={f.ini} color={f.color} tam="38px" />
+          {f.nombre}
+          <span class="xp">{f.xp} XP</span>
+        </li>
+      ))}
+    </ol>
+    <p class="ranking-aviso" data-ranking-aviso>
+      <ChipXp>Subiste 2 puestos</ChipXp>
+    </p>
+  </div>
+
+  <div class="nav-app">
+    <span data-actual>
+      <Icon name="home" />
+    </span>
+    <span>
+      <Icon name="play" />
+    </span>
+    <span class="boton-mas">
+      <Icon name="plus" />
+    </span>
+    <span>
+      <Icon name="book-open" />
+    </span>
+    <span>
+      <Icon name="user" />
+    </span>
+  </div>
+</div>
+
+<style>
+  @layer pantallas {
+    .ranking-titulo {
+      text-align: center;
+      font-family: var(--fuente-titulos);
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .ranking-aviso {
+      text-align: center;
+    }
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+/**
+ * Encabezado común de sección: etiqueta opcional (slot "etiqueta"), h2 con revelado y texto de
+ * apoyo. Hereda el color de la sección (claro u oscuro).
+ */
+interface Props {
+  id: string;
+  titulo: string;
+  apoyo?: string;
+  class?: string;
+}
+
+const { id, titulo, apoyo, class: clase } = Astro.props;
+---
+
+<header class:list={['encabezado-seccion', clase]}>
+  <slot name="etiqueta" />
+  <h2 id={id} data-motion="reveal">
+    {titulo}
+  </h2>
+  {apoyo && <p>{apoyo}</p>}
+</header>
+
+<style>
+  @layer componentes {
+    .encabezado-seccion {
+      display: grid;
+      justify-items: start;
+      gap: var(--espacio-4);
+      max-inline-size: 46rem;
+      margin-block-end: var(--espacio-7);
+
+      & h2 {
+        font-size: var(--texto-h2);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+
+      & p {
+        max-inline-size: 38rem;
+        font-size: var(--texto-grande);
+        color: color-mix(in srgb, currentColor 75%, transparent);
+      }
+    }
+  }
+</style>

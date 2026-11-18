@@ -1,0 +1,207 @@
+---
+/**
+ * Formulario de lista de espera (RF-07): creadores (cobro con Yape) o iOS.
+ * Validación nativa del navegador; los errores se muestran solo después de interactuar
+ * (:user-invalid) y se enlazan con aria-describedby/aria-invalid (scripts/waitlist.ts).
+ * Por ahora NO envía datos: el destino de los correos está pendiente (decisión A5, riesgo R10).
+ */
+import TactileButton from './TactileButton.astro';
+
+interface Props {
+  tipo: 'creadores' | 'ios';
+  /** id del título que da nombre al formulario. */
+  tituloId: string;
+}
+
+const { tipo, tituloId } = Astro.props;
+const id = (campo: string) => `espera-${tipo}-${campo}`;
+---
+
+<form
+  class="formulario-espera"
+  method="post"
+  action="#"
+  data-waitlist
+  data-tipo={tipo}
+  aria-labelledby={tituloId}
+>
+  <div class="campos">
+    <div class="campo-grupo">
+      <label for={id('correo')}>
+        Tu correo <span aria-hidden="true">*</span>
+      </label>
+      <span class="pista" id={id('correo-pista')}>
+        Formato: tu@correo.com
+      </span>
+      <input
+        id={id('correo')}
+        type="email"
+        name="correo"
+        autocomplete="email"
+        inputmode="email"
+        required
+        aria-describedby={id('correo-pista')}
+        data-error={id('correo-error')}
+      />
+      <p class="error" id={id('correo-error')}>
+        <span role="img" aria-label="Error">
+          ✕
+        </span>{' '}
+        Escribe un correo con el formato tu@correo.com.
+      </p>
+    </div>
+
+    {tipo === 'creadores' && (
+      <div class="campo-grupo">
+        <label for={id('tema')}>¿Qué enseñas? (opcional)</label>
+        <span class="pista" id={id('tema-pista')}>
+          Ej.: matemáticas, inglés, programación
+        </span>
+        <input
+          id={id('tema')}
+          type="text"
+          name="tema"
+          autocomplete="off"
+          maxlength="80"
+          aria-describedby={id('tema-pista')}
+        />
+      </div>
+    )}
+  </div>
+
+  <div class="consentimiento-grupo">
+    <div class="consentimiento">
+      <input
+        id={id('consentimiento')}
+        type="checkbox"
+        name="consentimiento"
+        value="si"
+        required
+        data-error={id('consentimiento-error')}
+      />
+      <label for={id('consentimiento')}>
+        Acepto que Estud-IA use mi correo solo para avisarme. Ver la{' '}
+        <a href="/privacidad">política de privacidad</a>. <span aria-hidden="true">*</span>
+      </label>
+    </div>
+    <p class="error" id={id('consentimiento-error')}>
+      <span role="img" aria-label="Error">
+        ✕
+      </span>{' '}
+      Marca la casilla para poder avisarte.
+    </p>
+  </div>
+
+  <div class="acciones">
+    <TactileButton type="submit" tono="amarillo">
+      Unirme a la lista
+    </TactileButton>
+    <p class="mensaje" role="status" aria-live="polite" data-mensaje></p>
+  </div>
+  <p class="nota">
+    <span aria-hidden="true">*</span> Campo obligatorio.
+  </p>
+</form>
+
+<style>
+  @layer componentes {
+    .formulario-espera {
+      display: grid;
+      gap: var(--espacio-4);
+      color: var(--color-tinta);
+    }
+
+    .campos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+      gap: var(--espacio-4);
+    }
+
+    .campo-grupo {
+      display: grid;
+      gap: var(--espacio-1);
+      align-content: start;
+    }
+
+    label {
+      font-size: var(--texto-chico);
+      font-weight: 600;
+    }
+
+    .pista {
+      font-size: var(--texto-mini);
+      color: var(--gris-700);
+    }
+
+    input[type='email'],
+    input[type='text'] {
+      margin-block-start: var(--espacio-1);
+      padding: 0.8em 1em;
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: 14px;
+      background: var(--color-superficie);
+      font-size: var(--texto-base);
+
+      &:user-invalid {
+        border-color: var(--color-vivo);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-vivo) 25%, transparent);
+      }
+    }
+
+    .error {
+      display: none;
+      font-size: var(--texto-chico);
+      font-weight: 600;
+      color: var(--rojo-700);
+    }
+
+    .campo-grupo:has(:user-invalid) .error,
+    .consentimiento-grupo:has(:user-invalid) .error {
+      display: block;
+    }
+
+    .consentimiento {
+      display: flex;
+      gap: var(--espacio-2);
+      align-items: flex-start;
+
+      & label {
+        font-weight: 400;
+        font-size: var(--texto-chico);
+      }
+
+      & a {
+        font-weight: 600;
+      }
+    }
+
+    input[type='checkbox'] {
+      flex: none;
+      inline-size: 1.25rem;
+      block-size: 1.25rem;
+      margin: 0.1rem 0 0;
+      accent-color: var(--color-tinta);
+    }
+
+    .acciones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espacio-4);
+      align-items: center;
+    }
+
+    .mensaje {
+      font-weight: 600;
+      font-size: var(--texto-chico);
+
+      &:empty {
+        display: none;
+      }
+    }
+
+    .nota {
+      font-size: var(--texto-mini);
+      color: var(--gris-700);
+    }
+  }
+</style>

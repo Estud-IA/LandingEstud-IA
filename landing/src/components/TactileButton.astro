@@ -1,0 +1,129 @@
+---
+/**
+ * Botón táctil (equivale a TactileButton de la app): píldora con borde negro y sombra dura
+ * que "se hunde" al pulsar. Es un <a> si recibe `href`; si no, un <button> (`type`, por defecto
+ * "button"; "submit" en formularios).
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  href?: string;
+  tono?: 'blanco' | 'esmeralda' | 'amarillo' | 'negro';
+  tamano?: 'chico' | 'normal' | 'grande';
+  icono?: string;
+  detalle?: string;
+  type?: 'button' | 'submit';
+  class?: string;
+  [atributo: `data-${string}`]: string | undefined;
+}
+
+const {
+  href,
+  tono = 'blanco',
+  tamano = 'normal',
+  icono,
+  detalle,
+  type = 'button',
+  class: clase,
+  ...resto
+} = Astro.props;
+const Etiqueta = href ? 'a' : 'button';
+---
+
+<Etiqueta
+  class:list={['btn', clase]}
+  href={href}
+  type={href ? undefined : type}
+  data-tono={tono}
+  data-tamano={tamano}
+  {...resto}
+>
+  {icono && <Icon name={icono} />}
+  {detalle ? (
+    <span>
+      <slot />
+      <span class="btn-detalle">{detalle}</span>
+    </span>
+  ) : (
+    <slot />
+  )}
+</Etiqueta>
+
+<style>
+  @layer componentes {
+    .btn {
+      --btn-fondo: var(--color-superficie);
+      --btn-texto: var(--color-tinta);
+      --btn-borde: var(--color-tinta);
+      --btn-sombra: var(--sombra-color, var(--color-tinta));
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6em;
+      padding: 0.85em 1.6em;
+      border: var(--borde) solid var(--btn-borde);
+      border-radius: var(--radio-pildora);
+      background: var(--btn-fondo);
+      color: var(--btn-texto);
+      box-shadow: 0 4px 0 var(--btn-sombra);
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+      font-size: var(--texto-base);
+      letter-spacing: var(--tracking-etiqueta);
+      line-height: 1.1;
+      text-align: start;
+      text-transform: uppercase;
+      text-decoration: none;
+      white-space: nowrap;
+      transition:
+        translate 0.12s var(--curva-marca),
+        box-shadow 0.12s var(--curva-marca);
+
+      &:active {
+        translate: 0 4px;
+        box-shadow: none;
+      }
+
+      &[data-tono='esmeralda'] {
+        --btn-fondo: linear-gradient(180deg, var(--color-accion), var(--color-accion-fin));
+        --btn-texto: var(--gris-50);
+      }
+
+      &[data-tono='amarillo'] {
+        --btn-fondo: var(--color-marca);
+        --btn-borde: var(--color-marca-borde);
+        --btn-sombra: var(--color-marca-borde);
+      }
+
+      &[data-tono='negro'] {
+        --btn-fondo: var(--color-tinta);
+        --btn-texto: var(--gris-50);
+      }
+
+      &[data-tamano='grande'] {
+        font-size: var(--texto-grande);
+        padding: 1em 1.9em;
+      }
+
+      &[data-tamano='chico'] {
+        font-size: var(--texto-chico);
+        padding: 0.55em 1.1em;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    .btn-detalle {
+      display: block;
+      font-family: var(--fuente-texto);
+      font-weight: 600;
+      font-size: 0.75em;
+      letter-spacing: 0;
+      text-transform: none;
+      opacity: 0.85;
+    }
+  }
+</style>

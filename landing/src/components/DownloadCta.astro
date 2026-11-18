@@ -1,0 +1,124 @@
+---
+/**
+ * CTA de descarga según el dispositivo (RF-01). Las tres variantes están en el HTML y el CSS muestra
+ * la que corresponde según <html data-dispositivo> (lo pone BaseLayout antes del primer pintado):
+ * - android:     botón "Descargar para Android" con versión y peso.
+ * - ios:         "Próximamente en iOS" + enlace a la lista de espera.
+ * - escritorio:  botón + QR para pasar al teléfono.
+ * Sin JS (sin data-dispositivo) se ve el botón de Android y, en pantallas anchas, el QR.
+ */
+import TactileButton from './TactileButton.astro';
+import QrCode from './QrCode.astro';
+import Badge from './Badge.astro';
+import { rutaDescarga, textoVersion } from '../content/release';
+
+interface Props {
+  /** Origen para la analítica (hero, barra, seccion, final). */
+  origen: string;
+  qr?: boolean;
+  tamano?: 'normal' | 'grande';
+}
+
+const { origen, qr = true, tamano = 'grande' } = Astro.props;
+---
+
+<div class="cta-descarga">
+  <div class="cta-android">
+    <TactileButton
+      href={rutaDescarga(origen)}
+      tono="esmeralda"
+      tamano={tamano}
+      icono="download"
+      detalle={textoVersion()}
+      data-origen={origen}
+    >
+      Descargar para Android
+    </TactileButton>
+  </div>
+
+  <div class="cta-ios">
+    <Badge tipo="pronto">Próximamente en iOS</Badge>
+    <p>
+      Por ahora Estud-IA está disponible para Android. <a href="/#lista-ios">Déjanos tu correo</a> y
+      te avisamos cuando llegue a iPhone.
+    </p>
+  </div>
+
+  {qr && (
+    <div class="cta-qr">
+      <QrCode tam="6.5rem" />
+      <p>
+        ¿Estás en la computadora?
+        <br />
+        Escanea con tu Android.
+      </p>
+    </div>
+  )}
+</div>
+
+<style>
+  @layer componentes {
+    .cta-descarga {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espacio-5);
+      align-items: center;
+    }
+
+    .cta-android {
+      max-inline-size: 100%;
+    }
+
+    /* En pantallas estrechas el botón ocupa todo el ancho y su texto puede partirse. */
+    @media (width < 30rem) {
+      .cta-android,
+      .cta-android :global(.btn) {
+        inline-size: 100%;
+      }
+
+      .cta-android :global(.btn) {
+        white-space: normal;
+      }
+    }
+
+    .cta-ios {
+      display: none;
+      gap: var(--espacio-3);
+      max-inline-size: 26rem;
+      font-size: var(--texto-chico);
+      color: var(--color-texto-suave);
+
+      & a {
+        font-weight: 600;
+        color: var(--color-accion-texto);
+      }
+    }
+
+    .cta-qr {
+      display: none;
+      gap: var(--espacio-4);
+      align-items: center;
+      font-size: var(--texto-chico);
+      font-weight: 600;
+
+      @media (width >= 60rem) {
+        display: flex;
+      }
+    }
+
+    /* iOS: no se ofrece el APK */
+    :global(html[data-dispositivo='ios']) .cta-android {
+      display: none;
+    }
+
+    :global(html[data-dispositivo='ios']) .cta-ios {
+      display: grid;
+      justify-items: start;
+    }
+
+    /* En el teléfono el QR no sirve */
+    :global(html:is([data-dispositivo='android'], [data-dispositivo='ios'])) .cta-qr {
+      display: none;
+    }
+  }
+</style>

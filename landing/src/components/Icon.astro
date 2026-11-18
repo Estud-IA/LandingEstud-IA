@@ -1,0 +1,36 @@
+---
+/**
+ * Icono de Feather desde el sprite public/iconos/sprite.svg.
+ * Sin `label` es decorativo (aria-hidden); con `label` lo anuncia el lector de pantalla.
+ */
+interface Props {
+  name: string;
+  size?: string;
+  label?: string;
+  class?: string;
+}
+
+const { name, size, label, class: clase } = Astro.props;
+const estilo = size ? `--icono-tam: ${size}` : undefined;
+---
+
+{label ? (
+  <svg class:list={['icono', clase]} style={estilo} role="img" aria-label={label}>
+    <use href={`/iconos/sprite.svg#${name}`} />
+  </svg>
+) : (
+  <svg class:list={['icono', clase]} style={estilo} aria-hidden="true">
+    <use href={`/iconos/sprite.svg#${name}`} />
+  </svg>
+)}
+
+<style>
+  @layer componentes {
+    .icono {
+      inline-size: var(--icono-tam, 1.25em);
+      block-size: var(--icono-tam, 1.25em);
+      flex: none;
+      stroke: currentColor;
+    }
+  }
+</style>

@@ -1,0 +1,73 @@
+---
+/**
+ * Avatar con iniciales (la landing no usa fotos de personas). `vivo` añade el aro rojo de directo.
+ */
+interface Props {
+  iniciales: string;
+  color?: 'amarillo' | 'menta' | 'lavanda' | 'rosa' | 'gris' | 'cielo';
+  vivo?: boolean;
+  tam?: string;
+  class?: string;
+}
+
+const { iniciales, color = 'amarillo', vivo = false, tam, class: clase } = Astro.props;
+---
+
+<span
+  class:list={['avatar', clase]}
+  data-color={color}
+  data-vivo={vivo ? '' : undefined}
+  style={tam ? `--tam: ${tam}` : undefined}
+  aria-hidden="true"
+>
+  {iniciales}
+</span>
+
+<style>
+  @layer componentes {
+    .avatar {
+      --tam: 40px;
+      --avatar-fondo: var(--color-marca);
+      display: inline-grid;
+      place-items: center;
+      flex: none;
+      inline-size: var(--tam);
+      block-size: var(--tam);
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: 50%;
+      background: var(--avatar-fondo);
+      color: var(--color-tinta);
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+      font-size: calc(var(--tam) * 0.36);
+      line-height: 1;
+
+      &[data-color='menta'] {
+        --avatar-fondo: var(--color-acento);
+      }
+
+      &[data-color='lavanda'] {
+        --avatar-fondo: var(--lavanda-100);
+      }
+
+      &[data-color='rosa'] {
+        --avatar-fondo: var(--rojo-100);
+      }
+
+      &[data-color='gris'] {
+        --avatar-fondo: var(--gris-200);
+      }
+
+      &[data-color='cielo'] {
+        --avatar-fondo: var(--ilus-cielo);
+      }
+
+      &[data-vivo] {
+        border-color: var(--color-vivo);
+        box-shadow:
+          0 0 0 2px var(--gris-50),
+          0 0 0 4px var(--color-vivo);
+      }
+    }
+  }
+</style>

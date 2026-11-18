@@ -1,0 +1,216 @@
+---
+/**
+ * Tarjeta de video (VideoThumbnailCard de la app): marco con borde y sombra dura, escena con
+ * degradado (sin fotos de personas), etiqueta del tipo, título, datos y avatar montado sobre el
+ * borde. Basada en .tarjeta-video y .escena de maqueta/css/componentes.css.
+ */
+import Avatar from './Avatar.astro';
+import Badge from './Badge.astro';
+import Icon from './Icon.astro';
+
+type Escena = 'fisica' | 'quimica' | 'programacion' | 'mates' | 'ingles' | 'historia';
+type Color = 'amarillo' | 'menta' | 'lavanda' | 'rosa' | 'gris' | 'cielo';
+
+interface Props {
+  tipo: 'short' | 'vivo' | 'grabacion';
+  titulo: string;
+  escena: Escena;
+  motivo: string;
+  iniciales: string;
+  color?: Color;
+  /** Datos de la línea inferior: [icono, texto]. */
+  datos: [string, string][];
+  class?: string;
+}
+
+const {
+  tipo,
+  titulo,
+  escena,
+  motivo,
+  iniciales,
+  color = 'amarillo',
+  datos,
+  class: clase,
+} = Astro.props;
+const etiquetas = { short: 'Short', vivo: 'En vivo', grabacion: 'Grabación' } as const;
+---
+
+<article class:list={['tarjeta-video', clase]}>
+  <div class="tarjeta-video-marco" data-escena={escena}>
+    <span class="tarjeta-video-motivo" aria-hidden="true">
+      {motivo}
+    </span>
+    <Badge tipo={tipo}>{etiquetas[tipo]}</Badge>
+    <div class="tarjeta-video-info">
+      <h3>{titulo}</h3>
+      <p class="tarjeta-video-datos">
+        {datos.map(([icono, texto]) => (
+          <span>
+            <Icon name={icono} />
+            {texto}
+          </span>
+        ))}
+      </p>
+    </div>
+  </div>
+  <Avatar iniciales={iniciales} color={color} vivo={tipo === 'vivo'} tam="var(--tv-avatar)" />
+</article>
+
+<style>
+  @layer componentes {
+    .tarjeta-video {
+      --tv-avatar: 56px;
+      position: relative;
+      flex: none;
+      inline-size: var(--tv-ancho, 13.5rem);
+      padding-block-end: calc(var(--tv-avatar) / 2);
+
+      & :global(.avatar) {
+        position: absolute;
+        inset-block-end: 0;
+        inset-inline-start: 50%;
+        translate: -50% 0;
+        z-index: 2;
+      }
+
+      & :global(.avatar:not([data-vivo])) {
+        box-shadow: var(--sombra-dura-chica);
+      }
+    }
+
+    .tarjeta-video-marco {
+      --escena: linear-gradient(160deg, var(--slate-800), var(--slate));
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      aspect-ratio: 154 / 215;
+      padding: 12px 12px calc(var(--tv-avatar) / 2 + 10px);
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: var(--radio-tarjeta);
+      background: var(--escena);
+      box-shadow: 0 4px 0 var(--sombra-color, var(--color-tinta));
+      color: var(--gris-50);
+      overflow: hidden;
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 40% 0 0;
+        background: linear-gradient(transparent, color-mix(in srgb, var(--negro) 75%, transparent));
+      }
+
+      & :global(.etiqueta) {
+        position: relative;
+        z-index: 1;
+        align-self: flex-start;
+      }
+
+      &[data-escena='fisica'] {
+        --escena:
+          radial-gradient(
+            circle at 75% 25%,
+            color-mix(in srgb, var(--ilus-cielo) 55%, transparent),
+            transparent 45%
+          ),
+          radial-gradient(
+            circle at 20% 80%,
+            color-mix(in srgb, var(--ilus-violeta) 60%, transparent),
+            transparent 50%
+          ),
+          linear-gradient(160deg, var(--ilus-indigo), var(--slate));
+      }
+
+      &[data-escena='quimica'] {
+        --escena:
+          radial-gradient(
+            circle at 30% 30%,
+            color-mix(in srgb, var(--color-acento) 70%, transparent),
+            transparent 45%
+          ),
+          linear-gradient(150deg, var(--esmeralda-800), var(--slate));
+      }
+
+      &[data-escena='programacion'] {
+        --escena:
+          radial-gradient(
+            circle at 80% 70%,
+            color-mix(in srgb, var(--color-marca) 45%, transparent),
+            transparent 45%
+          ),
+          linear-gradient(170deg, var(--slate-800), var(--negro));
+      }
+
+      &[data-escena='mates'] {
+        --escena:
+          radial-gradient(
+            circle at 25% 30%,
+            color-mix(in srgb, var(--ilus-naranja) 70%, transparent),
+            transparent 50%
+          ),
+          linear-gradient(160deg, var(--ilus-coral), var(--ilus-violeta));
+      }
+
+      &[data-escena='ingles'] {
+        --escena:
+          radial-gradient(
+            circle at 70% 30%,
+            color-mix(in srgb, var(--color-marca) 80%, transparent),
+            transparent 45%
+          ),
+          linear-gradient(160deg, var(--ilus-cielo), var(--ilus-indigo));
+      }
+
+      &[data-escena='historia'] {
+        --escena:
+          radial-gradient(
+            circle at 30% 70%,
+            color-mix(in srgb, var(--color-marca) 60%, transparent),
+            transparent 50%
+          ),
+          linear-gradient(160deg, var(--ilus-naranja), var(--oliva-900));
+      }
+    }
+
+    .tarjeta-video-motivo {
+      position: absolute;
+      inset: 18% auto auto 10%;
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+      font-size: 4rem;
+      line-height: 1;
+      color: color-mix(in srgb, var(--gris-50) 22%, transparent);
+      white-space: nowrap;
+    }
+
+    .tarjeta-video-info {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 4px;
+
+      & h3 {
+        font-size: 1.05rem;
+        line-height: 1.2;
+        color: var(--gris-50);
+      }
+    }
+
+    .tarjeta-video-datos {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: color-mix(in srgb, var(--gris-50) 88%, transparent);
+      --icono-tam: 0.95em;
+
+      & span {
+        display: inline-flex;
+        gap: 3px;
+        align-items: center;
+      }
+    }
+  }
+</style>

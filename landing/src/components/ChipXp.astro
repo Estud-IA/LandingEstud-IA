@@ -1,0 +1,34 @@
+---
+/** Chip amarillo de experiencia ("+10 XP"). */
+import Icon from './Icon.astro';
+
+interface Props {
+  class?: string;
+  style?: string;
+}
+
+const { class: clase, style } = Astro.props;
+---
+
+<span class:list={['chip-xp', clase]} style={style}>
+  <Icon name="zap" size="1.1em" />
+  <slot />
+</span>
+
+<style>
+  @layer componentes {
+    .chip-xp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35em;
+      padding: 0.4em 0.85em;
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: var(--radio-pildora);
+      background: var(--color-marca);
+      color: var(--color-tinta);
+      box-shadow: var(--sombra-dura-chica);
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+    }
+  }
+</style>

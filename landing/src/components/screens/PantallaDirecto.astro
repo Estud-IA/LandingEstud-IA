@@ -1,0 +1,232 @@
+---
+/**
+ * Directo de la app en HTML (390 × 844), con capas que anima motion/pinnedPhone.ts:
+ * fondo, cabecera, controles, chat (4 burbujas), trivia, nivel (+ confeti) y entrada de mensaje.
+ * Basado en maqueta/pantallas/directo-chat, directo-trivia y xp-nivel. Es decorativo: los textos de
+ * los pasos de la sección explican lo que pasa.
+ */
+import Avatar from '../Avatar.astro';
+import Badge from '../Badge.astro';
+import Icon from '../Icon.astro';
+import InsigniaNivel from '../InsigniaNivel.astro';
+import ChipXp from '../ChipXp.astro';
+
+const burbujas = [
+  { ini: 'MA', color: 'amarillo', autor: 'mateo_22', texto: '¡Ahora sí entendí la dualidad!' },
+  {
+    ini: 'SR',
+    color: 'menta',
+    autor: 'sofi.rios · destacado',
+    texto: '¿Esto entra en el examen del viernes?',
+    tipo: 'destacado',
+  },
+  { ini: 'LU', color: 'lavanda', autor: 'luciana', texto: 'Profe, ¿puede repetir la fórmula?' },
+] as const;
+
+const opciones = [
+  { letra: 'A', texto: 'Que la luz es solo una onda', votos: 0.12 },
+  { letra: 'B', texto: 'La dualidad onda-partícula', votos: 0.68, elegida: true },
+  { letra: 'C', texto: 'La ley de la gravedad', votos: 0.14 },
+  { letra: 'D', texto: 'La conservación de la masa', votos: 0.06 },
+];
+
+const logros = [
+  { icono: 'eye', texto: 'Asististe a la clase', xp: '+10 XP' },
+  { icono: 'check', texto: 'Trivia correcta', xp: '+15 XP' },
+  { icono: 'zap', texto: 'Racha de 7 días', xp: '+25 XP' },
+];
+
+const confeti = [
+  { pos: 'inset: 210px auto auto 40px', c: 'var(--color-acento)', r: '-25deg' },
+  { pos: 'inset: 180px auto auto 120px', c: 'var(--color-marca)', r: '15deg' },
+  { pos: 'inset: 200px 60px auto auto', c: 'var(--ilus-coral)', r: '40deg' },
+  { pos: 'inset: 250px 120px auto auto', c: 'var(--lavanda-100)', r: '-10deg' },
+  { pos: 'inset: 240px auto auto 200px', c: 'var(--color-acento)', r: '60deg' },
+];
+---
+
+<div class="app" data-tema="oscuro" data-pantalla="directo">
+  <div class="directo" data-capa="fondo">
+    <span class="escena-motivo" style="inset: auto auto 20% -4%; font-size: 9rem">
+      λ
+    </span>
+    <div class="directo-pizarra">
+      <span>Dualidad onda-partícula</span>
+      <strong>λ = h / p</strong>
+      <svg viewBox="0 0 300 60" preserveAspectRatio="none">
+        <path d="M0 30 Q 18.75 0 37.5 30 T 75 30 T 112.5 30 T 150 30 T 187.5 30 T 225 30 T 262.5 30 T 300 30"></path>
+      </svg>
+    </div>
+    <div class="directo-velo"></div>
+  </div>
+
+  <div class="barra-estado">
+    <span>9:41</span>
+    <span class="estado-iconos">
+      <span class="senal"></span>
+      <span class="bateria"></span>
+    </span>
+  </div>
+
+  <div class="directo-cabecera" data-capa="cabecera">
+    <span class="boton-icono">
+      <Icon name="arrow-left" />
+    </span>
+    <div class="directo-titulo">
+      <strong>Física: ondas y partículas</strong>
+      <small>Clase 3 · Profe Valeria</small>
+    </div>
+    <div class="directo-estado">
+      <Badge tipo="vivo">En vivo</Badge>
+      <span class="pildora-dato">
+        <Icon name="eye" />
+        1,2 k
+      </span>
+    </div>
+  </div>
+
+  <div class="directo-controles" data-capa="controles">
+    {['plus', 'layers', 'gift', 'share-2', 'more-vertical'].map((n) => (
+      <span class="boton-icono">
+        <Icon name={n} />
+      </span>
+    ))}
+  </div>
+
+  <div class="directo-chat" data-capa="chat">
+    {burbujas.map((b) => (
+      <div class="burbuja" data-tipo={'tipo' in b ? b.tipo : undefined} data-burbuja>
+        <Avatar iniciales={b.ini} color={b.color} tam="34px" />
+        <p class="burbuja-cuerpo">
+          <span class="burbuja-autor">{b.autor}</span>
+          {b.texto}
+        </p>
+      </div>
+    ))}
+    <div class="burbuja" data-tipo="sistema" data-burbuja>
+      <span class="boton-icono" style="--tam: 34px">
+        <Icon name="bar-chart-2" />
+      </span>
+      <p class="burbuja-cuerpo">
+        <span class="burbuja-autor">Sistema</span>
+        Nueva trivia iniciada
+      </p>
+    </div>
+  </div>
+
+  <div class="panel-flotante" style="inset-block-end: 96px" data-capa="trivia">
+    <div class="panel-cabecera">
+      <Badge tipo="sistema">Trivia</Badge>
+      <span class="pildora-dato">
+        <Icon name="clock" />
+        0:15
+      </span>
+    </div>
+    <p class="panel-titulo">¿Qué demuestra el experimento de la doble rendija?</p>
+    <ul class="opciones">
+      {opciones.map((o) => (
+        <li data-elegida={o.elegida ? '' : undefined} style={`--votos: ${o.votos}`}>
+          <span class="voto" data-voto />
+          <span class="letra">{o.letra}</span>
+          <span>{o.texto}</span>
+          <span class="porcentaje">{Math.round(o.votos * 100)}%</span>
+        </li>
+      ))}
+    </ul>
+    <div class="panel-pie">
+      <span>214 respuestas</span>
+      <ChipXp>+15 XP si aciertas</ChipXp>
+    </div>
+  </div>
+
+  <div class="confeti" data-capa="confeti">
+    {confeti.map((c) => (
+      <i style={`${c.pos}; --c: ${c.c}; --r: ${c.r}`} />
+    ))}
+  </div>
+
+  <div class="panel-flotante panel-nivel" style="inset-block-end: 110px" data-capa="nivel">
+    <InsigniaNivel nivel={12} class="nivel-insignia" />
+    <p class="panel-titulo panel-titulo-grande">¡Subiste de nivel!</p>
+    <div class="nivel-progreso">
+      <div class="barra-xp" style="--progreso: 0.18">
+        <span data-barra-xp></span>
+      </div>
+      <div class="nivel-datos">
+        <span>270 / 1.500 XP</span>
+        <span>Nivel 13</span>
+      </div>
+    </div>
+    <ul class="opciones">
+      {logros.map((l) => (
+        <li data-logro>
+          <span class="letra">
+            <Icon name={l.icono} />
+          </span>
+          {l.texto}
+          <span class="porcentaje">{l.xp}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="directo-entrada" data-capa="entrada">
+    <span class="campo">Escribe un mensaje…</span>
+    <span class="boton-icono">
+      <Icon name="send" />
+    </span>
+  </div>
+</div>
+
+<style>
+  @layer pantallas {
+    .panel-titulo {
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 1.15;
+    }
+
+    .panel-titulo-grande {
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .panel-pie {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .panel-nivel {
+      justify-items: center;
+      text-align: center;
+
+      & .opciones {
+        inline-size: 100%;
+        text-align: start;
+      }
+    }
+
+    .panel-nivel :global(.nivel-insignia) {
+      font-size: 30px;
+      margin-block-start: -64px;
+    }
+
+    .nivel-progreso {
+      display: grid;
+      gap: 6px;
+      inline-size: 100%;
+    }
+
+    .nivel-datos {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-texto-suave);
+    }
+  }
+</style>

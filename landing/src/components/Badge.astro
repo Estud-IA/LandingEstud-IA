@@ -1,0 +1,67 @@
+---
+/**
+ * Etiqueta con borde (EN VIVO, SHORT, GRABACIÓN, PRÓXIMAMENTE, SISTEMA), como en la app.
+ */
+interface Props {
+  tipo?: 'neutra' | 'vivo' | 'short' | 'grabacion' | 'pronto' | 'sistema';
+  class?: string;
+}
+
+const { tipo = 'neutra', class: clase } = Astro.props;
+---
+
+<span class:list={['etiqueta', clase]} data-tipo={tipo}>
+  {tipo === 'vivo' && <span class="punto-vivo" aria-hidden="true" />}
+  <slot />
+</span>
+
+<style>
+  @layer componentes {
+    .etiqueta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      padding: 0.3em 0.65em;
+      border: var(--borde-fino) solid var(--color-tinta);
+      border-radius: var(--radio-etiqueta);
+      background: var(--color-superficie);
+      color: var(--color-tinta);
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+      font-size: var(--texto-mini);
+      letter-spacing: var(--tracking-etiqueta);
+      line-height: 1;
+      text-transform: uppercase;
+      white-space: nowrap;
+
+      &[data-tipo='vivo'] {
+        background: var(--color-vivo);
+        color: var(--gris-50);
+      }
+
+      &[data-tipo='short'] {
+        background: var(--color-marca);
+      }
+
+      &[data-tipo='grabacion'] {
+        background: var(--lavanda-100);
+      }
+
+      &[data-tipo='pronto'] {
+        background: var(--color-acento);
+      }
+
+      &[data-tipo='sistema'] {
+        background: var(--color-tinta);
+        color: var(--color-marca);
+      }
+    }
+
+    .punto-vivo {
+      inline-size: 0.55em;
+      block-size: 0.55em;
+      border-radius: 50%;
+      background: currentColor;
+    }
+  }
+</style>
