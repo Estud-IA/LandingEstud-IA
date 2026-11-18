@@ -8,20 +8,23 @@ una clase en vivo y que los creadores se anoten para enseñar.
 
 ## Estado
 
-**Fase 01 implementada (2026-11-17):** maqueta HTML estática en [`maqueta/`](maqueta/README.md),
-pendiente de la revisión del equipo. La landing real (Astro) es la fase 02. Detalle en
+**Fase 02 en curso (2026-11-17):** la base de la landing está en [`landing/`](landing/README.md). La
+maqueta aprobada (fase 01) está en [`maqueta/`](maqueta/README.md). Detalle en
 [`docs/05-roadmap/`](docs/05-roadmap/README.md).
 
-Para ver la maqueta: `python -m http.server 5500 -d maqueta` y abrir `http://localhost:5500/`.
+| Parte | Cómo verla |
+|---|---|
+| Landing (`landing/`) | Node ≥ 22.23.4; `cd landing && npm install && npm run dev` → `http://localhost:4321` |
+| Maqueta (`maqueta/`) | `python -m http.server 5500 -d maqueta` → `http://localhost:5500/` |
 
-## Stack (planificado)
+## Stack
 
 | Parte | Tecnología |
 |---|---|
-| Framework | Astro (sitio estático) |
+| Framework | Astro 7 (sitio estático) |
 | Animación | GSAP (ScrollTrigger, SplitText, CustomEase) + Lenis |
 | Estilos | CSS con tokens tomados de la app (estilo táctil) |
-| Tipografía | Outfit + Inter |
+| Tipografía | Outfit + Inter (Fontsource, autoalojadas) |
 | Hosting | Estático con CDN (a decidir) |
 
 ## Documentación

@@ -3,8 +3,9 @@
 Cómo está construida la landing y por qué. El detalle de cada archivo está en
 [`estructura-del-proyecto.md`](estructura-del-proyecto.md).
 
-**Estado al 2026-11-17:** existe la **maqueta HTML estática** (`maqueta/`, fase 01). La landing real
-(Astro) está **planificada** para la fase 02. Este documento se actualiza en cada fase.
+**Estado al 2026-11-17:** existe la **maqueta HTML estática** (`maqueta/`, fase 01, aprobada). La
+**base de la landing** (`landing/`, fase 02) está escrita: Astro 7, tokens, componentes base y sistema
+de animación. Las secciones llegan en las fases 03 a 06. Este documento se actualiza en cada fase.
 
 ## Vista general
 
@@ -35,13 +36,13 @@ Cómo está construida la landing y por qué. El detalle de cada archivo está e
 
 | Tema | Elección | Versión objetivo |
 |---|---|---|
-| Framework | **Astro** (salida estática) | 5.x estable al crear el proyecto |
-| Animación | **GSAP** + ScrollTrigger + SplitText + CustomEase (Flip opcional) | 3.13 o superior (todos los plugins gratis) |
-| Scroll suave | **Lenis** | 1.x |
+| Framework | **Astro** (salida estática) | 7.4 (exige Node 22.23.4 o superior) |
+| Animación | **GSAP** + ScrollTrigger + SplitText + CustomEase (Flip opcional) | 3.15 (todos los plugins gratis) |
+| Scroll suave | **Lenis** | 1.3 |
 | Estilos | CSS propio con variables (tokens) + CSS por componente de Astro | — |
-| Tipografía | Outfit + Inter, autoalojadas en WOFF2 | — |
+| Tipografía | Outfit + Inter variables, autoalojadas con Fontsource | 5.3 |
 | QR | Generado al compilar como SVG (librería `qrcode`) | — |
-| Lint y formato | ESLint + Prettier (+ `astro check`) | — |
+| Lint y formato | ESLint (configuración plana) + Prettier + `astro check` | ESLint 10, Prettier 3 |
 | Hosting | Vercel, Netlify o Cloudflare Pages (a decidir, ver A7 en riesgos) | — |
 | APK | GitHub Releases o Cloudflare R2 (a decidir, ver A2 en riesgos) | — |
 
@@ -60,6 +61,9 @@ Cómo está construida la landing y por qué. El detalle de cada archivo está e
 | D9 | 2026-11-17 | **Solo Outfit + Inter** (sin Poppins) | Poppins casi no aparece en la app; cada familia extra pesa (RNF-02) |
 | D10 | 2026-11-17 | **Maqueta HTML estática** (`maqueta/`) antes de la landing real | Sirve de referencia visual aprobable por el equipo y de fuente de las imágenes (pantallas, tarjetas, og-image). Sus tokens (`maqueta/css/tokens.css`) son la base de los de la landing. Ver [`../../maqueta/README.md`](../../maqueta/README.md) |
 | D11 | 2026-11-17 | **Navegación en "isla" táctil** en vez de `mix-blend-mode: difference` | El logo es a color y `difference` lo invertía; una isla blanca con borde y sombra dura se lee sobre fondos claros y negros y sigue el estilo de la app |
+| D12 | 2026-11-17 | **La landing vive en `landing/`**, junto a `maqueta/` y `docs/` | Cada parte tiene su README y sus dependencias; el hosting apunta a `landing/` |
+| D13 | 2026-11-17 | **Fuentes con Fontsource** (`@fontsource-variable/outfit` e `inter`) | Se sirven desde el propio sitio, sin peticiones a Google Fonts (RNF-08), y el navegador baja solo los subconjuntos que usa |
+| D14 | 2026-11-17 | **Astro 7** (y por tanto Node ≥ 22.23.4) en vez de fijar Astro 5 | Es la versión estable vigente; evita una migración mayor más adelante. El equipo actualiza Node |
 
 ## Documentos de esta carpeta
 

@@ -10,8 +10,10 @@ Enrutador para Claude Code. **No registra avances ni estado**: eso va en `docs/0
   `docs/06-estandares/verificacion.md`.
 - Textos de la landing en español, con **tuteo**. No anunciar como disponible lo que la app no tiene
   (ver `docs/01-producto/app-estudia.md`).
-- Colores solo desde `src/styles/tokens.css`; datos de versión solo desde `src/content/release.json`.
-- Cada animación va en su módulo de `src/motion/` y respeta `prefers-reduced-motion`.
+- La landing está en `landing/` (Astro 7, requiere Node ≥ 22.23.4); los comandos se ejecutan ahí.
+- Colores solo desde `landing/src/styles/tokens.css`; datos de versión solo desde
+  `landing/src/content/release.json`.
+- Cada animación va en su módulo de `landing/src/motion/` y respeta `prefers-reduced-motion`.
 - Nada de datos personales en capturas, videos ni ejemplos.
 
 ## Si vas a…

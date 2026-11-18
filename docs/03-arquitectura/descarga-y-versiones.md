@@ -14,6 +14,24 @@ genera desconfianza, así que la landing tiene que **guiar y dar pruebas** (HU-0
 
 ## `src/content/release.json`: la única fuente de la versión
 
+**Estado al 2026-11-18 (fase 06):** tiene la forma completa y se valida al compilar con el `zod` de
+Astro, en `src/content/release.ts`.
+
+- Con `"provisional": true`, `url`, `sha256` y `fecha` pueden ser `null`. Así está hoy: A2 y A8
+  siguen abiertas.
+- Con `"provisional": false` son obligatorios:
+  - `url` con https;
+  - `sha256` de 64 caracteres hexadecimales;
+  - `fecha` en formato AAAA-MM-DD.
+- Si algo no cumple, el build se detiene con un mensaje como
+  `release.json no es válido: - sha256: sha256 es obligatorio cuando provisional es false`.
+- `release.ts` exporta:
+  - `release`;
+  - `disponible` (`true` solo con APK publicado);
+  - `textoVersion()`;
+  - `rutaDescarga(origen)`;
+  - `datosFicha()`: lo que falta aparece como "Se publica con la versión final".
+
 Al publicar una versión solo se cambia este archivo (HU-14). Forma propuesta:
 
 ```json
@@ -49,11 +67,21 @@ que `url` use `https`. Si algo falla, **el build se detiene**.
   - el QR impreso sigue sirviendo con cada versión nueva;
   - la analítica registra el origen (RF-14);
   - cambiar de alojamiento no rompe enlaces.
-- **Implementación:** una página estática que registra el evento y redirige con
-  `location.replace(url)`. Lleva un enlace visible por si el JS falla. Si el hosting lo permite,
-  puede ser una redirección del servidor con analítica del lado del servidor.
+- **Implementación (fase 06, `src/pages/descargar.astro`):**
+  - **Con `disponible`:** redirige con `location.replace(url)` y muestra el enlace "Si la descarga
+    no empieza, toca aquí".
+  - **Con datos provisionales:** no redirige y muestra "La descarga estará disponible muy pronto",
+    con un botón para volver a `/#descargar`.
+  - Guarda `?origen` en `data-origen` para la analítica (fase 08).
+  - Lleva `noindex` y no está en el sitemap.
+  - Si el hosting lo permite, más adelante puede ser una redirección del servidor con analítica del
+    lado del servidor.
 
-## Detección del dispositivo (`src/scripts/device.ts`)
+## Detección del dispositivo (script en línea en `BaseLayout.astro`)
+
+Implementado en la fase 03. Un script en línea en el `<head>` pone
+`<html data-dispositivo="android|ios|escritorio">` **antes del primer pintado**, y `DownloadCta`
+muestra la variante que corresponde solo con CSS, sin saltos visuales.
 
 | Caso | Cómo se detecta | Qué muestra el CTA |
 |---|---|---|

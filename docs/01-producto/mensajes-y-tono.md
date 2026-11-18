@@ -35,6 +35,9 @@ Las secciones están descritas en [`../04-diseno/secciones.md`](../04-diseno/sec
 
 ## Preguntas frecuentes (borrador)
 
+> **Desde la fase 06, la fuente de verdad es `landing/src/content/faq.ts`.** La lista de abajo es
+> el borrador original y no se mantiene.
+
 1. **¿Es gratis?** Sí. Descargar la app y ver clases gratuitas no cuesta nada.
 2. **¿Es seguro instalar un APK?** Sí, si lo descargas desde esta página. Mostramos su huella
    SHA-256 para que puedas verificarlo. Android te pedirá permiso una sola vez.
