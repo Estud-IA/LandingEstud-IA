@@ -7,7 +7,10 @@ y [`../07-referencias/estudio-app-2026-11-17.md`](../07-referencias/estudio-app-
 
 **Fuente de los tokens:** `streaming-estudia/Frontend/lib/src/shared/theme/app_colors.dart` y
 `streaming-estudia/docs/05-diseno/design-system.md` (sección "Estilo táctil"), consultados el
-2026-11-17. Si la app cambia su paleta, se actualiza aquí y en `src/styles/tokens.css`.
+2026-11-17. **La implementación de referencia es [`maqueta/css/tokens.css`](../../maqueta/css/tokens.css)**
+(fase 01); los tokens de la landing real parten de ese archivo. Si la app cambia su paleta, se
+actualiza aquí y en los tokens. El catálogo visual está en
+[`maqueta/componentes.html`](../../maqueta/componentes.html).
 
 ## Colores
 
@@ -26,6 +29,10 @@ y [`../07-referencias/estudio-app-2026-11-17.md`](../07-referencias/estudio-app-
 | `--color-amarillo-borde` | `#4A3F00` | `onTertiaryContainer` | Borde de los elementos amarillos |
 | `--color-oro` | `#F1D647` | `tertiaryGold` | Insignias, detalles |
 | `--color-vivo` | `#BA1A1A` | `error` | Etiqueta EN VIVO |
+| `--lavanda-100` | `#DAE2FD` | `primaryFixed` | Etiqueta GRABACIÓN, tarjetas secundarias |
+| `--logo-pizarra` | `#243842` | `logo.svg` | Solo en el logo |
+| `--logo-lima` | `#7ED248` | `logo.svg` | Solo en el logo |
+| `--ilus-*` | índigo, violeta, cielo, coral, naranja | — | **Solo** miniaturas y fondos de video ficticios (`.escena`), nunca en texto ni botones |
 
 **Contraste (RNF-03):** el texto esmeralda `#14B887` sobre blanco **no** llega a 4,5:1. Para texto
 esmeralda se usa `#006C4D`. El botón esmeralda lleva texto blanco en negrita de 16 px o más, y se
@@ -35,7 +42,7 @@ verifica su contraste antes de publicar (ver [`../06-estandares/verificacion.md`
 
 | Rol | Familia | Tamaño | Detalle |
 |---|---|---|---|
-| Display (titulares gigantes) | **Outfit** 700 | `clamp(3rem, 9vw, 9rem)` | `line-height` 0,9 y `letter-spacing` −0,04em, al estilo Bulletproof |
+| Display (titulares gigantes) | **Outfit** 800 | `clamp(3.25rem, 1.5rem + 7vw, 8rem)` (hero: `clamp(3rem, 1rem + 4.6vw, 5.75rem)`) | `line-height` 0,9 y `letter-spacing` −0,04em, al estilo Bulletproof. El máximo no supera 2,5 veces el mínimo, para que el zoom del navegador siga funcionando (WCAG 1.4.4) |
 | Títulos de sección | Outfit 600 | `clamp(2rem, 4vw, 3.5rem)` | `line-height` 1,1 |
 | Texto | **Inter** 400 | 16–18 px | `line-height` 1,5 |
 | Botones y etiquetas | Inter 700 (o Outfit 600) | 14–16 px | MAYÚSCULAS con un `letter-spacing` leve |
@@ -68,7 +75,9 @@ Negro  → Creadores                  (como el estudio en la app)
 Claro  → Descarga · FAQ · CTA final · Footer
 ```
 
-La navegación usa `mix-blend-mode: difference` para leerse sobre los dos fondos.
+La navegación es una **"isla" blanca táctil** (borde negro y sombra dura) que se lee sobre los dos
+fondos (decisión D11). En las secciones negras, las sombras duras pasan a menta
+(`--sombra-color`) y el contorno del teléfono a gris, para que no se pierdan sobre el negro.
 
 ## Espaciado y cuadrícula
 

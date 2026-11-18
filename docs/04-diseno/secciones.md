@@ -7,7 +7,7 @@ Orden, contenido, layout, fondo y animación de cada sección. Los textos están
 
 | # | Sección | Fondo |
 |---|---|---|
-| 1 | Navegación | Transparente (`difference`) |
+| 1 | Navegación | Isla blanca táctil |
 | 2 | Hero | Claro |
 | 3 | Franja de prueba | Claro |
 | 4 | Así se vive una clase | **Negro** |
@@ -22,8 +22,8 @@ Orden, contenido, layout, fondo y animación de cada sección. Los textos están
 
 - **Contenido:** logo de Estud-IA, anclas (Cómo funciona · Para creadores · FAQ) y el botón
   **Descargar**.
-- **Comportamiento:** fija arriba, con `mix-blend-mode: difference`. Se oculta al bajar y reaparece
-  al subir. En móvil, las anclas van a un menú y el botón Descargar pasa a una barra fija abajo
+- **Comportamiento:** fija arriba, como una "isla" blanca con borde negro y sombra dura (D11), que se
+  lee sobre fondos claros y negros. Se oculta al bajar y reaparece al subir. En móvil, las anclas van a un menú y el botón Descargar pasa a una barra fija abajo
   (RF-02).
 
 ## 2. Hero

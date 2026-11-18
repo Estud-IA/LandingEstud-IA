@@ -66,7 +66,7 @@ en [`../03-arquitectura/README.md`](../03-arquitectura/README.md).
 | Un módulo por efecto, activado por `data-*` | **Se toma** | Cada efecto queda aislado, reutilizable y fácil de desactivar |
 | Titular gigante que se mueve con el scroll | **Se toma**, con Outfit | La coreografía es la referencia |
 | Secciones fijas que cuentan una historia | **Se toma** (el teléfono fijo) | Es el núcleo de "Así se vive una clase" |
-| `mix-blend-mode: difference` en la navegación | **Se toma** | La landing alterna fondos claros y negros |
+| `mix-blend-mode: difference` en la navegación | **Se descartó en la maqueta** → isla táctil (D11) | Invertía los colores del logo |
 | Webflow | **No** → Astro | Somos desarrolladores; no necesitamos un CMS visual |
 | Barba.js | **No** | Es casi una sola página. Si hace falta, View Transitions |
 | HLS con Cloudflare Stream | **No** → MP4/WebM cortos | Son pocos videos de 5 a 10 s |

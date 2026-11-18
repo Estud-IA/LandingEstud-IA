@@ -8,8 +8,11 @@ una clase en vivo y que los creadores se anoten para enseñar.
 
 ## Estado
 
-**Sin iniciar (2026-11-17).** Hay estudio de referencias y documentación; todavía no hay código ni
-fases abiertas. El roadmap se va llenando en [`docs/05-roadmap/`](docs/05-roadmap/README.md).
+**Fase 01 implementada (2026-11-17):** maqueta HTML estática en [`maqueta/`](maqueta/README.md),
+pendiente de la revisión del equipo. La landing real (Astro) es la fase 02. Detalle en
+[`docs/05-roadmap/`](docs/05-roadmap/README.md).
+
+Para ver la maqueta: `python -m http.server 5500 -d maqueta` y abrir `http://localhost:5500/`.
 
 ## Stack (planificado)
 

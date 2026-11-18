@@ -26,15 +26,15 @@ fase en el [roadmap](../05-roadmap/README.md). Los RNF aplican a todo el proyect
 | HU-01 | Descargar en Android | RF-01, RF-02, RF-04, RF-05, RF-14, RF-19 (futuro) | — |
 | HU-02 | De la computadora al teléfono (QR) | RF-01, RF-03, RF-04 | — |
 | HU-03 | Visitante con iPhone | RF-01, RF-07, RF-19 (futuro) | — |
-| HU-04 | Instalar con confianza | RF-05, RF-06, RF-12 | — |
-| HU-05 | Ver cómo se vive una clase | RF-08, RF-16, RF-17 | — |
-| HU-06 | Qué gano por participar | RF-09 | — |
-| HU-07 | Shorts y grabaciones | RF-10 | — |
-| HU-08 | Estudio del creador | RF-11 | — |
-| HU-09 | Lista de espera para cobrar | RF-07, RF-11 | — |
+| HU-04 | Instalar con confianza | RF-05, RF-06, RF-12 | [01](../05-roadmap/fase-01-maqueta-html.md) (material) |
+| HU-05 | Ver cómo se vive una clase | RF-08, RF-16, RF-17 | [01](../05-roadmap/fase-01-maqueta-html.md) (material) |
+| HU-06 | Qué gano por participar | RF-09 | [01](../05-roadmap/fase-01-maqueta-html.md) (material) |
+| HU-07 | Shorts y grabaciones | RF-10 | [01](../05-roadmap/fase-01-maqueta-html.md) (material) |
+| HU-08 | Estudio del creador | RF-11 | [01](../05-roadmap/fase-01-maqueta-html.md) (material) |
+| HU-09 | Lista de espera para cobrar | RF-07, RF-11 | [01](../05-roadmap/fase-01-maqueta-html.md) (material) |
 | HU-10 | Resolver dudas | RF-12, RF-16 | — |
 | HU-11 | Privacidad de mis datos | RF-07, RF-13 | — |
 | HU-12 | Navegar sin animaciones | RNF-04 | — |
-| HU-13 | Compartir la landing | RF-15 | — |
+| HU-13 | Compartir la landing | RF-15 | [01](../05-roadmap/fase-01-maqueta-html.md) (og-image) |
 | HU-14 | Publicar una versión nueva | RF-04, RF-05, RF-18 | — |
 | HU-15 | Medir las descargas | RF-14 | — |

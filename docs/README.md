@@ -25,6 +25,7 @@
 | ¿Cuándo una tarea está terminada? | [`06-estandares/verificacion.md`](06-estandares/verificacion.md) |
 | ¿Qué se aprendió de la landing de referencia (Bulletproof)? | [`07-referencias/estudio-bulletproof.md`](07-referencias/estudio-bulletproof.md) |
 | ¿Qué se vio al recorrer la app en local? | [`07-referencias/estudio-app-2026-11-17.md`](07-referencias/estudio-app-2026-11-17.md) |
+| ¿Cómo abro la maqueta o exporto sus imágenes? | [`../maqueta/README.md`](../maqueta/README.md) |
 
 ## Estructura
 
@@ -43,10 +44,11 @@ docs/
 └── archivo/               documentos históricos que ya no describen el proyecto
 ```
 
-Fuera de `docs/` solo quedan:
+Fuera de `docs/` quedan:
 
 - `README.md` (raíz): portada del repo.
 - `CLAUDE.md` (raíz): enrutador que Claude Code lee al iniciar.
+- `maqueta/README.md`: cómo usar la maqueta HTML y exportar sus imágenes (fase 01).
 
 ## Repo relacionado
 

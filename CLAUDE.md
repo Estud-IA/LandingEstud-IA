@@ -26,3 +26,4 @@ Enrutador para Claude Code. **No registra avances ni estado**: eso va en `docs/0
 | Tocar la descarga o publicar un APK | `docs/03-arquitectura/descarga-y-versiones.md` |
 | Revisar qué falta decidir | `docs/03-arquitectura/riesgos.md` |
 | Revisar la landing en el navegador | Usar el MCP de Chrome DevTools (ver `docs/06-estandares/verificacion.md`) |
+| Tocar la maqueta o exportar imágenes | `maqueta/README.md` (sin JS; colores solo desde `maqueta/css/tokens.css`) |

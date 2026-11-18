@@ -22,7 +22,7 @@ actualiza el estado.
 
 | # | Fecha | Riesgo | Impacto | Mitigación | Estado |
 |---|---|---|---|---|---|
-| R1 | 2026-11-17 | **No hay material visual real:** la app en local está vacía (sin directos, Shorts ni logros) | Sin video del hero ni capturas creíbles | Pantallas recreadas en HTML (D5); preparar datos de demo (A1) | 🟡 |
+| R1 | 2026-11-17 | **No hay material visual real:** la app en local está vacía (sin directos, Shorts ni logros) | Sin video del hero ni capturas creíbles | Pantallas recreadas en HTML (D5); la maqueta ya exporta 9 pantallas, tarjetas y og-image con datos ficticios (fase 01); preparar datos de demo solo para el video del hero (A1) | 🟡 |
 | R2 | 2026-11-17 | **Desconfianza al instalar un APK** (permiso de "fuentes desconocidas", avisos de Play Protect) | Menos instalaciones | Guía de 3 pasos, SHA-256 visible, FAQ, dominio propio con HTTPS | 🔴 |
 | R3 | 2026-11-17 | **Animaciones pesadas en móviles de gama baja** | Lighthouse < 90, tirones | Solo `transform`/`opacity`, `import()` diferido, sin fijar secciones en móvil, trazas de rendimiento antes de publicar | 🔴 |
 | R4 | 2026-11-17 | **Prometer funciones que aún no existen** (Monedas, Yape, Academia, iOS) | Pérdida de confianza | Regla de "Próximamente" en [`../01-producto/app-estudia.md`](../01-producto/app-estudia.md); revisar en cada PR | 🟡 |

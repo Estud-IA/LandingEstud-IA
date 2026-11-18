@@ -68,7 +68,7 @@ DOMContentLoaded
 
 - Al entrar en una sección con `data-theme-section="dark"`, el fondo del `body` pasa a
   `--color-tinta` y el texto a blanco, con un `scrub` corto.
-- La navegación no necesita cambiar porque usa `mix-blend-mode: difference`.
+- La navegación no necesita cambiar: es una isla blanca que se lee sobre los dos fondos (D11).
 
 ### Titular del hero (`reveal.ts` + `heroLines.ts`)
 

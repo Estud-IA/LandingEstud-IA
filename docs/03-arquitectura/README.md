@@ -3,8 +3,8 @@
 Cómo está construida la landing y por qué. El detalle de cada archivo está en
 [`estructura-del-proyecto.md`](estructura-del-proyecto.md).
 
-**Estado al 2026-11-17:** todo está **planificado**; todavía no hay código. Este documento se
-actualiza en cada fase.
+**Estado al 2026-11-17:** existe la **maqueta HTML estática** (`maqueta/`, fase 01). La landing real
+(Astro) está **planificada** para la fase 02. Este documento se actualiza en cada fase.
 
 ## Vista general
 
@@ -58,6 +58,8 @@ actualiza en cada fase.
 | D7 | 2026-11-17 | **Identidad táctil de la app**, no la estética de Bulletproof | La landing debe parecerse a la app que se descarga. Ver [`../04-diseno/design-system.md`](../04-diseno/design-system.md) |
 | D8 | 2026-11-17 | **Un módulo por efecto**, activado con atributos `data-*` | El mismo patrón que Bulletproof: efectos aislados, reutilizables y fáciles de desactivar |
 | D9 | 2026-11-17 | **Solo Outfit + Inter** (sin Poppins) | Poppins casi no aparece en la app; cada familia extra pesa (RNF-02) |
+| D10 | 2026-11-17 | **Maqueta HTML estática** (`maqueta/`) antes de la landing real | Sirve de referencia visual aprobable por el equipo y de fuente de las imágenes (pantallas, tarjetas, og-image). Sus tokens (`maqueta/css/tokens.css`) son la base de los de la landing. Ver [`../../maqueta/README.md`](../../maqueta/README.md) |
+| D11 | 2026-11-17 | **Navegación en "isla" táctil** en vez de `mix-blend-mode: difference` | El logo es a color y `difference` lo invertía; una isla blanca con borde y sombra dura se lee sobre fondos claros y negros y sigue el estilo de la app |
 
 ## Documentos de esta carpeta
 

@@ -3,9 +3,48 @@
 Qué hace cada carpeta y cada archivo. **Al crear, borrar o cambiar un archivo, se actualiza su fila**
 (ver la matriz de [`../06-estandares/documentacion.md`](../06-estandares/documentacion.md)).
 
+El repo tiene dos partes:
+
+- **`maqueta/`** (fase 01, ✅ implementada): la maqueta HTML estática. Ver la sección
+  [Maqueta](#maqueta).
+- **La landing real con Astro** (fase 02, 📝 planificada): el árbol de abajo. Vivirá en su propia
+  carpeta, cuyo nombre se decide al abrir la fase 02.
+
 **Estados:** 📝 planificado · 🔵 en curso · ✅ implementado · ❌ eliminado.
 
-## Árbol
+## Maqueta
+
+Detalle de uso y exportación en [`../../maqueta/README.md`](../../maqueta/README.md).
+
+```
+maqueta/
+├── README.md            qué es, reglas, cómo abrirla y exportar imágenes
+├── index.html           la landing completa (10 secciones)
+├── componentes.html     catálogo del estilo táctil
+├── pantallas/           9 pantallas de la app en lienzo de 390 × 844
+├── piezas/              og-image, tarjetas de video, gamificación, instalación
+├── css/                 tokens, base, componentes, pantallas, secciones (con @layer)
+├── assets/              logo, ícono de la app, iconos Feather + sprite
+└── exportes/            PNG exportados: pantallas/, piezas/, secciones/
+```
+
+| Archivo | Función | Estado |
+|---|---|---|
+| `maqueta/index.html` | Landing completa y estática; las pantallas se muestran con `<iframe>` escalado dentro de `.telefono` | ✅ |
+| `maqueta/componentes.html` | Catálogo de colores, tipografía y componentes | ✅ |
+| `maqueta/pantallas/*.html` | `inicio`, `directo-chat`, `directo-trivia`, `xp-nivel`, `ranking`, `perfil`, `billetera`, `shorts`, `estudio` | ✅ |
+| `maqueta/piezas/*.html` | `og-image` (1200 × 630), `tarjetas-video`, `gamificacion`, `instalacion` | ✅ |
+| `maqueta/css/tokens.css` | Única fuente de colores, sombras, radios, espaciado y tipografía; declara el orden de las capas | ✅ |
+| `maqueta/css/base.css` | Reset puntual (sin `*` global), tipografía base, `.sr-only` | ✅ |
+| `maqueta/css/componentes.css` | `.btn`, `.boton-icono`, `.boton-mas`, `.tarjeta`, `.etiqueta`, `.avatar`, `.insignia-nivel`, `.chip-xp`, `.barra-xp`, `.campo`, `.burbuja`, `.escena`, `.tarjeta-video`, `.telefono`, `.qr-ejemplo`, `.marca` | ✅ |
+| `maqueta/css/pantallas.css` | Barra de estado, navegación de la app, directo, trivia, ranking, perfil, billetera, Shorts, estudio | ✅ |
+| `maqueta/css/secciones.css` | Secciones de la landing, ritmo claro/negro y piezas exportables | ✅ |
+| `maqueta/assets/` | `logo.svg`, `app-icon.png`, `iconos/*.svg` y `iconos/sprite.svg` (Feather 4.29.2, MIT) | ✅ |
+| `maqueta/exportes/` | 9 pantallas @3x, 16 piezas y 17 capturas de secciones | ✅ |
+
+## Landing real (fase 02, planificada)
+
+### Árbol
 
 ```
 LandingEstud-IA/
@@ -34,9 +73,9 @@ LandingEstud-IA/
     └── content/                  datos editables sin tocar código
 ```
 
-## Archivos y su función
+### Archivos y su función
 
-### Raíz y configuración
+#### Raíz y configuración
 
 | Archivo | Función | Estado |
 |---|---|---|
@@ -47,7 +86,7 @@ LandingEstud-IA/
 | `README.md` | Portada: qué es, cómo levantar, enlace a `docs/` | ✅ |
 | `CLAUDE.md` | Enrutador para Claude Code | ✅ |
 
-### `src/pages/`
+#### `src/pages/`
 
 | Archivo | Función | Estado |
 |---|---|---|
@@ -57,13 +96,13 @@ LandingEstud-IA/
 | `terminos.astro` | Términos y condiciones (RF-13) | 📝 |
 | `404.astro` | Página no encontrada, con el botón de descarga | 📝 |
 
-### `src/layouts/`
+#### `src/layouts/`
 
 | Archivo | Función | Estado |
 |---|---|---|
 | `BaseLayout.astro` | `<html lang="es">`, `<head>` con metadatos (RF-15), precarga de fuentes, navegación, footer y el arranque de `motion/` | 📝 |
 
-### `src/sections/`
+#### `src/sections/`
 
 Ver [`../04-diseno/secciones.md`](../04-diseno/secciones.md).
 
@@ -82,7 +121,7 @@ Ver [`../04-diseno/secciones.md`](../04-diseno/secciones.md).
 | `Footer.astro` | Logo, legales, contacto | 📝 |
 | `BarraDescargaMovil.astro` | Barra fija de descarga en móvil (RF-02) | 📝 |
 
-### `src/components/`
+#### `src/components/`
 
 | Archivo | Función | Estado |
 |---|---|---|
@@ -102,7 +141,7 @@ Ver [`../04-diseno/secciones.md`](../04-diseno/secciones.md).
 | `screens/PantallaRanking.astro` | Ranking en tiempo real | 📝 |
 | `screens/PantallaEstudio.astro` | Estudio del creador | 📝 |
 
-### `src/motion/`
+#### `src/motion/`
 
 Ver [`animaciones.md`](animaciones.md).
 
@@ -121,7 +160,7 @@ Ver [`animaciones.md`](animaciones.md).
 | `horizontalScroll.ts` | Carrusel que avanza en horizontal con el scroll | 📝 |
 | `navHide.ts` | Ocultar la navegación al bajar y mostrarla al subir | 📝 |
 
-### `src/scripts/`
+#### `src/scripts/`
 
 | Archivo | Función | Estado |
 |---|---|---|
@@ -129,7 +168,7 @@ Ver [`animaciones.md`](animaciones.md).
 | `waitlist.ts` | Envía los formularios de lista de espera y muestra la confirmación | 📝 |
 | `analytics.ts` | Registra `download_click` y `waitlist_submit` | 📝 |
 
-### `src/styles/`
+#### `src/styles/`
 
 | Archivo | Función | Estado |
 |---|---|---|
@@ -138,7 +177,7 @@ Ver [`animaciones.md`](animaciones.md).
 | `base.css` | Reset, tipografía base, `.lenis`, movimiento reducido | 📝 |
 | `utilities.css` | Contenedor, cuadrícula y clases para lectores de pantalla | 📝 |
 
-### `src/content/`
+#### `src/content/`
 
 | Archivo | Función | Estado |
 |---|---|---|
