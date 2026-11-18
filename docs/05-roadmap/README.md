@@ -5,14 +5,15 @@ abiertas están en [`../03-arquitectura/riesgos.md`](../03-arquitectura/riesgos.
 convierte en tareas. Los cambios ya hechos se anotan en
 [`registro-de-cambios.md`](registro-de-cambios.md).
 
-**Estado al 2026-11-17:** el proyecto **no ha comenzado**. Hay estudio y documentación, pero ninguna
-fase abierta. Las fases se crean cuando empieza el trabajo real.
+**Estado al 2026-11-17:** la fase 01 (maqueta HTML) está implementada y espera la revisión del
+equipo. La landing real (fase 02) todavía no tiene archivo: se crea cuando empiece el trabajo.
 
 ## Estado de las fases
 
 | Fase | Tema | Requerimientos | Depende de | Estado |
 |---|---|---|---|---|
-| — | — | — | — | — |
+| [01](fase-01-maqueta-html.md) | Maqueta HTML estática: referencia visual y fuente de imágenes | Material para HU-04 a HU-09 y HU-13 | — | 🟡 implementada 2026-11-17, falta revisión del equipo |
+| 02 | Landing real con Astro, GSAP y Lenis, a partir de la maqueta | HU-01 a HU-15 | 01 | ⏳ pendiente (sin archivo todavía) |
 
 **Leyenda:** ⏳ pendiente · 🔵 en curso · 🟡 implementada, falta verificación · ✅ cerrada.
 
