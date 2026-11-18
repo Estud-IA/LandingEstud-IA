@@ -1,0 +1,140 @@
+---
+/**
+ * Páginas de texto (privacidad, términos): cabecera simple, aviso de borrador legal, texto con
+ * estilos de lectura (.prosa) y el pie común. Mientras `borrador` sea true, el aviso es visible
+ * (riesgo R11: revisión de un abogado antes de publicar).
+ */
+import BaseLayout from './BaseLayout.astro';
+import Footer from '../sections/Footer.astro';
+import TactileButton from '../components/TactileButton.astro';
+import { sitio } from '../content/site';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  actualizado: string;
+  borrador?: boolean;
+}
+
+const { titulo, descripcion, actualizado, borrador = true } = Astro.props;
+---
+
+<BaseLayout titulo={`${titulo} · ${sitio.nombre}`} descripcion={descripcion}>
+  <header class="legal-cabecera contenedor">
+    <a class="marca" href="/">
+      <img src="/logo.svg" alt="" width="36" height="38" />
+      {sitio.nombre}
+    </a>
+    <TactileButton href="/" tamano="chico" icono="arrow-left">
+      Volver al inicio
+    </TactileButton>
+  </header>
+
+  <main id="contenido" class="legal contenedor">
+    {borrador && (
+      <p class="legal-aviso" role="note">
+        <strong>Borrador pendiente de revisión legal.</strong> Este texto todavía no es definitivo.
+      </p>
+    )}
+    <article class="prosa">
+      <h1>{titulo}</h1>
+      <p class="legal-fecha">Última actualización: {actualizado}</p>
+      <slot />
+    </article>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  @layer secciones {
+    .legal-cabecera {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--espacio-4);
+      padding-block: var(--espacio-5);
+    }
+
+    .marca {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+      font-size: 1.375rem;
+      text-decoration: none;
+
+      & img {
+        inline-size: 1.6em;
+        block-size: auto;
+      }
+    }
+
+    .legal {
+      display: grid;
+      gap: var(--espacio-6);
+      padding-block: var(--espacio-6) var(--espacio-8);
+    }
+
+    .legal-aviso {
+      max-inline-size: 68ch;
+      padding: var(--espacio-4) var(--espacio-5);
+      border: var(--borde) solid var(--color-marca-borde);
+      border-radius: var(--radio-tarjeta);
+      background: var(--color-marca);
+      box-shadow: var(--sombra-marca);
+    }
+
+    .prosa {
+      max-inline-size: 68ch;
+
+      & :global(h1) {
+        font-size: var(--texto-h2);
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+      }
+
+      & :global(h2) {
+        margin-block: var(--espacio-7) var(--espacio-3);
+        font-size: var(--texto-h3);
+      }
+
+      & :global(h3) {
+        margin-block: var(--espacio-5) var(--espacio-2);
+        font-size: 1.15rem;
+      }
+
+      & :global(p),
+      & :global(ul),
+      & :global(ol) {
+        margin-block: 0 var(--espacio-4);
+        color: var(--color-texto-suave);
+      }
+
+      & :global(ul),
+      & :global(ol) {
+        padding-inline-start: 1.25em;
+      }
+
+      & :global(li) {
+        margin-block-end: var(--espacio-2);
+      }
+
+      & :global(strong) {
+        color: var(--color-texto);
+      }
+
+      & :global(a) {
+        font-weight: 600;
+        color: var(--color-accion-texto);
+      }
+    }
+
+    .legal-fecha {
+      margin-block-start: var(--espacio-3);
+      font-size: var(--texto-chico);
+    }
+  }
+</style>

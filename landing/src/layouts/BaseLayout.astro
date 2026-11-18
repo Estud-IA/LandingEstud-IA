@@ -1,0 +1,106 @@
+---
+/**
+ * Esqueleto común: <head> con metadatos (SEO, Open Graph y Twitter Card), precarga de fuentes,
+ * estilos globales (tokens → fuentes → base), enlace "Saltar al contenido" y arranque del sistema
+ * de animación. Los datos estructurados (JSON-LD) van en cada página (DatosEstructurados.astro).
+ */
+import '../styles/tokens.css';
+import '../styles/fonts.css';
+import '../styles/base.css';
+import '../styles/pantallas.css';
+import { sitio } from '../content/site';
+// Las dos fuentes que se ven arriba de la página (subconjunto latino). Vite les da el mismo nombre
+// con hash que en fonts.css, así que la precarga y el @font-face piden el mismo archivo.
+import fuenteTitulos from '@fontsource-variable/outfit/files/outfit-latin-wght-normal.woff2?url';
+import fuenteTexto from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+
+interface Props {
+  titulo?: string;
+  descripcion?: string;
+  indexar?: boolean;
+  /** Imagen para compartir (ruta en public/, 1200 × 630). */
+  imagen?: string;
+  imagenAlt?: string;
+  /** id del <main> de la página, destino de "Saltar al contenido". */
+  principal?: string;
+}
+
+const {
+  titulo = sitio.titulo,
+  descripcion = sitio.descripcion,
+  indexar = true,
+  imagen = '/og-image.png',
+  imagenAlt = 'Estud-IA: aprende en vivo y sube de nivel. Clases en directo con chat y XP.',
+  principal = 'contenido',
+} = Astro.props;
+const base = Astro.site ?? sitio.url;
+const canonica = new URL(Astro.url.pathname, base);
+const imagenAbsoluta = new URL(imagen, base);
+---
+
+<!doctype html>
+<html lang={sitio.idioma}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titulo}</title>
+    <meta name="description" content={descripcion} />
+    {indexar && <link rel="canonical" href={canonica} />}
+    {!indexar && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content={sitio.colorTema} />
+    <link rel="preload" href={fuenteTitulos} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={fuenteTexto} as="font" type="font/woff2" crossorigin />
+
+    <!-- Vista previa al compartir (RF-15). -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={sitio.nombre} />
+    <meta property="og:locale" content={sitio.locale} />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:url" content={canonica} />
+    <meta property="og:image" content={imagenAbsoluta} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imagenAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={titulo} />
+    <meta name="twitter:description" content={descripcion} />
+    <meta name="twitter:image" content={imagenAbsoluta} />
+    <meta name="twitter:image:alt" content={imagenAlt} />
+    <slot name="head" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <!--
+      Detección del dispositivo antes del primer pintado (RF-01): <html data-dispositivo>.
+      Va en línea para que el CTA correcto se vea desde el inicio, sin saltos.
+    -->
+    <script is:inline>
+      {
+        const ua = navigator.userAgent || '';
+        const plataforma = navigator.userAgentData?.platform ?? '';
+        let tipo = 'escritorio';
+        if (/android/i.test(plataforma) || /Android/i.test(ua)) {
+          tipo = 'android';
+        } else if (
+          /iPhone|iPad|iPod/.test(ua) ||
+          (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+        ) {
+          tipo = 'ios';
+        }
+        document.documentElement.dataset.dispositivo = tipo;
+      }
+    </script>
+  </head>
+  <body>
+    <a class="saltar" href={`#${principal}`}>
+      Saltar al contenido
+    </a>
+    <slot />
+    <script>
+      import '../motion/index';
+      import '../scripts/barraMovil';
+      import '../scripts/waitlist';
+    </script>
+  </body>
+</html>

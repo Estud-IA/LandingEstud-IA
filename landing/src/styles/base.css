@@ -1,0 +1,164 @@
+/* Reset puntual (sin selector universal), tipografía base, scroll suave y movimiento reducido. */
+
+@layer reset {
+  html {
+    box-sizing: border-box;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+  /* Hereda el modelo de caja; :where() deja la especificidad en 0 para poder sobrescribirlo. */
+  :where(body, body *, body *::before, body *::after) {
+    box-sizing: inherit;
+  }
+
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  figure,
+  blockquote,
+  dl,
+  dd,
+  ul,
+  ol {
+    margin: 0;
+  }
+
+  ul[role='list'],
+  ol[role='list'] {
+    list-style: none;
+    padding: 0;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-inline-size: 100%;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    min-block-size: 100dvh;
+    background-color: var(--color-fondo);
+    transition: background-color 0.5s var(--curva-marca);
+    color: var(--color-texto);
+    font-family: var(--fuente-texto);
+    font-size: var(--texto-base);
+    line-height: var(--interlineado-texto);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Fondo de página negro mientras una sección oscura ocupa la pantalla (motion/themeSwitch.ts). */
+  html[data-tema-pagina='oscuro'] body {
+    background-color: var(--negro);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body {
+      transition: none;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--fuente-titulos);
+    line-height: var(--interlineado-titulos);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-accion);
+    outline-offset: 3px;
+  }
+
+  /* Lenis (scroll suave). Ver src/motion/lenis.ts. */
+  html.lenis,
+  html.lenis body {
+    block-size: auto;
+  }
+
+  .lenis:is(.lenis-smooth) {
+    scroll-behavior: auto;
+  }
+
+  .lenis:is(.lenis-smooth) [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis:is(.lenis-stopped) {
+    overflow: clip;
+  }
+
+  /*
+   * Movimiento reducido (RNF-04): src/motion/index.ts añade .reduced-motion a <html> y no
+   * carga GSAP ni Lenis. Cada componente con animación CSS propia la desactiva con
+   * @media (prefers-reduced-motion: reduce); no se usa un selector global.
+   */
+}
+
+@layer utilidades {
+  .contenedor {
+    inline-size: min(100% - 2 * var(--margen-lateral), var(--ancho-max));
+    margin-inline: auto;
+  }
+
+  /* "Saltar al contenido" (WCAG 2.4.1): fuera de la vista hasta que recibe el foco. */
+  .saltar {
+    position: fixed;
+    inset-block-start: var(--espacio-3);
+    inset-inline-start: var(--espacio-3);
+    z-index: 100;
+    padding: var(--espacio-3) var(--espacio-4);
+    border: var(--borde) solid var(--color-tinta);
+    border-radius: var(--radio-etiqueta);
+    background: var(--color-marca);
+    color: var(--color-tinta);
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: var(--sombra-dura);
+
+    &:not(:focus) {
+      translate: 0 -200%;
+    }
+  }
+
+  .sr-only {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
