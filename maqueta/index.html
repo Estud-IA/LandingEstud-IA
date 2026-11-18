@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estud-IA · Aprende en vivo. Sube de nivel. (maqueta)</title>
+  <meta name="description" content="Clases en directo, chat al instante y XP por participar. Descarga Estud-IA para Android.">
+  <link rel="icon" href="assets/app-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/secciones.css">
+</head>
+<body>
+
+  <!-- 1. Navegación -->
+  <header class="nav-landing contenedor">
+    <nav class="nav-isla" aria-label="Principal">
+      <a class="marca" href="#inicio"><img src="assets/logo.svg" alt="" width="36" height="38">Estud-IA</a>
+      <ul role="list">
+        <li><a href="#clase">Cómo funciona</a></li>
+        <li><a href="#creadores">Para creadores</a></li>
+        <li><a href="#faq">Preguntas</a></li>
+      </ul>
+      <a class="btn" data-tono="esmeralda" data-tamano="chico" href="#descargar">
+        <svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#download"/></svg>Descargar
+      </a>
+    </nav>
+  </header>
+
+  <main id="inicio">
+
+    <!-- 2. Hero -->
+    <section class="hero" aria-labelledby="titulo-hero">
+      <div class="contenedor">
+        <div class="hero-texto">
+          <span class="etiqueta" data-tipo="pronto">Android · Gratis</span>
+          <h1 id="titulo-hero" class="titulo-display"><span>Aprende en vivo.</span><span>Sube de nivel.</span></h1>
+          <p class="texto-apoyo">Clases en directo, chat al instante y XP por participar. Todo desde tu teléfono.</p>
+          <div class="hero-acciones">
+            <a class="btn" data-tono="esmeralda" data-tamano="grande" href="#descargar">
+              <svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#download"/></svg>
+              <span>Descargar para Android <span class="btn-detalle">v1.0.0 · 48 MB</span></span>
+            </a>
+            <a class="btn" href="#clase">Ver cómo funciona</a>
+          </div>
+          <div class="hero-datos">
+            <span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#smartphone"/></svg>Android 8 o superior</span>
+            <span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#shield"/></svg>APK verificado con SHA-256</span>
+            <span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#clock"/></svg>iOS: próximamente</span>
+          </div>
+          <div class="hero-qr">
+            <div class="qr-ejemplo" role="img" aria-label="Código QR de ejemplo para descargar"><i></i><i></i><i></i></div>
+            <p>¿Estás en la computadora?<br>Escanea con tu Android.</p>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <span class="boton-mas forma-mas" style="inset: 4% auto auto 6%; --giro: -14deg" aria-hidden="true"><svg class="icono"><use href="assets/iconos/sprite.svg#plus"/></svg></span>
+          <span class="boton-mas forma-mas" style="inset: auto 4% 10% auto; --giro: 18deg" aria-hidden="true"><svg class="icono"><use href="assets/iconos/sprite.svg#plus"/></svg></span>
+          <div class="telefono">
+            <iframe src="pantallas/directo-chat.html" title="Pantalla de la app: clase en vivo con chat" loading="eager" tabindex="-1"></iframe>
+          </div>
+          <span class="etiqueta flotante" data-tipo="vivo" style="inset: 12% auto auto 0; --giro: -6deg; font-size: 1rem"><span class="punto-vivo" aria-hidden="true"></span>En vivo</span>
+          <span class="chip-xp flotante" style="inset: auto auto 22% -2%; --giro: -4deg; font-size: 1.15rem"><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#zap"/></svg>+10 XP</span>
+          <span class="insignia-nivel flotante" style="inset: 18% 0 auto auto; --giro: 8deg; font-size: 1.2rem"><small>NIVEL</small><strong>12</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Franja de prueba -->
+    <div class="franja" aria-label="Lo que trae Estud-IA">
+      <ul role="list">
+        <li>Chat en menos de 2 s <svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#plus"/></svg></li>
+        <li>200+ en una misma clase <svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#plus"/></svg></li>
+        <li>Trivias en vivo <svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#plus"/></svg></li>
+        <li>Shorts <svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#plus"/></svg></li>
+        <li>XP y rachas <svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#plus"/></svg></li>
+        <li>Ranking en tiempo real <svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#plus"/></svg></li>
+      </ul>
+    </div>
+
+    <!-- 4. Así se vive una clase -->
+    <section id="clase" class="seccion" data-tema="oscuro" aria-labelledby="titulo-clase">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <span class="etiqueta" data-tipo="vivo"><span class="punto-vivo" aria-hidden="true"></span>En vivo</span>
+          <h2 id="titulo-clase">Así se vive una clase</h2>
+          <p class="texto-apoyo">Cinco momentos de una clase en Estud-IA. En la landing real, el teléfono queda fijo y las escenas cambian con el scroll.</p>
+        </div>
+        <ol class="pasos-clase" role="list">
+          <li>
+            <span class="paso-numero">1</span>
+            <div class="telefono"><iframe src="pantallas/inicio.html" title="Inicio con transmisiones en vivo" loading="eager" tabindex="-1"></iframe></div>
+            <h3>Entra al directo</h3>
+            <p>Elige una clase en vivo desde el inicio.</p>
+          </li>
+          <li>
+            <span class="paso-numero">2</span>
+            <div class="telefono"><iframe src="pantallas/directo-chat.html" title="Directo con chat" loading="eager" tabindex="-1"></iframe></div>
+            <h3>Pregunta en el chat</h3>
+            <p>Tu profe te responde en el momento.</p>
+          </li>
+          <li>
+            <span class="paso-numero">3</span>
+            <div class="telefono"><iframe src="pantallas/directo-trivia.html" title="Trivia en vivo" loading="eager" tabindex="-1"></iframe></div>
+            <h3>Responde la trivia</h3>
+            <p>Pon a prueba lo que aprendiste.</p>
+          </li>
+          <li>
+            <span class="paso-numero">4</span>
+            <div class="telefono"><iframe src="pantallas/xp-nivel.html" title="Subida de nivel" loading="eager" tabindex="-1"></iframe></div>
+            <h3>Gana XP</h3>
+            <p>Cada clase y cada acierto suman.</p>
+          </li>
+          <li>
+            <span class="paso-numero">5</span>
+            <div class="telefono"><iframe src="pantallas/ranking.html" title="Ranking de la clase" loading="eager" tabindex="-1"></iframe></div>
+            <h3>Sube en el ranking</h3>
+            <p>Compite con tu clase en tiempo real.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. Gamificación -->
+    <section class="seccion" aria-labelledby="titulo-gamificacion">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <h2 id="titulo-gamificacion">Aprender suma</h2>
+          <p class="texto-apoyo">Cada clase, cada respuesta y cada racha cuentan.</p>
+        </div>
+        <div class="bento">
+          <article class="tarjeta grande" data-tono="amarillo">
+            <span class="insignia-nivel" style="font-size: 2.2rem; justify-self: start"><small>NIVEL</small><strong>12</strong></span>
+            <div style="display: grid; gap: var(--espacio-3)">
+              <h3>Sube de nivel mientras aprendes</h3>
+              <div class="barra-xp" style="--progreso: 72%"><span></span></div>
+              <p style="color: inherit; font-weight: 600">1.080 / 1.500 XP para el nivel 13</p>
+            </div>
+          </article>
+          <article class="tarjeta" data-tono="menta">
+            <svg class="icono" aria-hidden="true" style="--icono-tam: 2rem"><use href="assets/iconos/sprite.svg#zap"/></svg>
+            <div><span class="cifra">7 días</span><h3>de racha</h3></div>
+          </article>
+          <article class="tarjeta">
+            <span class="chip-xp" style="justify-self: start"><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#zap"/></svg>+15 XP</span>
+            <div><h3>Por cada acierto</h3><p>Responde las trivias en vivo.</p></div>
+          </article>
+          <article class="tarjeta">
+            <div class="fila-logros" aria-hidden="true">
+              <span><svg class="icono"><use href="assets/iconos/sprite.svg#award"/></svg></span>
+              <span style="--c: var(--color-acento)"><svg class="icono"><use href="assets/iconos/sprite.svg#star"/></svg></span>
+              <span style="--c: var(--lavanda-100)"><svg class="icono"><use href="assets/iconos/sprite.svg#target"/></svg></span>
+            </div>
+            <div><h3>Insignias</h3><p>Desbloquea logros por constancia.</p></div>
+          </article>
+          <article class="tarjeta" data-tono="lavanda">
+            <span class="cifra">350</span>
+            <div><h3>Vcoins</h3><p>Gánalas gratis y canjéalas por mensajes destacados.</p></div>
+          </article>
+          <article class="tarjeta ancha">
+            <h3>Ranking en tiempo real</h3>
+            <ol class="mini-ranking" role="list">
+              <li><span class="avatar" data-color="menta" style="--tam: 30px">SR</span>sofi.rios<b>1.420 XP</b></li>
+              <li><span class="avatar" data-color="lavanda" style="--tam: 30px">LU</span>luciana<b>1.310 XP</b></li>
+              <li data-propio><span class="avatar" style="--tam: 30px">AT</span>Tú · #4 ↑2<b>1.240 XP</b></li>
+            </ol>
+          </article>
+          <article class="tarjeta ancha" data-tono="menta">
+            <h3>Destaca tu pregunta</h3>
+            <div class="burbuja" data-tipo="destacado"><span class="avatar" data-color="amarillo" style="--tam: 36px">AT</span><p class="burbuja-cuerpo" style="background: var(--color-superficie)"><span class="burbuja-autor">ana.torres · destacado</span>¿Puede explicar otra vez la doble rendija?</p></div>
+            <p style="color: inherit">Canjea tus Vcoins para que tu mensaje no se pierda en el chat.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Shorts y grabaciones -->
+    <section class="seccion" style="padding-block-start: 0" aria-labelledby="titulo-shorts">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <h2 id="titulo-shorts">¿Te perdiste la clase?</h2>
+          <p class="texto-apoyo">Mira la grabación o repasa con Shorts de un minuto.</p>
+        </div>
+      </div>
+      <div class="carrusel" role="group" aria-label="Shorts y grabaciones de ejemplo">
+        <article class="tarjeta-video">
+          <div class="tarjeta-video-marco escena" data-escena="programacion">
+            <span class="escena-motivo" style="inset: 18% auto auto 10%; font-size: 4rem" aria-hidden="true">&lt;/&gt;</span>
+            <span class="etiqueta" data-tipo="short">Short</span>
+            <div class="tarjeta-video-info"><h3>Python en 60 segundos: listas</h3><div class="tarjeta-video-datos"><span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#heart"/></svg>842</span><span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#message-circle"/></svg>36</span></div></div>
+          </div>
+          <span class="avatar">DR</span>
+        </article>
+        <article class="tarjeta-video">
+          <div class="tarjeta-video-marco escena" data-escena="fisica">
+            <span class="escena-motivo" style="inset: 18% auto auto 10%; font-size: 4rem" aria-hidden="true">λ</span>
+            <span class="etiqueta" data-tipo="grabacion">Grabación</span>
+            <div class="tarjeta-video-info"><h3>Física: ondas y partículas · Clase 3</h3><div class="tarjeta-video-datos"><span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#clock"/></svg>52 min</span></div></div>
+          </div>
+          <span class="avatar" data-color="menta">PV</span>
+        </article>
+        <article class="tarjeta-video">
+          <div class="tarjeta-video-marco escena" data-escena="mates">
+            <span class="escena-motivo" style="inset: 18% auto auto 10%; font-size: 4rem" aria-hidden="true">∫ x²</span>
+            <span class="etiqueta" data-tipo="short">Short</span>
+            <div class="tarjeta-video-info"><h3>El truco para derivar rápido</h3><div class="tarjeta-video-datos"><span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#heart"/></svg>1,5 k</span><span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#message-circle"/></svg>92</span></div></div>
+          </div>
+          <span class="avatar" data-color="lavanda">LM</span>
+        </article>
+        <article class="tarjeta-video">
+          <div class="tarjeta-video-marco escena" data-escena="quimica">
+            <span class="escena-motivo" style="inset: 18% auto auto 10%; font-size: 4rem" aria-hidden="true">H₂O</span>
+            <span class="etiqueta" data-tipo="vivo"><span class="punto-vivo" aria-hidden="true"></span>En vivo</span>
+            <div class="tarjeta-video-info"><h3>Química orgánica desde cero</h3><div class="tarjeta-video-datos"><span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#eye"/></svg>342 viendo</span></div></div>
+          </div>
+          <span class="avatar" data-color="rosa" data-vivo>CQ</span>
+        </article>
+        <article class="tarjeta-video">
+          <div class="tarjeta-video-marco escena" data-escena="ingles">
+            <span class="escena-motivo" style="inset: 18% auto auto 10%; font-size: 4rem" aria-hidden="true">Hi!</span>
+            <span class="etiqueta" data-tipo="grabacion">Grabación</span>
+            <div class="tarjeta-video-info"><h3>Inglés: speaking para entrevistas</h3><div class="tarjeta-video-datos"><span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#clock"/></svg>45 min</span></div></div>
+          </div>
+          <span class="avatar" data-color="cielo">JD</span>
+        </article>
+        <article class="tarjeta-video">
+          <div class="tarjeta-video-marco escena" data-escena="historia">
+            <span class="escena-motivo" style="inset: 18% auto auto 10%; font-size: 4rem" aria-hidden="true">1821</span>
+            <span class="etiqueta" data-tipo="short">Short</span>
+            <div class="tarjeta-video-info"><h3>La independencia en un minuto</h3><div class="tarjeta-video-datos"><span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#heart"/></svg>610</span><span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#message-circle"/></svg>24</span></div></div>
+          </div>
+          <span class="avatar" data-color="amarillo">RP</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- 7. Para creadores -->
+    <section id="creadores" class="seccion creadores" data-tema="oscuro" aria-labelledby="titulo-creadores">
+      <div class="contenedor">
+        <div class="telefono">
+          <iframe src="pantallas/estudio.html" title="Estudio del creador" loading="eager" tabindex="-1"></iframe>
+        </div>
+        <div class="creadores-texto">
+          <div class="encabezado-seccion" style="margin: 0">
+            <span class="etiqueta" data-tipo="short">Para creadores</span>
+            <h2 id="titulo-creadores">Tu clase, tu estudio</h2>
+            <p class="texto-apoyo">Transmite desde tu teléfono, modera tu chat y arma tu comunidad.</p>
+          </div>
+          <ul class="ventajas" role="list">
+            <li><span class="boton-icono"><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#radio"/></svg></span><div><strong>Transmite en un toque</strong><p>Abre tu estudio y sal en vivo.</p></div></li>
+            <li><span class="boton-icono"><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#shield"/></svg></span><div><strong>Modera tu chat</strong><p>Moderadores y control de la sala.</p></div></li>
+            <li><span class="boton-icono"><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#bar-chart-2"/></svg></span><div><strong>Trivias y encuestas</strong><p>Haz que tu clase participe.</p></div></li>
+            <li><span class="boton-icono"><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#users"/></svg></span><div><strong>Tu comunidad</strong><p>Seguidores, Shorts y grabaciones.</p></div></li>
+          </ul>
+          <div class="tarjeta pronto" data-tono="menta">
+            <span class="etiqueta" style="justify-self: start">Próximamente</span>
+            <h3>Cobra con Yape</h3>
+            <p>Entradas y regalos de tus clases, directo a tu Yape. Anótate y te avisamos cuando esté listo.</p>
+            <form class="formulario-espera" action="#" aria-label="Lista de espera para creadores">
+              <div class="campos">
+                <label>Tu correo<input type="email" name="correo" placeholder="tu@correo.com" autocomplete="email"></label>
+                <label>¿Qué enseñas?<input type="text" name="tema" placeholder="Ej.: matemáticas"></label>
+                <button class="btn" data-tono="amarillo" type="button">Únete</button>
+              </div>
+              <label class="consentimiento"><input type="checkbox" name="consentimiento">Acepto que Estud-IA use mi correo para avisarme. Ver la <a href="#">política de privacidad</a>.</label>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Cómo descargar -->
+    <section id="descargar" class="seccion descarga" aria-labelledby="titulo-descargar">
+      <div class="contenedor">
+        <div>
+          <div class="encabezado-seccion">
+            <h2 id="titulo-descargar">Instálala en 3 pasos</h2>
+            <p class="texto-apoyo">Por ahora Estud-IA se instala con un APK desde esta página. Pronto estará en Google Play.</p>
+          </div>
+          <ol class="pasos-instalacion" role="list">
+            <li><span class="paso-numero">1</span><div><h3>Descarga el APK</h3><p>Toca "Descargar para Android" y abre el archivo cuando termine.</p></div></li>
+            <li><span class="paso-numero">2</span><div><h3>Permite instalar desde esta fuente</h3><p>Android te lo pedirá una sola vez. Es normal en apps que no vienen de Google Play.</p></div></li>
+            <li><span class="paso-numero">3</span><div><h3>Abre Estud-IA</h3><p>Crea tu cuenta y entra a tu primera clase en vivo.</p></div></li>
+          </ol>
+        </div>
+        <aside class="tarjeta ficha-version" aria-label="Datos de la versión">
+          <a class="btn" data-tono="esmeralda" data-tamano="grande" href="#">
+            <svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#download"/></svg>Descargar APK
+          </a>
+          <dl>
+            <dt>Versión</dt><dd>1.0.0 (ejemplo)</dd>
+            <dt>Peso</dt><dd>48 MB</dd>
+            <dt>Fecha</dt><dd>1 dic. 2026</dd>
+            <dt>Android</dt><dd>8.0 o superior</dd>
+            <dt>SHA-256</dt><dd><code>3f9a…e21c (ejemplo)</code></dd>
+          </dl>
+          <div class="fila-qr">
+            <div class="qr-ejemplo" role="img" aria-label="Código QR de ejemplo"><i></i><i></i><i></i></div>
+            <p>Escanea con tu Android para descargar.</p>
+          </div>
+          <div class="tiendas">
+            <span class="etiqueta" data-tipo="pronto">Google Play · pronto</span>
+            <span class="etiqueta" data-tipo="pronto">App Store · pronto</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 9. Preguntas frecuentes -->
+    <section id="faq" class="seccion" style="padding-block-start: 0" aria-labelledby="titulo-faq">
+      <div class="contenedor">
+        <div class="encabezado-seccion"><h2 id="titulo-faq">Preguntas frecuentes</h2></div>
+        <div class="faq">
+          <details open><summary>¿Es gratis?<svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#chevron-down"/></svg></summary><p>Sí. Descargar la app y ver clases gratuitas no cuesta nada.</p></details>
+          <details><summary>¿Es seguro instalar un APK?<svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#chevron-down"/></svg></summary><p>Sí, si lo descargas desde esta página. Publicamos su huella SHA-256 para que puedas verificarlo. Android te pedirá permiso una sola vez.</p></details>
+          <details><summary>¿Por qué no está en Google Play?<svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#chevron-down"/></svg></summary><p>Está en camino. Mientras tanto, la versión directa tiene todas las funciones.</p></details>
+          <details><summary>¿Hay versión para iPhone?<svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#chevron-down"/></svg></summary><p>Todavía no. Déjanos tu correo y te avisamos.</p></details>
+          <details><summary>¿Qué son las Vcoins?<svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#chevron-down"/></svg></summary><p>Puntos que ganas gratis al participar y que canjeas dentro de la app.</p></details>
+          <details><summary>¿Puedo dar clases?<svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#chevron-down"/></svg></summary><p>Sí. Cualquier usuario puede abrir su estudio y transmitir.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. CTA final -->
+    <section class="seccion cta-final" aria-labelledby="titulo-final">
+      <div class="contenedor">
+        <h2 id="titulo-final" class="titulo-display"><span>Tu próxima clase</span><span>empieza en vivo</span></h2>
+        <a class="btn" data-tono="esmeralda" data-tamano="grande" href="#descargar">
+          <svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#download"/></svg>Descargar para Android
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <a class="marca" href="#inicio"><img src="assets/logo.svg" alt="" width="36" height="38">Estud-IA</a>
+      <ul role="list">
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+      <small>© 2026 Estud-IA · Maqueta de referencia</small>
+    </div>
+  </footer>
+
+  <div class="barra-descarga-movil">
+    <a class="btn" data-tono="esmeralda" href="#descargar">
+      <svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#download"/></svg>Descargar para Android
+    </a>
+  </div>
+</body>
+</html>

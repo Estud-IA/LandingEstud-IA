@@ -1,0 +1,854 @@
+/*
+ * Secciones de la landing (index.html) y piezas exportables (piezas/*.html).
+ * Orden y contenido: docs/04-diseno/secciones.md.
+ */
+
+@layer secciones {
+  /* ── Estructura general ── */
+  .contenedor {
+    inline-size: min(100% - 2 * var(--margen-lateral), var(--ancho-max));
+    margin-inline: auto;
+  }
+
+  .seccion {
+    padding-block: var(--espacio-seccion);
+  }
+
+  /* Ritmo claro / negro, como los dos ambientes de la app */
+  [data-tema="oscuro"] {
+    --sombra-color: var(--color-acento);
+    --telefono-contorno: var(--gris-700);
+    background: var(--negro);
+    color: var(--gris-50);
+
+    & .texto-apoyo {
+      color: color-mix(in srgb, var(--gris-50) 75%, transparent);
+    }
+  }
+
+  .encabezado-seccion {
+    display: grid;
+    justify-items: start;
+    gap: var(--espacio-4);
+    max-inline-size: 46rem;
+    margin-block-end: var(--espacio-7);
+
+    & h2 {
+      font-size: var(--texto-h2);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+  }
+
+  .texto-apoyo {
+    font-size: var(--texto-grande);
+    color: var(--color-texto-suave);
+    max-inline-size: 38rem;
+  }
+
+  .titulo-display {
+    font-family: var(--fuente-titulos);
+    font-weight: 800;
+    font-size: var(--texto-display);
+    line-height: var(--interlineado-display);
+    letter-spacing: var(--tracking-display);
+
+    & span {
+      display: block;
+    }
+  }
+
+  /* ── 1. Navegación en isla táctil ── */
+  .nav-landing {
+    position: sticky;
+    inset-block-start: var(--espacio-3);
+    z-index: 20;
+    margin-block-start: var(--espacio-3);
+
+    & .nav-isla {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--espacio-4);
+      padding: 0.5rem 0.5rem 0.5rem 1rem;
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: var(--radio-pildora);
+      background: var(--color-superficie);
+      color: var(--color-tinta);
+      box-shadow: var(--sombra-dura);
+    }
+
+    & ul {
+      display: flex;
+      gap: var(--espacio-5);
+      font-family: var(--fuente-titulos);
+      font-weight: 600;
+
+      & a {
+        text-decoration: none;
+      }
+    }
+
+    @media (width < 48rem) {
+      & ul {
+        display: none;
+      }
+    }
+  }
+
+  /* ── 2. Hero ── */
+  .hero {
+    padding-block: var(--espacio-7) var(--espacio-seccion);
+    overflow: clip;
+
+    & .contenedor {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      align-items: center;
+      gap: var(--espacio-7);
+
+      @media (width < 60rem) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    & .hero-texto {
+      display: grid;
+      gap: var(--espacio-5);
+      justify-items: start;
+    }
+
+    & .titulo-display {
+      font-size: clamp(3rem, 1rem + 4.6vw, 5.75rem);
+    }
+
+    & .titulo-display span:nth-child(2) {
+      padding-inline-start: 0.6em;
+      color: var(--color-accion-texto);
+    }
+
+    & .hero-acciones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espacio-4);
+      align-items: center;
+    }
+
+    & .hero-datos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espacio-2) var(--espacio-4);
+      font-size: var(--texto-chico);
+      font-weight: 600;
+      color: var(--color-texto-suave);
+      --icono-tam: 1.1em;
+
+      & span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4em;
+      }
+    }
+
+    & .hero-qr {
+      display: flex;
+      gap: var(--espacio-4);
+      align-items: center;
+      font-size: var(--texto-chico);
+      font-weight: 600;
+
+      & .qr-ejemplo {
+        --modulo: 3.6px;
+      }
+
+      @media (width < 60rem) {
+        display: none;
+      }
+    }
+
+    & .hero-visual {
+      position: relative;
+      display: grid;
+      place-items: center;
+      padding-block: var(--espacio-6);
+
+      & .telefono {
+        --escala: 0.78;
+        rotate: 4deg;
+      }
+
+      @media (width < 30rem) {
+        & .telefono {
+          --escala: 0.66;
+        }
+      }
+    }
+  }
+
+  /* Elementos que flotan alrededor del teléfono */
+  .flotante {
+    position: absolute;
+    z-index: 2;
+    rotate: var(--giro, 0deg);
+
+    &.burbuja .burbuja-cuerpo {
+      max-inline-size: 15rem;
+    }
+  }
+
+  /* Formas decorativas de marca */
+  .forma-mas {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.9;
+    rotate: var(--giro, 12deg);
+  }
+
+  /* ── 3. Franja de prueba ── */
+  .franja {
+    overflow: clip;
+    border-block: var(--borde) solid var(--color-tinta);
+    background: var(--color-marca);
+    color: var(--color-tinta);
+
+    & ul {
+      display: flex;
+      gap: var(--espacio-6);
+      align-items: center;
+      inline-size: max-content;
+      padding-block: var(--espacio-4);
+      font-family: var(--fuente-titulos);
+      font-weight: 800;
+      font-size: clamp(1.25rem, 1rem + 1vw, 2rem);
+      text-transform: uppercase;
+      white-space: nowrap;
+      --icono-tam: 0.9em;
+
+      & li {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--espacio-6);
+      }
+    }
+  }
+
+  /* ── 4. Así se vive una clase ── */
+  .pasos-clase {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--espacio-5);
+    counter-reset: paso;
+
+    @media (width < 75rem) {
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    }
+
+    & li {
+      display: grid;
+      align-content: start;
+      gap: var(--espacio-4);
+      justify-items: center;
+      text-align: center;
+    }
+
+    & .telefono {
+      --escala: 0.5;
+      --marco: 7px;
+    }
+
+    & .paso-numero {
+      display: grid;
+      place-items: center;
+      inline-size: 2.75rem;
+      block-size: 2.75rem;
+      border: var(--borde) solid var(--gris-50);
+      border-radius: 50%;
+      background: var(--color-marca);
+      color: var(--color-tinta);
+      font-family: var(--fuente-titulos);
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+
+    & h3 {
+      font-size: var(--texto-h3);
+    }
+
+    & p {
+      font-size: var(--texto-chico);
+      color: color-mix(in srgb, var(--gris-50) 75%, transparent);
+      max-inline-size: 22ch;
+    }
+  }
+
+  /* ── 5. Gamificación (cuadrícula irregular) ── */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(12rem, auto);
+    gap: var(--espacio-5);
+
+    & > * {
+      display: grid;
+      align-content: space-between;
+      gap: var(--espacio-4);
+    }
+
+    & h3 {
+      font-size: var(--texto-h3);
+    }
+
+    & p {
+      color: var(--color-texto-suave);
+    }
+
+    & .grande {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    & .ancha {
+      grid-column: span 2;
+    }
+
+    & .cifra {
+      font-family: var(--fuente-titulos);
+      font-weight: 800;
+      font-size: clamp(2.5rem, 1.8rem + 2.5vw, 4rem);
+      line-height: 1;
+    }
+
+    @media (width < 60rem) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (width < 36rem) {
+      grid-template-columns: 1fr;
+
+      & .grande,
+      & .ancha {
+        grid-column: auto;
+        grid-row: auto;
+      }
+    }
+  }
+
+  .mini-ranking {
+    display: grid;
+    gap: var(--espacio-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    & li {
+      display: flex;
+      align-items: center;
+      gap: var(--espacio-3);
+      padding: 0.45rem 0.75rem;
+      border: 2px solid var(--color-tinta);
+      border-radius: 12px;
+      background: var(--color-superficie);
+      font-weight: 600;
+      font-size: var(--texto-chico);
+    }
+
+    & li[data-propio] {
+      background: var(--color-marca);
+    }
+
+    & b {
+      margin-inline-start: auto;
+      font-family: var(--fuente-titulos);
+    }
+  }
+
+  .fila-logros {
+    display: flex;
+    gap: var(--espacio-3);
+
+    & span {
+      display: grid;
+      place-items: center;
+      inline-size: 3.25rem;
+      block-size: 3.25rem;
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: 50%;
+      background: var(--c, var(--color-marca));
+      box-shadow: var(--sombra-dura-chica);
+      --icono-tam: 1.4rem;
+    }
+  }
+
+  /* ── 6. Shorts y grabaciones (carrusel con scroll-snap) ── */
+  .carrusel {
+    display: flex;
+    gap: var(--espacio-5);
+    padding: var(--espacio-2) var(--margen-lateral) var(--espacio-5);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--margen-lateral);
+    scrollbar-width: thin;
+    --tv-ancho: 13.5rem;
+    --tv-avatar: 56px;
+
+    & .tarjeta-video {
+      scroll-snap-align: start;
+    }
+
+    & h3 {
+      font-size: 1.05rem;
+    }
+  }
+
+  /* ── 7. Creadores ── */
+  .creadores {
+    & .contenedor {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--espacio-8);
+      align-items: center;
+
+      @media (width < 60rem) {
+        grid-template-columns: 1fr;
+        justify-items: center;
+      }
+    }
+
+    & .telefono {
+      --escala: 0.74;
+    }
+
+    & .creadores-texto {
+      display: grid;
+      gap: var(--espacio-6);
+    }
+  }
+
+  .ventajas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--espacio-4);
+
+    & li {
+      display: flex;
+      gap: var(--espacio-3);
+      align-items: flex-start;
+    }
+
+    & .boton-icono {
+      flex: none;
+    }
+
+    & strong {
+      display: block;
+      font-family: var(--fuente-titulos);
+      font-size: 1.1rem;
+    }
+
+    & p {
+      font-size: var(--texto-chico);
+      color: color-mix(in srgb, var(--gris-50) 72%, transparent);
+    }
+
+    @media (width < 36rem) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .pronto {
+    display: grid;
+    gap: var(--espacio-4);
+    color: var(--color-tinta);
+
+    & h3 {
+      font-size: var(--texto-h3);
+    }
+  }
+
+  .formulario-espera {
+    display: grid;
+    gap: var(--espacio-3);
+
+    & .campos {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: var(--espacio-3);
+
+      @media (width < 48rem) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    & label {
+      display: grid;
+      gap: var(--espacio-1);
+      font-size: var(--texto-chico);
+      font-weight: 600;
+    }
+
+    & input[type="email"],
+    & input[type="text"] {
+      padding: 0.8em 1em;
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: 14px;
+      background: var(--color-superficie);
+    }
+
+    & .campos .btn {
+      align-self: end;
+    }
+
+    & .consentimiento {
+      display: flex;
+      gap: var(--espacio-2);
+      align-items: flex-start;
+      font-weight: 400;
+      font-size: var(--texto-mini);
+    }
+
+    & input[type="checkbox"] {
+      accent-color: var(--color-tinta);
+      inline-size: 1.1rem;
+      block-size: 1.1rem;
+      margin: 0;
+    }
+  }
+
+  /* ── 8. Cómo descargar ── */
+  .descarga {
+    & .contenedor {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: var(--espacio-6);
+      align-items: start;
+
+      @media (width < 60rem) {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  .pasos-instalacion {
+    display: grid;
+    gap: var(--espacio-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    & li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--espacio-4);
+      align-items: start;
+    }
+
+    & .paso-numero {
+      display: grid;
+      place-items: center;
+      inline-size: 3rem;
+      block-size: 3rem;
+      border: var(--borde) solid var(--color-marca-borde);
+      border-radius: 14px;
+      background: var(--color-marca);
+      box-shadow: var(--sombra-marca);
+      font-family: var(--fuente-titulos);
+      font-weight: 800;
+      font-size: 1.4rem;
+    }
+
+    & h3 {
+      font-size: var(--texto-h3);
+    }
+
+    & p {
+      color: var(--color-texto-suave);
+    }
+  }
+
+  .ficha-version {
+    display: grid;
+    gap: var(--espacio-5);
+
+    & dl {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--espacio-2) var(--espacio-4);
+      font-size: var(--texto-chico);
+    }
+
+    & dt {
+      font-weight: 600;
+      color: var(--color-texto-suave);
+    }
+
+    & dd {
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+
+    & code {
+      font-size: var(--texto-mini);
+    }
+
+    & .fila-qr {
+      display: flex;
+      gap: var(--espacio-4);
+      align-items: center;
+      font-size: var(--texto-chico);
+      font-weight: 600;
+
+      & .qr-ejemplo {
+        --modulo: 3.6px;
+      }
+    }
+
+    & .tiendas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espacio-2);
+    }
+  }
+
+  /* ── 9. Preguntas frecuentes ── */
+  .faq {
+    display: grid;
+    gap: var(--espacio-4);
+    max-inline-size: 52rem;
+
+    & details {
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: var(--radio-tarjeta);
+      background: var(--color-superficie);
+      box-shadow: var(--sombra-dura);
+    }
+
+    & details[open] {
+      background: var(--menta-100);
+    }
+
+    & summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--espacio-4);
+      padding: var(--espacio-4) var(--espacio-5);
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+      font-size: 1.15rem;
+      cursor: pointer;
+      list-style: none;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+
+      & .icono {
+        transition: rotate 0.2s var(--curva-marca);
+      }
+    }
+
+    & details[open] summary .icono {
+      rotate: 180deg;
+    }
+
+    & details p {
+      padding: 0 var(--espacio-5) var(--espacio-5);
+      color: var(--color-texto-suave);
+    }
+  }
+
+  /* ── 10. CTA final y footer ── */
+  .cta-final {
+    text-align: center;
+
+    & .contenedor {
+      display: grid;
+      justify-items: center;
+      gap: var(--espacio-6);
+    }
+  }
+
+  .pie {
+    padding-block: var(--espacio-7) calc(var(--espacio-7) + 5rem);
+    border-block-start: var(--borde) solid var(--color-tinta);
+
+    & .contenedor {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--espacio-5);
+    }
+
+    & ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espacio-5);
+      font-size: var(--texto-chico);
+      font-weight: 600;
+    }
+
+    & small {
+      color: var(--color-texto-suave);
+    }
+
+    @media (width >= 48rem) {
+      padding-block-end: var(--espacio-7);
+    }
+  }
+
+  /* Barra de descarga fija (solo móvil) */
+  .barra-descarga-movil {
+    position: fixed;
+    inset-inline: var(--espacio-3);
+    inset-block-end: var(--espacio-3);
+    z-index: 30;
+    display: none;
+
+    & .btn {
+      inline-size: 100%;
+    }
+
+    @media (width < 48rem) {
+      display: block;
+    }
+  }
+
+  /* ── Piezas exportables ── */
+  .pieza-lienzo {
+    display: grid;
+    gap: var(--espacio-7);
+    padding: var(--espacio-7);
+    justify-items: start;
+  }
+
+  .pieza {
+    position: relative;
+  }
+
+  .og {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--espacio-6);
+    inline-size: 1200px;
+    block-size: 630px;
+    padding: 56px 72px;
+    overflow: clip;
+    border: var(--borde-grueso) solid var(--color-tinta);
+    background: var(--color-fondo);
+
+    & .titulo-display {
+      font-size: 5.4rem;
+    }
+
+    & .titulo-display span:nth-child(2) {
+      padding-inline-start: 0.5em;
+      color: var(--color-accion-texto);
+    }
+
+    & .og-texto {
+      display: grid;
+      gap: var(--espacio-4);
+      justify-items: start;
+    }
+
+    & .telefono {
+      --escala: 0.6;
+      rotate: 5deg;
+      margin-block: 120px -120px;
+    }
+  }
+
+  .fila-piezas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espacio-6);
+    align-items: flex-end;
+  }
+
+  .instalacion-pantalla {
+    display: grid;
+    align-content: center;
+    gap: 18px;
+    inline-size: 390px;
+    block-size: 844px;
+    padding: 28px;
+    background: var(--gris-150);
+    font-family: var(--fuente-texto);
+
+    & .dialogo {
+      display: grid;
+      gap: 14px;
+      padding: 24px;
+      border-radius: 28px;
+      background: var(--gris-50);
+      box-shadow: 0 2px 12px color-mix(in srgb, var(--negro) 15%, transparent);
+
+      & h2 {
+        font-family: var(--fuente-texto);
+        font-size: 22px;
+        font-weight: 500;
+      }
+
+      & p {
+        font-size: 15px;
+        color: var(--gris-700);
+      }
+
+      & .acciones {
+        display: flex;
+        justify-content: flex-end;
+        gap: 22px;
+        font-weight: 600;
+        color: var(--ilus-indigo);
+      }
+    }
+
+    & .notificacion {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 16px;
+      border-radius: 22px;
+      background: var(--gris-50);
+      box-shadow: 0 2px 12px color-mix(in srgb, var(--negro) 15%, transparent);
+      font-size: 15px;
+
+      & img {
+        inline-size: 44px;
+        border-radius: 12px;
+      }
+
+      & small {
+        display: block;
+        color: var(--gris-500);
+      }
+    }
+
+    & .interruptor {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: var(--gris-50);
+      font-size: 16px;
+
+      & span:last-child {
+        inline-size: 52px;
+        block-size: 30px;
+        border-radius: var(--radio-pildora);
+        background:
+          radial-gradient(circle at calc(100% - 15px) 50%, var(--gris-50) 10px, transparent 11px),
+          var(--ilus-indigo);
+      }
+    }
+
+    & .resaltado {
+      outline: 4px solid var(--color-marca);
+      outline-offset: 6px;
+    }
+  }
+}

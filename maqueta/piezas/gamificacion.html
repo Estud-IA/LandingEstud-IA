@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gamificación · Pieza · Maqueta Estud-IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/componentes.css">
+  <link rel="stylesheet" href="../css/secciones.css">
+</head>
+<body>
+  <main class="pieza-lienzo">
+    <div class="fila-piezas">
+      <span id="insignia-nivel" role="group" aria-label="insignia-nivel" class="pieza insignia-nivel" style="font-size: 3rem"><small>NIVEL</small><strong>12</strong></span>
+      <span id="chip-xp" role="group" aria-label="chip-xp" class="pieza chip-xp" style="font-size: 2rem"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#zap"/></svg>+10 XP</span>
+      <span id="etiqueta-vivo" role="group" aria-label="etiqueta-vivo" class="pieza etiqueta" data-tipo="vivo" style="font-size: 1.6rem"><span class="punto-vivo" aria-hidden="true"></span>En vivo</span>
+      <span id="boton-mas" role="group" aria-label="boton-mas" class="pieza boton-mas" style="inline-size: 96px; block-size: 96px; --icono-tam: 44px"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#plus"/></svg></span>
+    </div>
+    <div class="fila-piezas">
+      <article id="tarjeta-nivel" role="group" aria-label="tarjeta-nivel" class="pieza tarjeta" data-tono="amarillo" style="inline-size: 420px; display: grid; gap: 16px">
+        <span class="insignia-nivel" style="font-size: 2rem; justify-self: start"><small>NIVEL</small><strong>12</strong></span>
+        <h3 style="font-size: 1.6rem">Sube de nivel mientras aprendes</h3>
+        <div class="barra-xp" style="--progreso: 72%"><span></span></div>
+        <p style="font-weight: 600">1.080 / 1.500 XP para el nivel 13</p>
+      </article>
+      <article id="tarjeta-racha" role="group" aria-label="tarjeta-racha" class="pieza tarjeta" data-tono="menta" style="inline-size: 240px; display: grid; gap: 10px">
+        <svg class="icono" style="--icono-tam: 2.2rem" aria-hidden="true"><use href="../assets/iconos/sprite.svg#zap"/></svg>
+        <span style="font-family: var(--fuente-titulos); font-weight: 800; font-size: 3.5rem; line-height: 1">7 días</span>
+        <h3>de racha</h3>
+      </article>
+      <article id="tarjeta-monedas" role="group" aria-label="tarjeta-monedas" class="pieza tarjeta" data-tono="amarillo" style="inline-size: 300px; display: grid; justify-items: center; gap: 8px">
+        <span style="font-family: var(--fuente-titulos); font-weight: 700; letter-spacing: var(--tracking-etiqueta)">MIS MONEDAS</span>
+        <span style="font-family: var(--fuente-titulos); font-weight: 800; font-size: 3.5rem; line-height: 1">120</span>
+        <span style="font-size: 0.85rem; font-weight: 600">1 Moneda = S/ 1.00</span>
+      </article>
+    </div>
+    <div class="fila-piezas">
+      <div id="logros" role="group" aria-label="logros" class="pieza fila-logros" style="--icono-tam: 2rem; gap: 20px">
+        <span style="inline-size: 88px; block-size: 88px"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#award"/></svg></span>
+        <span style="inline-size: 88px; block-size: 88px; --c: var(--color-acento)"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#star"/></svg></span>
+        <span style="inline-size: 88px; block-size: 88px; --c: var(--lavanda-100)"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#target"/></svg></span>
+      </div>
+      <div id="burbujas-chat" role="group" aria-label="burbujas-chat" class="pieza escena" data-escena="fisica" style="display: grid; gap: 12px; padding: 20px; border-radius: 22px; inline-size: 380px">
+        <div class="burbuja"><span class="avatar" data-color="amarillo" style="--tam: 36px">MA</span><p class="burbuja-cuerpo"><span class="burbuja-autor">mateo_22</span>¡Ahora sí entendí la dualidad!</p></div>
+        <div class="burbuja" data-tipo="destacado"><span class="avatar" data-color="menta" style="--tam: 36px">SR</span><p class="burbuja-cuerpo"><span class="burbuja-autor">sofi.rios · destacado</span>¿Esto entra en el examen?</p></div>
+        <div class="burbuja" data-tipo="sistema"><span class="avatar" data-color="gris" style="--tam: 36px"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#bar-chart-2"/></svg></span><p class="burbuja-cuerpo"><span class="burbuja-autor">Sistema</span>Nueva trivia iniciada</p></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
