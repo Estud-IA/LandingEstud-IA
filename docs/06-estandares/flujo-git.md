@@ -1,33 +1,54 @@
 # Flujo de Git
 
-Alineado con el flujo del repo de la app (`streaming-estudia/docs/03-estandares/flujo-git.md`).
+Este estándar es para todo el equipo. Cada integrante trabaja en su propia rama y puede apoyarse en un
+agente (Claude Code). En estos documentos, **"quien dirige la sesión"** es la persona del equipo que
+está trabajando con el agente en ese momento.
 
 ## Regla para agentes (Claude Code)
 
-**El agente hace commits, push, PR y merges, y crea o cambia de rama, solo cuando quien dirige la
-sesión se lo pide explícitamente, en ese momento.**
+**El agente hace commits, push, PR, merges y crea o cambia de rama solo cuando quien dirige la sesión
+se lo pide explícitamente, en ese momento.**
 
-- Un plan aprobado no cuenta como pedido de commit.
+- Un plan aprobado que diga "un commit por tarea" **no** cuenta como pedido.
 - Una aprobación vale para esa vez, no para las siguientes.
-- Al terminar una tarea, el agente reporta los archivos cambiados y los deja en el working tree.
+- Al terminar una tarea, el agente reporta los archivos cambiados y los deja en el working tree para
+  que quien dirige la sesión los revise y decida.
+- El agente trabaja en la rama que ya está en checkout. No cambia de rama; si es `main` o `develop`,
+  o no parece la correcta para la tarea, avisa antes de tocar nada.
+
+## Trabajo en equipo
+
+- **Cada persona trabaja en su propia rama.** Nadie trabaja directo sobre `main` ni `develop`, ni sobre
+  la rama de otra persona sin acordarlo.
+- **Antes de empezar:** actualizar la rama con `develop` y revisar en
+  [`../05-roadmap/README.md`](../05-roadmap/README.md) que la tarea no la tenga otra persona.
+- **Al tomar una tarea de una fase**, anotar quién la lleva en el archivo de la fase (por ejemplo,
+  `- [ ] **02-3. …** (en curso: @usuario-github)`), para no duplicar trabajo.
+- **Código y docs viajan juntos:** el PR que cambia código incluye la actualización de docs que pide
+  la matriz de [`documentacion.md`](documentacion.md). Así el estado documentado no se adelanta ni se
+  atrasa respecto de `develop`.
+- **No reescribir historia compartida:** nada de `push --force` sobre ramas que otros usan. En la rama
+  propia, solo `--force-with-lease`.
+- **Conflictos en docs compartidos** (`05-roadmap/README.md`,
+  `03-arquitectura/estructura-del-proyecto.md`): se resuelven conservando los cambios de ambos;
+  ninguna fila de estado se pisa sin hablarlo.
 
 ## Ramas
 
 ```
-main       ← producción: lo que está publicado en el dominio (protegida)
-└─ develop ← integración y vista previa (protegida)
-   ├─ feature/*    sección o funcionalidad nueva
-   ├─ bugfix/*     corrección
-   ├─ hotfix/*     arreglo urgente en producción
+main       ← producción (protegida)
+└─ develop ← integración (protegida)
+   ├─ feature/*    nueva funcionalidad
+   ├─ bugfix/*     corrección de bug
+   ├─ hotfix/*     arreglo urgente para producción
    ├─ docs/*       documentación
    └─ refactor/*   refactorización
 ```
 
-- Nombres en kebab-case: `feature/hero-titular-animado`, `docs/estructura-inicial`.
-- Las ramas salen de `develop` y vuelven a `develop` por PR.
-- Cada persona trabaja en su propia rama. Antes de tomar una tarea, revisar en
-  [`../05-roadmap/README.md`](../05-roadmap/README.md) que no la tenga otra persona, y anotarse en el
-  archivo de la fase: `(en curso: @usuario-github)`.
+Nombres en kebab-case y descriptivos: `feature/hero-titular-animado`, `bugfix/qr-url-descarga`.
+Las ramas salen de `develop` y vuelven a `develop` por PR. Una rama personal de largo plazo (por
+ejemplo, la que usa alguien para una fase entera) también se integra a `develop` por PR, con las mismas
+reglas.
 
 ## Commits
 
@@ -35,24 +56,31 @@ Formato: `type(scope): descripción breve`, en español y en presente.
 
 | Tipo | Uso |
 |---|---|
-| `feat` | Sección o funcionalidad nueva |
-| `fix` | Corrección |
+| `feat` | Nueva funcionalidad |
+| `fix` | Corrección de bug |
 | `docs` | Documentación |
-| `style` | Solo estilos visuales, sin cambiar comportamiento |
-| `refactor` | Reorganizar código sin cambiar el resultado |
-| `perf` | Rendimiento (peso, carga, animaciones) |
-| `chore` | Dependencias, configuración, scripts |
+| `style` | Formato, sin cambios lógicos |
+| `refactor` | Refactorización |
+| `test` | Tests |
+| `chore` | Dependencias, configuración |
 
-Scopes habituales: `hero`, `clase`, `gamificacion`, `shorts`, `creadores`, `descarga`, `faq`,
-`legal`, `motion`, `tokens`, `seo`, `docs`.
+Ejemplos: `feat(hero): anima el titular letra a letra`,
+`docs(roadmap): cierra la fase 02`.
 
-Ejemplo: `feat(hero): titular gigante con revelado por letras`.
+- Commits chicos y de un solo tema.
+- Nada de mensajes como "fix" o "update".
+- Referenciar issues cuando aplique: `fix #123`.
 
-## Pull requests
+## Pull Requests
 
-- **Para mergear:** una aprobación, verificación en verde (ver [`verificacion.md`](verificacion.md)) y
-  la rama actualizada con `develop`.
-- **Código y docs viajan juntos:** el PR incluye la actualización de docs que pide la matriz de
-  [`documentacion.md`](documentacion.md).
-- **Cambios visuales:** el PR lleva capturas de antes y después, en móvil y en escritorio.
-- Nada de `push --force` sobre ramas compartidas; en la rama propia, solo `--force-with-lease`.
+- Título con el mismo formato que los commits.
+- La descripción incluye: qué hace, con qué se relaciona, cambios principales, cómo probarlo y un
+  checklist (convenciones, docs actualizadas según
+  [`documentacion.md`](documentacion.md), tests nuevos, tests existentes en verde).
+- Para mergear: 1 aprobación, CI en verde (ver [`verificacion.md`](verificacion.md)) y rama
+  actualizada con la de destino.
+- **Squash and merge** para feature branches. **Merge commit** para hotfixes y releases.
+
+## Protección de `main` y `develop`
+
+1 aprobación obligatoria, checks de CI en verde, rama actualizada, sin force push y sin borrar la rama.
