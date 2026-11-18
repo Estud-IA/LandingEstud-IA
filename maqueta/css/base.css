@@ -1,0 +1,91 @@
+/* Reset puntual (sin selector universal) y tipografía base. */
+
+@layer reset {
+  html {
+    box-sizing: border-box;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+  /* Hereda el modelo de caja; :where() deja la especificidad en 0 para poder sobrescribirlo. */
+  :where(body, body *, body *::before, body *::after) {
+    box-sizing: inherit;
+  }
+
+  body,
+  h1, h2, h3, h4, p, figure, blockquote, dl, dd, ul, ol {
+    margin: 0;
+  }
+
+  ul[role="list"], ol[role="list"] {
+    list-style: none;
+    padding: 0;
+  }
+
+  img, svg, video, iframe {
+    display: block;
+    max-inline-size: 100%;
+  }
+
+  button, input, textarea, select {
+    font: inherit;
+    color: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-block-size: 100dvh;
+    background: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--fuente-texto);
+    font-size: var(--texto-base);
+    line-height: var(--interlineado-texto);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--fuente-titulos);
+    line-height: var(--interlineado-titulos);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-accion);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer utilidades {
+  .sr-only {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}

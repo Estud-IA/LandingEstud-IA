@@ -1,0 +1,120 @@
+/*
+ * Tokens de diseño de la maqueta de Estud-IA.
+ * Fuente: streaming-estudia/Frontend/lib/src/shared/theme/app_colors.dart
+ *         y docs/04-diseno/design-system.md (estilo táctil).
+ * Es la única fuente de colores, sombras y radios de la maqueta y la base de los
+ * tokens de la landing real.
+ */
+
+@layer reset, base, componentes, pantallas, secciones, utilidades;
+
+:root {
+  /* ── Nivel 1: colores literales (app_colors.dart) ── */
+  --gris-50: #ffffff;
+  --gris-100: #f9f9f9;      /* background */
+  --gris-150: #f3f3f4;      /* surfaceContainerLow */
+  --gris-200: #eeeeee;      /* surfaceContainer */
+  --gris-300: #e2e2e2;      /* surfaceContainerHighest */
+  --gris-400: #c6c6cd;      /* outlineVariant */
+  --gris-500: #76777d;      /* outline */
+  --gris-700: #45464d;      /* onSurfaceVariant */
+  --gris-900: #1a1c1c;      /* onSurface */
+  --negro: #000000;         /* primary */
+  --slate: #0f172a;         /* primarySlate */
+  --slate-800: #131b2e;     /* primaryContainer */
+  --slate-400: #7c839b;     /* onPrimaryContainer */
+
+  --esmeralda-500: #14b887; /* secondaryEmerald */
+  --esmeralda-600: #10b981; /* secondaryEmeraldEnd */
+  --esmeralda-800: #006c4d; /* secondary */
+  --menta-300: #6df8c2;     /* secondaryContainer */
+  --menta-100: #dcfdf0;
+
+  --amarillo-300: #fee252;  /* tertiaryFixed */
+  --amarillo-400: #f1d647;  /* tertiaryGold */
+  --amarillo-600: #c3ab19;  /* tertiaryContainer */
+  --oliva-900: #4a3f00;     /* onTertiaryContainer */
+
+  --rojo-700: #ba1a1a;      /* error (EN VIVO) */
+  --rojo-100: #ffdad6;      /* errorContainer */
+
+  --lavanda-100: #dae2fd;   /* primaryFixed */
+
+  /* Colores de ilustración: solo para miniaturas y fondos de video ficticios */
+  --ilus-indigo: #3730a3;
+  --ilus-violeta: #7c3aed;
+  --ilus-cielo: #38bdf8;
+  --ilus-coral: #fb7185;
+  --ilus-naranja: #fb923c;
+
+  /* Colores del logo (logo.svg) */
+  --logo-pizarra: #243842;
+  --logo-lima: #7ed248;
+
+  /* ── Nivel 2: colores semánticos ── */
+  --color-fondo: var(--gris-100);
+  --color-superficie: var(--gris-50);
+  --color-superficie-suave: var(--gris-150);
+  --color-tinta: var(--negro);
+  --color-texto: var(--gris-900);
+  --color-texto-suave: var(--gris-700);
+  --color-texto-tenue: var(--gris-500);
+  --color-linea: var(--gris-300);
+  --color-accion: var(--esmeralda-500);
+  --color-accion-fin: var(--esmeralda-600);
+  --color-accion-texto: var(--esmeralda-800);   /* texto esmeralda sobre claro (contraste AA) */
+  --color-acento: var(--menta-300);
+  --color-marca: var(--amarillo-300);
+  --color-marca-borde: var(--oliva-900);
+  --color-oro: var(--amarillo-400);
+  --color-vivo: var(--rojo-700);
+
+  /* ── Tipografía ── */
+  --fuente-titulos: "Outfit", system-ui, sans-serif;
+  --fuente-texto: "Inter", system-ui, sans-serif;
+
+  --texto-display: clamp(3.25rem, 1.5rem + 7vw, 8rem);
+  --texto-h2: clamp(2.25rem, 1.4rem + 3.4vw, 4.5rem);
+  --texto-h3: clamp(1.375rem, 1.1rem + 0.9vw, 1.875rem);
+  --texto-grande: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --texto-base: 1rem;
+  --texto-chico: 0.875rem;
+  --texto-mini: 0.75rem;
+
+  --interlineado-display: 0.9;
+  --interlineado-titulos: 1.1;
+  --interlineado-texto: 1.5;
+  --tracking-display: -0.04em;
+  --tracking-etiqueta: 0.06em;
+
+  /* ── Estilo táctil: bordes, sombras y radios ── */
+  --borde-fino: 1.5px;
+  --borde: 2.5px;
+  --borde-grueso: 3px;
+  --sombra-dura: 0 4px 0 var(--color-tinta);
+  --sombra-dura-chica: 0 3px 0 var(--color-tinta);
+  --sombra-dura-grande: 0 8px 0 var(--color-tinta);
+  --sombra-marca: 0 4px 0 var(--color-marca-borde);
+
+  --radio-etiqueta: 7px;
+  --radio-tarjeta: 18px;
+  --radio-grande: 28px;
+  --radio-telefono: 46px;
+  --radio-pildora: 9999px;
+
+  /* ── Espaciado (base de 4 px) ── */
+  --espacio-1: 0.25rem;
+  --espacio-2: 0.5rem;
+  --espacio-3: 0.75rem;
+  --espacio-4: 1rem;
+  --espacio-5: 1.5rem;
+  --espacio-6: 2rem;
+  --espacio-7: 2.5rem;
+  --espacio-8: 4rem;
+  --espacio-seccion: clamp(4rem, 2.5rem + 6vw, 10rem);
+  --margen-lateral: clamp(1.25rem, 0.5rem + 4vw, 5rem);
+  --ancho-max: 80rem;
+
+  /* ── Movimiento (referencia para la landing; la maqueta no anima) ── */
+  --curva-marca: cubic-bezier(0.84, 0, 0.16, 1);
+}
