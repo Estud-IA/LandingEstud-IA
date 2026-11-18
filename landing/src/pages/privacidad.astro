@@ -1,0 +1,100 @@
+---
+/**
+ * Política de privacidad del sitio (RF-13). BORRADOR pendiente de revisión legal (riesgo R11).
+ * Redactado según la Ley N.° 29733, Ley de Protección de Datos Personales del Perú, y su reglamento.
+ */
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { sitio } from '../content/site';
+
+const correo = sitio.contacto;
+---
+
+<LegalLayout
+  titulo="Política de privacidad"
+  descripcion="Cómo Estud-IA trata los datos personales que recoge este sitio web."
+  actualizado="18 de noviembre de 2026"
+>
+  <p>
+    En {sitio.nombre} cuidamos tus datos. Esta política explica qué datos recoge este sitio web,
+    para qué los usamos y cómo puedes ejercer tus derechos. Se aplica solo a este sitio; la app
+    Estud-IA tiene su propia política de privacidad.
+  </p>
+
+  <h2>1. Quién es responsable de tus datos</h2>
+  <p>
+    El responsable del tratamiento es el equipo de {sitio.nombre}. Puedes escribirnos a{' '}
+    <a href={`mailto:${correo}`}>{correo}</a> para cualquier consulta sobre tus datos.
+  </p>
+
+  <h2>2. Qué datos recogemos</h2>
+  <ul>
+    <li>
+      <strong>Lista de espera:</strong> tu correo electrónico y, si lo indicas, el tema que enseñas.
+      Solo si llenas el formulario y aceptas esta política.
+    </li>
+    <li>
+      <strong>Datos técnicos mínimos:</strong> los que tu navegador envía al visitar cualquier sitio
+      (por ejemplo, el tipo de dispositivo), que usamos para mostrarte la opción de descarga
+      adecuada.
+    </li>
+  </ul>
+  <p>
+    No pedimos datos sensibles ni datos de pago en este sitio. No usamos tus datos para perfilarte
+    ni los vendemos.
+  </p>
+
+  <h2>3. Para qué los usamos</h2>
+  <ul>
+    <li>
+      Avisarte cuando la app esté disponible en iPhone o cuando puedas cobrar con Yape como creador.
+    </li>
+    <li>Responder a los mensajes que nos envíes.</li>
+    <li>Saber de forma agregada cuántas personas descargan la app y desde qué parte del sitio.</li>
+  </ul>
+
+  <h2>4. Base para tratarlos</h2>
+  <p>
+    Tratamos tus datos con tu <strong>consentimiento</strong>, que das al marcar la casilla del
+    formulario. Puedes retirarlo cuando quieras escribiéndonos, sin que eso afecte lo que hicimos
+    antes.
+  </p>
+
+  <h2>5. Cuánto tiempo los guardamos</h2>
+  <p>
+    Guardamos tu correo mientras la lista de espera esté activa o hasta que nos pidas borrarlo.
+    Después lo eliminamos.
+  </p>
+
+  <h2>6. Con quién los compartimos</h2>
+  <p>
+    Solo con los proveedores que necesitamos para enviarte los avisos (por ejemplo, el servicio de
+    correo o de formularios), que tratan los datos por encargo nuestro y con las mismas garantías.
+    <em>
+      Pendiente: indicar el proveedor elegido y, si sus servidores están fuera del Perú, informar de
+      la transferencia internacional.
+    </em>
+  </p>
+
+  <h2>7. Tus derechos</h2>
+  <p>
+    Puedes ejercer tus derechos de <strong>acceso, rectificación, cancelación y oposición</strong>{' '}
+    (derechos ARCO) escribiendo a <a href={`mailto:${correo}`}>{correo}</a> con el asunto "Derechos
+    ARCO". Te responderemos en los plazos que fija la ley. Si no estás conforme con nuestra
+    respuesta, puedes acudir a la Autoridad Nacional de Protección de Datos Personales.
+  </p>
+
+  <h2>8. Menores de edad</h2>
+  <p>Si eres menor de 14 años, pide a tu madre, padre o tutor que llene el formulario por ti.</p>
+
+  <h2>9. Seguridad</h2>
+  <p>
+    Aplicamos medidas técnicas y organizativas razonables para proteger tus datos, como conexiones
+    cifradas (HTTPS) y acceso restringido.
+  </p>
+
+  <h2>10. Cambios en esta política</h2>
+  <p>
+    Si cambiamos esta política, actualizaremos la fecha de arriba. Si el cambio es importante, te lo
+    avisaremos por correo.
+  </p>
+</LegalLayout>

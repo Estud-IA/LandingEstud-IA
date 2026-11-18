@@ -1,0 +1,232 @@
+---
+/**
+ * Catálogo interno de tokens y componentes (adaptado de maqueta/componentes.html).
+ * No se indexa (noindex) y queda fuera del sitemap (astro.config.mjs).
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TactileButton from '../../components/TactileButton.astro';
+import TactileCard from '../../components/TactileCard.astro';
+import Badge from '../../components/Badge.astro';
+import Avatar from '../../components/Avatar.astro';
+import Icon from '../../components/Icon.astro';
+
+const colores = [
+  ['Fondo', '--color-fondo', '#F9F9F9'],
+  ['Superficie', '--color-superficie', '#FFFFFF'],
+  ['Tinta', '--color-tinta', '#000000'],
+  ['Esmeralda', '--color-accion', '#14B887'],
+  ['Esmeralda texto', '--color-accion-texto', '#006C4D'],
+  ['Menta', '--color-acento', '#6DF8C2'],
+  ['Amarillo', '--color-marca', '#FEE252'],
+  ['Oliva', '--color-marca-borde', '#4A3F00'],
+  ['En vivo', '--color-vivo', '#BA1A1A'],
+  ['Lavanda', '--lavanda-100', '#DAE2FD'],
+  ['Logo pizarra', '--logo-pizarra', '#243842'],
+  ['Logo lima', '--logo-lima', '#7ED248'],
+];
+---
+
+<BaseLayout titulo="Catálogo de estilos · Estud-IA" indexar={false}>
+  <main id="contenido" class="catalogo">
+    <header>
+      <h1>Catálogo de estilos</h1>
+      <p>
+        Tokens y componentes de la landing, con el estilo táctil de la app. Página interna: no se
+        indexa.
+      </p>
+    </header>
+
+    <section class="bloque" aria-labelledby="t-colores">
+      <h2 id="t-colores">Colores</h2>
+      <div class="fila">
+        {colores.map(([nombre, variable, hex]) => (
+          <div class="muestra">
+            <div class="color" style={`--c: var(${variable})`} />
+            {nombre}
+            <code>{hex}</code>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="bloque" aria-labelledby="t-tipo">
+      <h2 id="t-tipo">Tipografía</h2>
+      <p class="display" data-motion="reveal">
+        Aprende en vivo.
+      </p>
+      <p class="h2">Así se vive una clase</p>
+      <p class="h3">Outfit 600 · títulos de tarjeta</p>
+      <p class="cuerpo">
+        Inter 400 · Clases en directo, chat al instante y XP por participar. Todo desde tu teléfono.
+      </p>
+    </section>
+
+    <section class="bloque" aria-labelledby="t-botones">
+      <h2 id="t-botones">Botones</h2>
+      <div class="fila">
+        <TactileButton
+          href="#"
+          tono="esmeralda"
+          tamano="grande"
+          icono="download"
+          detalle="v1.0.0 · 48 MB"
+        >
+          Descargar para Android
+        </TactileButton>
+        <TactileButton href="#" tono="esmeralda">
+          Descargar
+        </TactileButton>
+        <TactileButton tono="amarillo">Únete a la lista</TactileButton>
+        <TactileButton href="#">Ver cómo funciona</TactileButton>
+        <TactileButton tono="negro" tamano="chico">
+          Chico
+        </TactileButton>
+      </div>
+    </section>
+
+    <section class="bloque" aria-labelledby="t-etiquetas">
+      <h2 id="t-etiquetas">Etiquetas, avatares e iconos</h2>
+      <div class="fila">
+        <Badge tipo="vivo">En vivo</Badge>
+        <Badge tipo="short">Short</Badge>
+        <Badge tipo="grabacion">Grabación</Badge>
+        <Badge tipo="pronto">Próximamente</Badge>
+        <Badge tipo="sistema">Sistema</Badge>
+      </div>
+      <div class="fila">
+        <Avatar iniciales="AT" />
+        <Avatar iniciales="PV" color="menta" />
+        <Avatar iniciales="LM" color="lavanda" />
+        <Avatar iniciales="CQ" color="rosa" />
+        <Avatar iniciales="JD" color="menta" vivo />
+      </div>
+      <div class="fila iconos">
+        {[
+          'radio',
+          'message-circle',
+          'zap',
+          'award',
+          'trending-up',
+          'gift',
+          'download',
+          'users',
+        ].map((n) => (
+          <Icon name={n} label={n} size="1.75rem" />
+        ))}
+      </div>
+    </section>
+
+    <section class="bloque" aria-labelledby="t-tarjetas">
+      <h2 id="t-tarjetas">Tarjetas</h2>
+      <div class="fila">
+        <TactileCard class="demo-tarjeta">
+          <h3>Tarjeta blanca</h3>
+          <p>Borde negro de 2,5 px, esquinas de 18 px y sombra dura.</p>
+        </TactileCard>
+        <TactileCard tono="amarillo" class="demo-tarjeta">
+          <h3>Amarilla</h3>
+          <p>Para Monedas, nivel y lo que protagoniza.</p>
+        </TactileCard>
+        <TactileCard tono="menta" class="demo-tarjeta">
+          <h3>Menta</h3>
+          <p>Para "Próximamente" y acentos.</p>
+        </TactileCard>
+        <TactileCard tono="lavanda" class="demo-tarjeta">
+          <h3>Lavanda</h3>
+          <p>Para grabaciones y apoyos.</p>
+        </TactileCard>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  @layer secciones {
+    .catalogo {
+      display: grid;
+      gap: var(--espacio-8);
+      inline-size: min(100% - 2 * var(--margen-lateral), var(--ancho-max));
+      margin-inline: auto;
+      padding-block: var(--espacio-7) var(--espacio-8);
+
+      & > header h1 {
+        font-size: var(--texto-h2);
+      }
+
+      & > header p {
+        color: var(--color-texto-suave);
+        max-inline-size: 60ch;
+        margin-block-start: var(--espacio-3);
+      }
+    }
+
+    .bloque {
+      display: grid;
+      gap: var(--espacio-5);
+
+      & > h2 {
+        font-size: var(--texto-h3);
+        padding-block-end: var(--espacio-2);
+        border-block-end: var(--borde) solid var(--color-tinta);
+      }
+    }
+
+    .fila {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espacio-5);
+      align-items: flex-end;
+    }
+
+    .muestra {
+      display: grid;
+      gap: var(--espacio-2);
+      font-size: var(--texto-chico);
+
+      & code {
+        font-size: var(--texto-mini);
+        color: var(--color-texto-suave);
+      }
+    }
+
+    .color {
+      inline-size: 120px;
+      block-size: 72px;
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: 12px;
+      box-shadow: var(--sombra-dura-chica);
+      background: var(--c);
+    }
+
+    .display {
+      font-family: var(--fuente-titulos);
+      font-weight: 800;
+      font-size: var(--texto-display);
+      line-height: var(--interlineado-display);
+      letter-spacing: var(--tracking-display);
+    }
+
+    .h2 {
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+      font-size: var(--texto-h2);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .h3 {
+      font-family: var(--fuente-titulos);
+      font-weight: 600;
+      font-size: var(--texto-h3);
+    }
+
+    .cuerpo {
+      font-size: var(--texto-grande);
+      max-inline-size: 60ch;
+    }
+
+    .demo-tarjeta {
+      max-inline-size: 16rem;
+    }
+  }
+</style>

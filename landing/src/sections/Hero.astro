@@ -1,0 +1,216 @@
+---
+/**
+ * Hero (docs/04-diseno/secciones.md §2): titular gigante, CTA según el dispositivo, QR y el
+ * teléfono con la clase en vivo. Animaciones: reveal (titular), hero-lines (líneas con el scroll)
+ * y hero-intro (entrada del teléfono y los flotantes).
+ */
+import Badge from '../components/Badge.astro';
+import Icon from '../components/Icon.astro';
+import TactileButton from '../components/TactileButton.astro';
+import DownloadCta from '../components/DownloadCta.astro';
+import PhoneMockup from '../components/PhoneMockup.astro';
+import InsigniaNivel from '../components/InsigniaNivel.astro';
+import ChipXp from '../components/ChipXp.astro';
+import QrCode from '../components/QrCode.astro';
+import { release } from '../content/release';
+import pantallaDirecto from '../assets/pantallas/directo-chat.png';
+---
+
+<section class="hero" aria-labelledby="titulo-hero" data-hero>
+  <div class="contenedor">
+    <div class="hero-texto">
+      <Badge tipo="pronto">Android · Gratis</Badge>
+      <h1 id="titulo-hero" class="titulo-display" data-motion="reveal hero-lines">
+        <span>Aprende en vivo.</span> <span>Sube de nivel.</span>
+      </h1>
+      <p class="texto-apoyo">
+        Clases en directo, chat al instante y XP por participar. Todo desde tu teléfono.
+      </p>
+      <div class="hero-acciones">
+        <DownloadCta origen="hero" qr={false} />
+        <TactileButton href="#clase">Ver cómo funciona</TactileButton>
+      </div>
+      <ul class="hero-datos" role="list">
+        <li>
+          <Icon name="smartphone" />
+          Android {release.androidMinimo} o superior
+        </li>
+        <li>
+          <Icon name="shield" />
+          APK verificado con SHA-256
+        </li>
+        <li>
+          <Icon name="clock" />
+          iOS: próximamente
+        </li>
+      </ul>
+      <div class="hero-qr">
+        <QrCode tam="6.5rem" />
+        <p>
+          ¿Estás en la computadora?
+          <br />
+          Escanea con tu Android.
+        </p>
+      </div>
+    </div>
+
+    <div class="hero-visual" data-motion="hero-intro">
+      <span class="forma-mas" style="--giro: -14deg; inset: 4% auto auto 6%" aria-hidden="true">
+        <Icon name="plus" />
+      </span>
+      <span class="forma-mas" style="--giro: 18deg; inset: auto 4% 10% auto" aria-hidden="true">
+        <Icon name="plus" />
+      </span>
+      <PhoneMockup
+        class="hero-telefono"
+        imagen={pantallaDirecto}
+        alt="Clase en vivo en Estud-IA: la profe explica la dualidad onda-partícula mientras los estudiantes preguntan en el chat."
+        prioridad
+      />
+      <Badge tipo="vivo" class="flotante flotante-vivo">
+        En vivo
+      </Badge>
+      <ChipXp class="flotante flotante-xp">+10 XP</ChipXp>
+      <InsigniaNivel nivel={12} class="flotante flotante-nivel" />
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer secciones {
+    .hero {
+      padding-block: var(--espacio-7) var(--espacio-seccion);
+      overflow: clip;
+
+      & .contenedor {
+        display: grid;
+        grid-template-columns: 1.3fr 0.7fr;
+        align-items: center;
+        gap: var(--espacio-7);
+
+        @media (width < 60rem) {
+          grid-template-columns: 1fr;
+        }
+      }
+    }
+
+    .hero-texto {
+      display: grid;
+      gap: var(--espacio-5);
+      justify-items: start;
+    }
+
+    .titulo-display {
+      font-family: var(--fuente-titulos);
+      font-weight: 800;
+      font-size: clamp(2.6rem, 1rem + 4.6vw, 5.75rem);
+      line-height: var(--interlineado-display);
+      letter-spacing: var(--tracking-display);
+
+      & span {
+        display: block;
+      }
+
+      & span:nth-child(2) {
+        padding-inline-start: 0.6em;
+        color: var(--color-accion-texto);
+      }
+    }
+
+    .texto-apoyo {
+      font-size: var(--texto-grande);
+      color: var(--color-texto-suave);
+      max-inline-size: 38rem;
+    }
+
+    .hero-acciones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espacio-4);
+      align-items: center;
+    }
+
+    .hero-datos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espacio-2) var(--espacio-4);
+      font-size: var(--texto-chico);
+      font-weight: 600;
+      color: var(--color-texto-suave);
+      --icono-tam: 1.1em;
+
+      & li {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4em;
+      }
+    }
+
+    /* QR para pasar de la computadora al teléfono (RF-03): solo en pantallas anchas y nunca en un
+       teléfono detectado. */
+    .hero-qr {
+      display: none;
+      gap: var(--espacio-4);
+      align-items: center;
+      font-size: var(--texto-chico);
+      font-weight: 600;
+
+      @media (width >= 60rem) {
+        display: flex;
+      }
+    }
+
+    :global(html:is([data-dispositivo='android'], [data-dispositivo='ios'])) .hero-qr {
+      display: none;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: grid;
+      place-items: center;
+      padding-block: var(--espacio-6);
+
+      & :global(.hero-telefono) {
+        rotate: 4deg;
+      }
+    }
+
+    .forma-mas {
+      position: absolute;
+      z-index: 0;
+      display: grid;
+      place-items: center;
+      inline-size: 56px;
+      block-size: 56px;
+      border: var(--borde-grueso) solid var(--color-marca-borde);
+      border-radius: 16px;
+      background: var(--color-marca);
+      box-shadow: var(--sombra-marca);
+      rotate: var(--giro, 12deg);
+      --icono-tam: 26px;
+    }
+
+    .hero-visual :global(.flotante) {
+      position: absolute;
+      z-index: 2;
+    }
+
+    .hero-visual :global(.flotante-vivo) {
+      inset: 12% auto auto 0;
+      rotate: -6deg;
+      font-size: 1rem;
+    }
+
+    .hero-visual :global(.flotante-xp) {
+      inset: auto auto 22% -2%;
+      rotate: -4deg;
+      font-size: 1.15rem;
+    }
+
+    .hero-visual :global(.flotante-nivel) {
+      inset: 18% 0 auto auto;
+      rotate: 8deg;
+      font-size: 1.2rem;
+    }
+  }
+</style>

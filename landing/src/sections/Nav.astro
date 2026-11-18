@@ -1,0 +1,93 @@
+---
+/**
+ * Navegación en "isla" táctil (D11, RF-16): se lee sobre fondos claros y negros. Se oculta al
+ * bajar y reaparece al subir (motion/navHide.ts). En móvil solo quedan el logo y el botón.
+ */
+import TactileButton from '../components/TactileButton.astro';
+import { sitio } from '../content/site';
+
+const enlaces = [
+  { href: '#clase', texto: 'Cómo funciona' },
+  { href: '#creadores', texto: 'Para creadores' },
+  { href: '#faq', texto: 'Preguntas' },
+];
+---
+
+<header class="nav-landing contenedor" data-motion="nav-hide">
+  <nav class="nav-isla" aria-label="Principal">
+    <a class="marca" href="#inicio">
+      <img src="/logo.svg" alt="" width="36" height="38" />
+      {sitio.nombre}
+    </a>
+    <ul role="list">
+      {enlaces.map((enlace) => (
+        <li>
+          <a href={enlace.href}>{enlace.texto}</a>
+        </li>
+      ))}
+    </ul>
+    <TactileButton href="#descargar" tono="esmeralda" tamano="chico" icono="download">
+      Descargar
+    </TactileButton>
+  </nav>
+</header>
+
+<style>
+  @layer secciones {
+    .nav-landing {
+      position: sticky;
+      inset-block-start: var(--espacio-3);
+      z-index: 20;
+      margin-block-start: var(--espacio-3);
+    }
+
+    .nav-isla {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--espacio-4);
+      padding: 0.5rem 0.5rem 0.5rem 1rem;
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: var(--radio-pildora);
+      background: var(--color-superficie);
+      color: var(--color-tinta);
+      box-shadow: var(--sombra-dura);
+    }
+
+    .marca {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+      font-size: 1.375rem;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+
+      & img {
+        inline-size: 1.6em;
+        block-size: auto;
+      }
+    }
+
+    ul {
+      display: flex;
+      gap: var(--espacio-5);
+      font-family: var(--fuente-titulos);
+      font-weight: 600;
+
+      & a {
+        text-decoration: none;
+      }
+
+      & a:hover {
+        text-decoration: underline;
+        text-underline-offset: 0.25em;
+      }
+
+      @media (width < 48rem) {
+        display: none;
+      }
+    }
+  }
+</style>

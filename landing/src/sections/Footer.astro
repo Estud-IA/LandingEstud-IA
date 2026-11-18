@@ -1,0 +1,82 @@
+---
+/** Pie de página (docs/04-diseno/secciones.md §10): marca, enlaces legales y contacto. */
+import { sitio } from '../content/site';
+
+const anio = 2026;
+---
+
+<footer class="pie">
+  <div class="contenedor pie-grid">
+    <a class="marca" href="/">
+      <img src="/logo.svg" alt="" width="36" height="38" />
+      {sitio.nombre}
+    </a>
+    <nav aria-label="Legal y contacto">
+      <ul role="list">
+        <li>
+          <a href="/privacidad">Privacidad</a>
+        </li>
+        <li>
+          <a href="/terminos">Términos</a>
+        </li>
+        <li>
+          <a href={`mailto:${sitio.contacto}`}>Contacto</a>
+        </li>
+      </ul>
+    </nav>
+    <small>
+      © {anio} {sitio.nombre}
+    </small>
+  </div>
+</footer>
+
+<style>
+  @layer secciones {
+    .pie {
+      /* En móvil deja espacio para la barra fija de descarga. */
+      padding-block: var(--espacio-7) calc(var(--espacio-7) + 5.5rem);
+      border-block-start: var(--borde) solid var(--color-tinta);
+      background: var(--color-fondo);
+      color: var(--color-texto);
+
+      @media (width >= 48rem) {
+        padding-block-end: var(--espacio-7);
+      }
+    }
+
+    .pie-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--espacio-5);
+    }
+
+    .marca {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+      font-size: 1.375rem;
+      text-decoration: none;
+
+      & img {
+        inline-size: 1.6em;
+        block-size: auto;
+      }
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espacio-5);
+      font-size: var(--texto-chico);
+      font-weight: 600;
+    }
+
+    small {
+      color: var(--color-texto-suave);
+    }
+  }
+</style>

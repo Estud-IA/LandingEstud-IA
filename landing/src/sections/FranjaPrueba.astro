@@ -1,0 +1,86 @@
+---
+/**
+ * Franja de datos en movimiento continuo (docs/04-diseno/secciones.md §3). Animación solo con CSS:
+ * la lista se duplica (la copia va con aria-hidden) y se desplaza un 50 %. Se detiene con
+ * prefers-reduced-motion.
+ */
+import Icon from '../components/Icon.astro';
+
+const datos = [
+  'Chat en menos de 2 s',
+  '200+ en una misma clase',
+  'Trivias en vivo',
+  'Shorts',
+  'XP y rachas',
+  'Ranking en tiempo real',
+];
+---
+
+<div class="franja">
+  <div class="franja-pista">
+    <ul role="list" aria-label="Lo que trae Estud-IA">
+      {datos.map((dato) => (
+        <li>
+          {dato}
+          <Icon name="plus" />
+        </li>
+      ))}
+    </ul>
+    <ul role="list" aria-hidden="true">
+      {datos.map((dato) => (
+        <li>
+          {dato}
+          <Icon name="plus" />
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
+
+<style>
+  @layer secciones {
+    .franja {
+      overflow: clip;
+      border-block: var(--borde) solid var(--color-tinta);
+      background: var(--color-marca);
+      color: var(--color-tinta);
+    }
+
+    .franja-pista {
+      display: flex;
+      inline-size: max-content;
+      animation: franja-desliza 32s linear infinite;
+
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+
+    ul {
+      display: flex;
+      flex: none;
+      gap: var(--espacio-6);
+      align-items: center;
+      padding-block: var(--espacio-4);
+      padding-inline-end: var(--espacio-6);
+      font-family: var(--fuente-titulos);
+      font-weight: 800;
+      font-size: clamp(1.25rem, 1rem + 1vw, 2rem);
+      text-transform: uppercase;
+      white-space: nowrap;
+      --icono-tam: 0.9em;
+
+      & li {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--espacio-6);
+      }
+    }
+
+    @keyframes franja-desliza {
+      to {
+        translate: -50% 0;
+      }
+    }
+  }
+</style>

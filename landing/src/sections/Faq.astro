@@ -1,0 +1,99 @@
+---
+/**
+ * Preguntas frecuentes (docs/04-diseno/secciones.md §9, RF-12): acordeón nativo con
+ * <details>/<summary>, usable con teclado y sin JS. Textos en src/content/faq.ts.
+ */
+import DatosEstructurados from '../components/DatosEstructurados.astro';
+import EncabezadoSeccion from '../components/EncabezadoSeccion.astro';
+import Icon from '../components/Icon.astro';
+import { preguntas } from '../content/faq';
+
+// Las mismas preguntas, para buscadores (RF-15).
+const faqPage = {
+  '@type': 'FAQPage',
+  mainEntity: preguntas.map((p) => ({
+    '@type': 'Question',
+    name: p.pregunta,
+    acceptedAnswer: { '@type': 'Answer', text: p.respuesta },
+  })),
+};
+---
+
+<section id="faq" class="faq" aria-labelledby="titulo-faq">
+  <div class="contenedor">
+    <EncabezadoSeccion id="titulo-faq" titulo="Preguntas frecuentes" />
+    <div class="faq-lista">
+      {preguntas.map((p, i) => (
+        <details open={i === 0}>
+          <summary>
+            {p.pregunta}
+            <Icon name="chevron-down" />
+          </summary>
+          <p>{p.respuesta}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+  <DatosEstructurados datos={faqPage} />
+</section>
+
+<style>
+  @layer secciones {
+    .faq {
+      padding-block: 0 var(--espacio-seccion);
+      scroll-margin-block-start: 6rem;
+    }
+
+    .faq-lista {
+      display: grid;
+      gap: var(--espacio-4);
+      max-inline-size: 52rem;
+    }
+
+    details {
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: var(--radio-tarjeta);
+      background: var(--color-superficie);
+      box-shadow: var(--sombra-dura);
+
+      &[open] {
+        background: var(--menta-100);
+      }
+    }
+
+    summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--espacio-4);
+      padding: var(--espacio-4) var(--espacio-5);
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+      font-size: 1.15rem;
+      cursor: pointer;
+      list-style: none;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+
+      & :global(.icono) {
+        transition: rotate 0.2s var(--curva-marca);
+
+        @media (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
+      }
+    }
+
+    details[open] summary :global(.icono) {
+      rotate: 180deg;
+    }
+
+    details p {
+      padding: 0 var(--espacio-5) var(--espacio-5);
+      color: var(--color-texto-suave);
+      max-inline-size: 65ch;
+    }
+  }
+</style>

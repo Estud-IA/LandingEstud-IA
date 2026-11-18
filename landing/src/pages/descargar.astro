@@ -1,0 +1,106 @@
+---
+/**
+ * /descargar (RF-04): todos los botones y el QR pasan por aquí con ?origen=…
+ * - Con un APK publicado (release.json no provisional): redirige a la URL del APK y muestra un enlace
+ *   visible por si la descarga no empieza. El origen queda en data-origen para la analítica (fase 08).
+ * - Con datos provisionales: no redirige; avisa que la descarga estará disponible muy pronto.
+ * No se indexa ni aparece en el sitemap.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TactileButton from '../components/TactileButton.astro';
+import Badge from '../components/Badge.astro';
+import { release, disponible, textoVersion } from '../content/release';
+import { sitio } from '../content/site';
+---
+
+<BaseLayout titulo={`Descargar · ${sitio.nombre}`} indexar={false}>
+  <main
+    id="contenido"
+    class="descargar contenedor"
+    data-descarga
+    data-url={disponible ? release.url : undefined}
+  >
+    <a class="marca" href="/">
+      <img src="/logo.svg" alt="" width="48" height="51" />
+      {sitio.nombre}
+    </a>
+
+    {disponible ? (
+      <>
+        <h1>Tu descarga está empezando…</h1>
+        <p>
+          Estud-IA para Android · {textoVersion()}. Cuando termine, abre el archivo y sigue los 3
+          pasos de instalación.
+        </p>
+        <TactileButton href={release.url ?? '/'} tono="esmeralda" tamano="grande" icono="download">
+          Si la descarga no empieza, toca aquí
+        </TactileButton>
+      </>
+    ) : (
+      <>
+        <Badge tipo="pronto">Muy pronto</Badge>
+        <h1>La descarga estará disponible muy pronto</h1>
+        <p>
+          Estamos preparando la primera versión pública de Estud-IA para Android. Vuelve en unos
+          días o revisa cómo será la instalación.
+        </p>
+        <TactileButton href="/#descargar" tono="esmeralda" tamano="grande" icono="arrow-left">
+          Volver a la página de descarga
+        </TactileButton>
+      </>
+    )}
+  </main>
+</BaseLayout>
+
+<script>
+  // Con un APK publicado, redirige a la descarga. El origen (?origen=) se conserva para la
+  // analítica de la fase 08.
+  const contenedor = document.querySelector<HTMLElement>('[data-descarga]');
+  if (contenedor) {
+    const origen = new URLSearchParams(location.search).get('origen') ?? 'directo';
+    contenedor.dataset.origen = origen.slice(0, 32);
+    const url = contenedor.dataset.url;
+    if (url) location.replace(url);
+  }
+</script>
+
+<style>
+  @layer secciones {
+    .descargar {
+      display: grid;
+      align-content: center;
+      justify-items: start;
+      gap: var(--espacio-5);
+      min-block-size: 100dvh;
+      max-inline-size: 44rem;
+      padding-block: var(--espacio-8);
+
+      & h1 {
+        font-size: var(--texto-h2);
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+      }
+
+      & p {
+        font-size: var(--texto-grande);
+        color: var(--color-texto-suave);
+      }
+    }
+
+    .marca {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+      font-size: 1.75rem;
+      text-decoration: none;
+
+      & img {
+        inline-size: 1.6em;
+        block-size: auto;
+      }
+    }
+  }
+</style>

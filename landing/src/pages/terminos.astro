@@ -1,0 +1,85 @@
+---
+/**
+ * Términos de uso del sitio (RF-13). BORRADOR pendiente de revisión legal (riesgo R11).
+ * Se refieren solo a este sitio web; los términos de la app son aparte.
+ */
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { sitio } from '../content/site';
+
+const correo = sitio.contacto;
+---
+
+<LegalLayout
+  titulo="Términos de uso"
+  descripcion="Condiciones de uso del sitio web de Estud-IA y de la descarga de la app."
+  actualizado="18 de noviembre de 2026"
+>
+  <p>
+    Estos términos regulan el uso de este sitio web. Al usarlo, los aceptas. El uso de la app
+    {sitio.nombre} se rige por sus propios términos, que aceptas al crear tu cuenta en la app.
+  </p>
+
+  <h2>1. Qué es este sitio</h2>
+  <p>
+    Este sitio presenta la app {sitio.nombre}, permite descargarla para Android y apuntarse a listas
+    de espera de funciones que llegarán más adelante.
+  </p>
+
+  <h2>2. Descarga e instalación del APK</h2>
+  <ul>
+    <li>
+      Por ahora la app se distribuye como un archivo APK que se descarga desde este sitio. Para
+      instalarla, Android te pedirá permitir la instalación desde esta fuente.
+    </li>
+    <li>
+      Publicamos la huella <strong>SHA-256</strong> de cada versión para que puedas comprobar que el
+      archivo es el original. Descárgalo solo desde este sitio.
+    </li>
+    <li>
+      Instalar la app es tu decisión. Te recomendamos mantener tu teléfono actualizado y no instalar
+      archivos de origen desconocido.
+    </li>
+  </ul>
+
+  <h2>3. Funciones anunciadas como "Próximamente"</h2>
+  <p>
+    Las funciones marcadas como "Próximamente" (por ejemplo, la versión para iPhone o el cobro con
+    Yape para creadores) están en desarrollo. No garantizamos fechas ni que lleguen exactamente como
+    se describen. Apuntarte a una lista de espera no te obliga a nada ni crea un contrato.
+  </p>
+
+  <h2>4. Propiedad intelectual</h2>
+  <p>
+    La marca, el logo, los textos, el diseño y las imágenes de este sitio pertenecen a{' '}
+    {sitio.nombre} o se usan con permiso. No puedes copiarlos ni usarlos con fines comerciales sin
+    autorización.
+  </p>
+
+  <h2>5. Uso correcto del sitio</h2>
+  <p>
+    No uses este sitio para enviar información falsa, suplantar a otras personas, intentar acceder a
+    sistemas sin permiso ni afectar su funcionamiento.
+  </p>
+
+  <h2>6. Limitación de responsabilidad</h2>
+  <p>
+    Hacemos lo posible para que el sitio funcione bien y su información sea correcta, pero puede
+    tener errores o interrupciones. En la medida que la ley lo permita, no respondemos por daños
+    derivados del uso del sitio.
+  </p>
+
+  <h2>7. Privacidad</h2>
+  <p>
+    El tratamiento de tus datos se explica en la <a href="/privacidad">política de privacidad</a>.
+  </p>
+
+  <h2>8. Ley aplicable</h2>
+  <p>
+    Estos términos se rigen por las leyes de la República del Perú. Ante cualquier controversia,
+    intentaremos primero resolverla de buena fe escribiéndonos a{' '}
+    <a href={`mailto:${correo}`}>{correo}</a>.
+  </p>
+
+  <h2>9. Cambios</h2>
+  <p>Podemos actualizar estos términos. La fecha de arriba indica la última versión.</p>
+</LegalLayout>

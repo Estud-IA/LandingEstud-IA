@@ -1,0 +1,287 @@
+---
+/**
+ * "Así se vive una clase" (docs/04-diseno/secciones.md §4, RF-08). Dos presentaciones; el CSS muestra
+ * solo una, así que el lector de pantalla no recibe contenido duplicado:
+ * - .clase-lista (base): 5 tarjetas con la captura de cada paso. Se ve sin JS, con movimiento
+ *   reducido y en pantallas de menos de 64rem.
+ * - .clase-fijada (mejora): un teléfono fijo con la pantalla en HTML que se anima con el scroll
+ *   (motion/pinnedPhone.ts). Solo con html.motion-ok y ≥ 64rem.
+ */
+import { Image } from 'astro:assets';
+import Badge from '../components/Badge.astro';
+import PhoneMockup from '../components/PhoneMockup.astro';
+import PantallaDirecto from '../components/screens/PantallaDirecto.astro';
+import PantallaRanking from '../components/screens/PantallaRanking.astro';
+import inicio from '../assets/pantallas/inicio.png';
+import directoChat from '../assets/pantallas/directo-chat.png';
+import directoTrivia from '../assets/pantallas/directo-trivia.png';
+import xpNivel from '../assets/pantallas/xp-nivel.png';
+import ranking from '../assets/pantallas/ranking.png';
+
+const pasos = [
+  {
+    titulo: 'Entra al directo',
+    texto: 'Elige una clase en vivo desde el inicio y entra con un toque.',
+    imagen: inicio,
+    alt: 'Inicio de Estud-IA con las transmisiones en vivo de física, química e inglés.',
+  },
+  {
+    titulo: 'Pregunta en el chat',
+    texto: 'Tu profe te responde en el momento. Nada de esperar al foro.',
+    imagen: directoChat,
+    alt: 'Clase en vivo con el chat: los estudiantes preguntan y aparece el aviso de una trivia.',
+  },
+  {
+    titulo: 'Responde la trivia',
+    texto: 'Pon a prueba lo que aprendiste y mira cómo vota tu clase.',
+    imagen: directoTrivia,
+    alt: 'Trivia en vivo con cuatro opciones; la mayoría elige "La dualidad onda-partícula".',
+  },
+  {
+    titulo: 'Gana XP',
+    texto: 'Cada clase, cada acierto y cada racha suman experiencia.',
+    imagen: xpNivel,
+    alt: 'Aviso de "¡Subiste de nivel!" con la insignia de nivel 12 y la experiencia ganada.',
+  },
+  {
+    titulo: 'Sube en el ranking',
+    texto: 'Compite con tu clase en tiempo real y escala posiciones.',
+    imagen: ranking,
+    alt: 'Ranking de la clase: ana.torres sube al puesto 4.',
+  },
+];
+---
+
+<section
+  id="clase"
+  class="clase"
+  data-tema="oscuro"
+  data-motion="theme-switch"
+  aria-labelledby="titulo-clase"
+>
+  <div class="contenedor">
+    <header class="clase-encabezado">
+      <Badge tipo="vivo">En vivo</Badge>
+      <h2 id="titulo-clase" data-motion="reveal">
+        Así se vive una clase
+      </h2>
+      <p>
+        Cinco momentos de una clase en Estud-IA, desde que entras hasta que subes en el ranking.
+      </p>
+    </header>
+
+    <ol class="clase-lista" role="list">
+      {pasos.map((paso, i) => (
+        <li>
+          <span class="paso-numero" aria-hidden="true">
+            {i + 1}
+          </span>
+          <PhoneMockup imagen={paso.imagen} alt={paso.alt} ancho={200} anchoMovil={220} />
+          <h3 data-motion="reveal">{paso.titulo}</h3>
+          <p>{paso.texto}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+
+  <div class="clase-fijada" data-motion="pinned-phone">
+    <div class="contenedor clase-fijada-grid">
+      <ol class="clase-textos" role="list">
+        {pasos.map((paso, i) => (
+          <li data-paso-texto={i}>
+            <span class="paso-numero" aria-hidden="true">
+              {i + 1}
+            </span>
+            <h3>{paso.titulo}</h3>
+            <p>{paso.texto}</p>
+          </li>
+        ))}
+      </ol>
+
+      <div class="clase-telefono" aria-hidden="true">
+        <PhoneMockup ancho={330}>
+          <div class="clase-capas">
+            <Image
+              src={inicio}
+              alt=""
+              widths={[220, 330, 440, 580, 660, 990]}
+              sizes="(width < 30rem) 220px, 330px"
+              class="capa-inicio"
+              data-pantalla="inicio"
+            />
+            <PantallaDirecto />
+            <PantallaRanking />
+          </div>
+        </PhoneMockup>
+      </div>
+
+      <ol class="clase-indicador" role="list" aria-hidden="true">
+        {pasos.map((_, i) => (
+          <li data-indicador={i} data-activo={i === 0 ? '' : undefined} />
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer secciones {
+    .clase {
+      --sombra-color: var(--color-acento);
+      --telefono-contorno: var(--gris-700);
+      padding-block: var(--espacio-seccion);
+      background: var(--negro);
+      color: var(--gris-50);
+    }
+
+    .clase-encabezado {
+      display: grid;
+      justify-items: start;
+      gap: var(--espacio-4);
+      max-inline-size: 46rem;
+      margin-block-end: var(--espacio-7);
+
+      & h2 {
+        font-size: var(--texto-h2);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+
+      & p {
+        font-size: var(--texto-grande);
+        color: color-mix(in srgb, var(--gris-50) 75%, transparent);
+        max-inline-size: 38rem;
+      }
+    }
+
+    .paso-numero {
+      display: grid;
+      place-items: center;
+      inline-size: 2.75rem;
+      block-size: 2.75rem;
+      border: var(--borde) solid var(--gris-50);
+      border-radius: 50%;
+      background: var(--color-marca);
+      color: var(--color-tinta);
+      font-family: var(--fuente-titulos);
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+
+    /* ── Lista base ── */
+    .clase-lista {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      gap: var(--espacio-7) var(--espacio-5);
+
+      @media (width >= 75rem) {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      & li {
+        display: grid;
+        align-content: start;
+        justify-items: center;
+        gap: var(--espacio-4);
+        text-align: center;
+      }
+
+      & h3 {
+        font-size: var(--texto-h3);
+      }
+
+      & p {
+        max-inline-size: 24ch;
+        font-size: var(--texto-chico);
+        color: color-mix(in srgb, var(--gris-50) 75%, transparent);
+      }
+    }
+
+    /* ── Teléfono fijo (solo escritorio con animaciones) ── */
+    .clase-fijada {
+      display: none;
+    }
+
+    @media (width >= 64rem) {
+      :global(html.motion-ok) .clase-fijada {
+        display: block;
+      }
+
+      :global(html.motion-ok) .clase-lista {
+        display: none;
+      }
+    }
+
+    .clase-fijada-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 3rem;
+      align-items: center;
+      gap: var(--espacio-8);
+      min-block-size: 100dvh;
+    }
+
+    .clase-textos {
+      display: grid;
+
+      & li {
+        grid-area: 1 / 1;
+        display: grid;
+        gap: var(--espacio-4);
+        align-content: center;
+        justify-items: start;
+      }
+
+      & h3 {
+        font-size: clamp(2.25rem, 1.4rem + 2.4vw, 4rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+
+      & p {
+        max-inline-size: 26rem;
+        font-size: var(--texto-grande);
+        color: color-mix(in srgb, var(--gris-50) 75%, transparent);
+      }
+    }
+
+    .clase-capas {
+      position: relative;
+      inline-size: 390px;
+      block-size: 844px;
+
+      & > :global(*) {
+        position: absolute;
+        inset: 0;
+      }
+
+      & :global(.capa-inicio) {
+        inline-size: 100%;
+        block-size: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .clase-indicador {
+      display: grid;
+      gap: var(--espacio-3);
+      justify-items: center;
+
+      & li {
+        inline-size: 0.75rem;
+        block-size: 0.75rem;
+        border: 2px solid var(--gris-50);
+        border-radius: var(--radio-pildora);
+        transition:
+          block-size 0.3s var(--curva-marca),
+          background-color 0.3s var(--curva-marca);
+      }
+
+      & li[data-activo] {
+        block-size: 2rem;
+        background: var(--color-marca);
+      }
+    }
+  }
+</style>

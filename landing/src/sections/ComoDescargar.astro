@@ -1,0 +1,267 @@
+---
+/**
+ * "Instálala en 3 pasos" (docs/04-diseno/secciones.md §8; RF-05, RF-06, RF-07 iOS). Pasos con la
+ * captura de Android de cada uno y una ficha con el botón, los datos de la versión (release.json),
+ * el QR, las tiendas "pronto" y la lista de espera de iOS. Mientras la versión sea provisional, la
+ * ficha lo dice y no inventa datos.
+ */
+import EncabezadoSeccion from '../components/EncabezadoSeccion.astro';
+import TactileCard from '../components/TactileCard.astro';
+import Badge from '../components/Badge.astro';
+import DownloadCta from '../components/DownloadCta.astro';
+import QrCode from '../components/QrCode.astro';
+import { Picture } from 'astro:assets';
+import WaitlistForm from '../components/WaitlistForm.astro';
+import { release, datosFicha } from '../content/release';
+import paso1 from '../assets/instalacion/paso-1.png';
+import paso2 from '../assets/instalacion/paso-2.png';
+import paso3 from '../assets/instalacion/paso-3.png';
+
+const pasos = [
+  {
+    titulo: 'Descarga el APK',
+    texto: 'Toca "Descargar para Android" y abre el archivo cuando termine.',
+    imagen: paso1,
+    alt: 'Notificación de Android: descarga completa de estud-ia.apk, con el botón Abrir.',
+  },
+  {
+    titulo: 'Permite instalar desde esta fuente',
+    texto: 'Android te lo pedirá una sola vez. Es normal en las apps que no vienen de Google Play.',
+    imagen: paso2,
+    alt: 'Ajuste de Android "Permitir de esta fuente" activado para instalar la app.',
+  },
+  {
+    titulo: 'Abre Estud-IA',
+    texto: 'Toca Instalar, crea tu cuenta y entra a tu primera clase en vivo.',
+    imagen: paso3,
+    alt: 'Diálogo de Android "¿Quieres instalar esta app?" con el ícono de Estud-IA y el botón Instalar.',
+  },
+];
+
+const ficha = datosFicha();
+---
+
+<section id="descargar" class="descarga" aria-labelledby="titulo-descargar">
+  <div class="contenedor descarga-grid">
+    <div>
+      <EncabezadoSeccion
+        id="titulo-descargar"
+        titulo="Instálala en 3 pasos"
+        apoyo="Por ahora Estud-IA se instala con un APK desde esta página. Pronto estará en Google Play."
+      />
+      <ol class="pasos-instalacion" role="list" data-motion="stagger">
+        {pasos.map((paso, i) => (
+          <li>
+            <span class="paso-numero" aria-hidden="true">
+              {i + 1}
+            </span>
+            <div class="paso-texto">
+              <h3>{paso.titulo}</h3>
+              <p>{paso.texto}</p>
+              <Picture
+                class="paso-captura"
+                src={paso.imagen}
+                alt={paso.alt}
+                formats={['avif', 'webp']}
+                fallbackFormat="jpg"
+                quality={80}
+                widths={[300, 390, 600, 780, 900]}
+                sizes="(width < 30rem) 85vw, 300px"
+                loading="lazy"
+              />
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+
+    <TactileCard as="aside" class="ficha-version" aria-labelledby="titulo-ficha">
+      <div class="ficha-cabecera">
+        <h3 id="titulo-ficha">Estud-IA para Android</h3>
+        {release.provisional && <Badge tipo="pronto">Datos provisionales</Badge>}
+      </div>
+
+      <DownloadCta origen="seccion" qr={false} />
+
+      <dl>
+        {ficha.map((fila) => (
+          <>
+            <dt>{fila.nombre}</dt>
+            <dd>{fila.codigo ? <code>{fila.valor}</code> : fila.valor}</dd>
+          </>
+        ))}
+      </dl>
+
+      <div class="fila-qr">
+        <QrCode tam="6rem" />
+        <p>Escanea con tu Android para descargar.</p>
+      </div>
+
+      <div class="tiendas">
+        <Badge tipo="pronto">Google Play · pronto</Badge>
+        <Badge tipo="pronto">App Store · pronto</Badge>
+      </div>
+
+      <div class="lista-ios" id="lista-ios">
+        <h3 id="titulo-lista-ios">¿Tienes iPhone?</h3>
+        <p>Estud-IA llegará a iOS. Déjanos tu correo y te avisamos.</p>
+        <WaitlistForm tipo="ios" tituloId="titulo-lista-ios" />
+      </div>
+    </TactileCard>
+  </div>
+</section>
+
+<style>
+  @layer secciones {
+    .descarga {
+      padding-block: var(--espacio-seccion);
+    }
+
+    .descarga-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: var(--espacio-7);
+      align-items: start;
+
+      @media (width < 60rem) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pasos-instalacion {
+      display: grid;
+      gap: var(--espacio-6);
+
+      & li {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: var(--espacio-4);
+        align-items: start;
+      }
+
+      & h3 {
+        font-size: var(--texto-h3);
+      }
+
+      & p {
+        color: var(--color-texto-suave);
+      }
+    }
+
+    .paso-numero {
+      display: grid;
+      place-items: center;
+      align-self: start;
+      inline-size: 3rem;
+      block-size: 3rem;
+      border: var(--borde) solid var(--color-marca-borde);
+      border-radius: 14px;
+      background: var(--color-marca);
+      box-shadow: var(--sombra-marca);
+      font-family: var(--fuente-titulos);
+      font-weight: 800;
+      font-size: 1.4rem;
+    }
+
+    .paso-texto {
+      display: grid;
+      gap: var(--espacio-2);
+      justify-items: start;
+    }
+
+    /* Captura recortada al diálogo de Android (exportada de la maqueta a 2x). Astro pone la clase en
+       el <img> del <picture>. */
+    .paso-texto :global(.paso-captura) {
+      display: block;
+      inline-size: min(100%, 300px);
+      block-size: auto;
+      margin-block-start: var(--espacio-2);
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: var(--radio-tarjeta);
+      box-shadow: var(--sombra-dura);
+    }
+
+    .descarga :global(.ficha-version) {
+      display: grid;
+      gap: var(--espacio-5);
+      position: sticky;
+      inset-block-start: 6rem;
+
+      @media (width < 60rem) {
+        position: static;
+      }
+    }
+
+    .ficha-cabecera {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espacio-3);
+      align-items: center;
+      justify-content: space-between;
+
+      & h3 {
+        font-size: var(--texto-h3);
+      }
+    }
+
+    dl {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--espacio-2) var(--espacio-4);
+      font-size: var(--texto-chico);
+    }
+
+    dt {
+      font-weight: 600;
+      color: var(--color-texto-suave);
+    }
+
+    dd {
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+
+    code {
+      font-size: var(--texto-mini);
+    }
+
+    .fila-qr {
+      display: none;
+      gap: var(--espacio-4);
+      align-items: center;
+      font-size: var(--texto-chico);
+      font-weight: 600;
+
+      @media (width >= 60rem) {
+        display: flex;
+      }
+    }
+
+    :global(html:is([data-dispositivo='android'], [data-dispositivo='ios'])) .fila-qr {
+      display: none;
+    }
+
+    .tiendas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espacio-2);
+    }
+
+    .lista-ios {
+      display: grid;
+      gap: var(--espacio-3);
+      padding-block-start: var(--espacio-5);
+      border-block-start: 2px dashed var(--gris-400);
+      scroll-margin-block-start: 6rem;
+
+      & h3 {
+        font-size: 1.25rem;
+      }
+
+      & p {
+        font-size: var(--texto-chico);
+        color: var(--color-texto-suave);
+      }
+    }
+  }
+</style>

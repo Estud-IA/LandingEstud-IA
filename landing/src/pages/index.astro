@@ -1,0 +1,56 @@
+---
+/**
+ * Home de la landing: las 10 secciones de docs/04-diseno/secciones.md, en orden.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../sections/Nav.astro';
+import Hero from '../sections/Hero.astro';
+import FranjaPrueba from '../sections/FranjaPrueba.astro';
+import ClaseEnVivo from '../sections/ClaseEnVivo.astro';
+import Gamificacion from '../sections/Gamificacion.astro';
+import ShortsGrabaciones from '../sections/ShortsGrabaciones.astro';
+import Creadores from '../sections/Creadores.astro';
+import ComoDescargar from '../sections/ComoDescargar.astro';
+import Faq from '../sections/Faq.astro';
+import CtaFinal from '../sections/CtaFinal.astro';
+import Footer from '../sections/Footer.astro';
+import BarraDescargaMovil from '../sections/BarraDescargaMovil.astro';
+import DatosEstructurados from '../components/DatosEstructurados.astro';
+import { sitio } from '../content/site';
+import { release, disponible } from '../content/release';
+
+// Ficha de la app para buscadores (RF-15). La URL de descarga solo aparece con un APK publicado.
+const app = {
+  '@type': 'SoftwareApplication',
+  name: sitio.nombre,
+  description: sitio.descripcion,
+  url: new URL('/', Astro.site ?? sitio.url).href,
+  image: new URL('/og-image.png', Astro.site ?? sitio.url).href,
+  inLanguage: sitio.idioma,
+  operatingSystem: `Android ${release.androidMinimo} o superior`,
+  applicationCategory: 'EducationalApplication',
+  softwareVersion: release.version,
+  fileSize: `${release.pesoMB} MB`,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'PEN' },
+  ...(disponible && release.url ? { downloadUrl: release.url } : {}),
+  ...(release.fecha ? { datePublished: release.fecha } : {}),
+};
+---
+
+<BaseLayout principal="inicio">
+  <DatosEstructurados slot="head" datos={app} />
+  <Nav />
+  <main id="inicio">
+    <Hero />
+    <FranjaPrueba />
+    <ClaseEnVivo />
+    <Gamificacion />
+    <ShortsGrabaciones />
+    <Creadores />
+    <ComoDescargar />
+    <Faq />
+    <CtaFinal />
+  </main>
+  <Footer />
+  <BarraDescargaMovil />
+</BaseLayout>

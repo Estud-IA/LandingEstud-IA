@@ -1,0 +1,50 @@
+---
+/**
+ * Barra fija de descarga en móvil (RF-02). Aparece al salir del hero (scripts/barraMovil.ts).
+ * En iOS no se muestra (no hay APK para iPhone). Sin JS se ve siempre en móvil.
+ */
+import DownloadCta from '../components/DownloadCta.astro';
+---
+
+<aside class="barra-descarga-movil" aria-label="Descargar la app" data-barra-descarga>
+  <DownloadCta origen="barra" qr={false} tamano="normal" />
+</aside>
+
+<style>
+  @layer secciones {
+    .barra-descarga-movil {
+      position: fixed;
+      inset-inline: var(--espacio-3);
+      inset-block-end: var(--espacio-3);
+      z-index: 30;
+      display: none;
+      transition:
+        translate 0.35s var(--curva-marca),
+        opacity 0.35s var(--curva-marca);
+
+      &[data-visible='false'] {
+        translate: 0 150%;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      @media (width < 48rem) {
+        display: block;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    .barra-descarga-movil :global(.cta-android),
+    .barra-descarga-movil :global(.btn) {
+      inline-size: 100%;
+    }
+
+    /* En iOS no hay nada que descargar: el aviso ya está en el hero y en la sección de descarga. */
+    :global(html[data-dispositivo='ios']) .barra-descarga-movil {
+      display: none;
+    }
+  }
+</style>

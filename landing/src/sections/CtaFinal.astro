@@ -1,0 +1,48 @@
+---
+/** Cierre de la landing (docs/04-diseno/secciones.md §10): titular gigante + descarga. */
+import DownloadCta from '../components/DownloadCta.astro';
+---
+
+<section class="cta-final" aria-labelledby="titulo-final">
+  <div class="contenedor">
+    <h2 id="titulo-final" class="titulo-final" data-motion="reveal">
+      <span>Tu próxima clase</span> <span>empieza en vivo</span>
+    </h2>
+    <DownloadCta origen="final" qr={false} />
+  </div>
+</section>
+
+<style>
+  @layer secciones {
+    .cta-final {
+      padding-block: var(--espacio-seccion);
+      text-align: center;
+
+      & .contenedor {
+        display: grid;
+        justify-items: center;
+        gap: var(--espacio-6);
+      }
+
+      & :global(.cta-descarga) {
+        justify-content: center;
+      }
+
+      & :global(.cta-ios) {
+        justify-items: center;
+      }
+    }
+
+    .titulo-final {
+      font-family: var(--fuente-titulos);
+      font-weight: 800;
+      font-size: clamp(2.6rem, 1rem + 5vw, 6.25rem);
+      line-height: var(--interlineado-display);
+      letter-spacing: var(--tracking-display);
+
+      & span {
+        display: block;
+      }
+    }
+  }
+</style>

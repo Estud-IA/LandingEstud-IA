@@ -1,0 +1,165 @@
+---
+/**
+ * "Tu clase, tu estudio" (docs/04-diseno/secciones.md §7, RF-11): sección oscura con el estudio de la
+ * app, las ventajas para creadores y el bloque "Próximamente: cobra con Yape" con lista de espera
+ * (decisión A4). El formulario aún no envía datos (A5, riesgo R10).
+ */
+import EncabezadoSeccion from '../components/EncabezadoSeccion.astro';
+import Badge from '../components/Badge.astro';
+import Icon from '../components/Icon.astro';
+import PhoneMockup from '../components/PhoneMockup.astro';
+import TactileCard from '../components/TactileCard.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+import estudio from '../assets/pantallas/estudio.png';
+
+const ventajas = [
+  { icono: 'radio', titulo: 'Transmite en un toque', texto: 'Abre tu estudio y sal en vivo.' },
+  { icono: 'shield', titulo: 'Modera tu chat', texto: 'Moderadores y control de la sala.' },
+  { icono: 'bar-chart-2', titulo: 'Trivias y encuestas', texto: 'Haz que tu clase participe.' },
+  { icono: 'users', titulo: 'Tu comunidad', texto: 'Seguidores, Shorts y grabaciones.' },
+];
+---
+
+<section
+  id="creadores"
+  class="creadores"
+  data-tema="oscuro"
+  data-motion="theme-switch"
+  aria-labelledby="titulo-creadores"
+>
+  <div class="contenedor creadores-grid">
+    <PhoneMockup
+      imagen={estudio}
+      alt="Estudio de Estud-IA para transmitir: selector En vivo o Shorts, vista previa de la cámara, controles y botón para salir en vivo."
+      ancho={290}
+      anchoMovil={240}
+    />
+
+    <div class="creadores-texto">
+      <EncabezadoSeccion
+        id="titulo-creadores"
+        titulo="Tu clase, tu estudio"
+        apoyo="Transmite desde tu teléfono, modera tu chat y arma tu comunidad."
+        class="creadores-encabezado"
+      >
+        <Badge tipo="short" slot="etiqueta">
+          Para creadores
+        </Badge>
+      </EncabezadoSeccion>
+
+      <ul class="ventajas" role="list" data-motion="stagger">
+        {ventajas.map((v) => (
+          <li>
+            <span class="ventaja-icono">
+              <Icon name={v.icono} />
+            </span>
+            <div>
+              <strong>{v.titulo}</strong>
+              <p>{v.texto}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <TactileCard tono="menta" as="div" class="pronto">
+        <Badge tipo="neutra">Próximamente</Badge>
+        <h3 id="titulo-yape">Cobra con Yape</h3>
+        <p>
+          Entradas y regalos de tus clases, directo a tu Yape. Anótate y te avisamos cuando esté
+          listo.
+        </p>
+        <WaitlistForm tipo="creadores" tituloId="titulo-yape" />
+      </TactileCard>
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer secciones {
+    .creadores {
+      --sombra-color: var(--color-acento);
+      --telefono-contorno: var(--gris-700);
+      padding-block: var(--espacio-seccion);
+      background: var(--negro);
+      color: var(--gris-50);
+    }
+
+    .creadores-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--espacio-8);
+      align-items: center;
+
+      @media (width < 60rem) {
+        grid-template-columns: 1fr;
+        justify-items: center;
+      }
+    }
+
+    .creadores-texto {
+      display: grid;
+      gap: var(--espacio-6);
+      inline-size: 100%;
+    }
+
+    .creadores-texto :global(.creadores-encabezado) {
+      margin-block-end: 0;
+    }
+
+    .ventajas {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--espacio-4);
+
+      & li {
+        display: flex;
+        gap: var(--espacio-3);
+        align-items: flex-start;
+      }
+
+      & strong {
+        display: block;
+        font-family: var(--fuente-titulos);
+        font-size: 1.1rem;
+      }
+
+      & p {
+        font-size: var(--texto-chico);
+        color: color-mix(in srgb, var(--gris-50) 72%, transparent);
+      }
+
+      @media (width < 36rem) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .ventaja-icono {
+      display: grid;
+      place-items: center;
+      flex: none;
+      inline-size: 44px;
+      block-size: 44px;
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: 50%;
+      background: var(--color-superficie);
+      color: var(--color-tinta);
+      box-shadow: var(--sombra-dura-chica);
+      --icono-tam: 45%;
+    }
+
+    .creadores-texto :global(.pronto) {
+      display: grid;
+      gap: var(--espacio-4);
+      justify-items: start;
+      color: var(--color-tinta);
+
+      & h3 {
+        font-size: var(--texto-h3);
+      }
+
+      & :global(.formulario-espera) {
+        justify-self: stretch;
+      }
+    }
+  }
+</style>

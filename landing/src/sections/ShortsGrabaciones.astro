@@ -1,0 +1,164 @@
+---
+/**
+ * "¿Te perdiste la clase?" (docs/04-diseno/secciones.md §6, RF-10). Patrón "base + mejora":
+ * - Base: carrusel nativo con overflow-x y scroll-snap; se desliza con el dedo y con el teclado.
+ * - Mejora (≥ 64rem con animaciones): motion/horizontalScroll.ts fija la sección y convierte el
+ *   scroll vertical en avance horizontal.
+ */
+import EncabezadoSeccion from '../components/EncabezadoSeccion.astro';
+import VideoCard from '../components/VideoCard.astro';
+
+type Tarjeta = {
+  tipo: 'short' | 'vivo' | 'grabacion';
+  titulo: string;
+  escena: 'fisica' | 'quimica' | 'programacion' | 'mates' | 'ingles' | 'historia';
+  motivo: string;
+  iniciales: string;
+  color: 'amarillo' | 'menta' | 'lavanda' | 'rosa' | 'gris' | 'cielo';
+  datos: [string, string][];
+};
+
+const tarjetas: Tarjeta[] = [
+  {
+    tipo: 'short',
+    titulo: 'Python en 60 segundos: listas',
+    escena: 'programacion',
+    motivo: '</>',
+    iniciales: 'DR',
+    color: 'amarillo',
+    datos: [
+      ['heart', '842'],
+      ['message-circle', '36'],
+    ],
+  },
+  {
+    tipo: 'grabacion',
+    titulo: 'Física: ondas y partículas · Clase 3',
+    escena: 'fisica',
+    motivo: 'λ',
+    iniciales: 'PV',
+    color: 'menta',
+    datos: [['clock', '52 min']],
+  },
+  {
+    tipo: 'short',
+    titulo: 'El truco para derivar rápido',
+    escena: 'mates',
+    motivo: '∫ x²',
+    iniciales: 'LM',
+    color: 'lavanda',
+    datos: [
+      ['heart', '1,5 k'],
+      ['message-circle', '92'],
+    ],
+  },
+  {
+    tipo: 'vivo',
+    titulo: 'Química orgánica desde cero',
+    escena: 'quimica',
+    motivo: 'H₂O',
+    iniciales: 'CQ',
+    color: 'rosa',
+    datos: [['eye', '342 viendo']],
+  },
+  {
+    tipo: 'grabacion',
+    titulo: 'Inglés: speaking para entrevistas',
+    escena: 'ingles',
+    motivo: 'Hi!',
+    iniciales: 'JD',
+    color: 'cielo',
+    datos: [['clock', '45 min']],
+  },
+  {
+    tipo: 'short',
+    titulo: 'La independencia en un minuto',
+    escena: 'historia',
+    motivo: '1821',
+    iniciales: 'RP',
+    color: 'amarillo',
+    datos: [
+      ['heart', '610'],
+      ['message-circle', '24'],
+    ],
+  },
+];
+---
+
+<section class="shorts" aria-labelledby="titulo-shorts" data-motion="horizontal-scroll">
+  <div class="shorts-marco">
+    <div class="contenedor">
+      <EncabezadoSeccion
+        id="titulo-shorts"
+        titulo="¿Te perdiste la clase?"
+        apoyo="Mira la grabación o repasa con Shorts de un minuto."
+      />
+    </div>
+    <div
+      class="carrusel"
+      role="region"
+      aria-label="Shorts y grabaciones de ejemplo"
+      tabindex="0"
+      data-carrusel
+    >
+      <ul class="carrusel-pista" role="list" data-pista>
+        {tarjetas.map((t) => (
+          <li>
+            <VideoCard {...t} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer secciones {
+    .shorts {
+      padding-block: 0 var(--espacio-seccion);
+      /* La pista es más ancha que la pantalla: no debe crear scroll horizontal en la página. */
+      overflow-x: clip;
+    }
+
+    .carrusel {
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: var(--margen-lateral);
+      scrollbar-width: thin;
+
+      &:focus-visible {
+        outline-offset: -3px;
+      }
+    }
+
+    .carrusel-pista {
+      display: flex;
+      gap: var(--espacio-5);
+      inline-size: max-content;
+      padding: var(--espacio-2) var(--margen-lateral) var(--espacio-5);
+
+      & li {
+        scroll-snap-align: start;
+      }
+    }
+
+    /* Mejora: con el scroll horizontal animado, la pista no usa el desplazamiento nativo. */
+    .shorts[data-horizontal-activo] {
+      --tv-ancho: clamp(13.5rem, 20vw, 19rem);
+
+      & .shorts-marco {
+        display: grid;
+        /* minmax(0, 1fr): la pista, más ancha que la pantalla, no ensancha la columna. */
+        grid-template-columns: minmax(0, 1fr);
+        align-content: center;
+        min-block-size: 100dvh;
+      }
+
+      & .carrusel {
+        overflow: visible;
+        scroll-snap-type: none;
+      }
+    }
+  }
+</style>

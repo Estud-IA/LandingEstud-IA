@@ -1,0 +1,71 @@
+---
+/** Página no encontrada: vuelve al inicio o a la descarga. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TactileButton from '../components/TactileButton.astro';
+import Footer from '../sections/Footer.astro';
+import { sitio } from '../content/site';
+---
+
+<BaseLayout titulo={`Página no encontrada · ${sitio.nombre}`} indexar={false}>
+  <main id="contenido" class="no-encontrada contenedor">
+    <!-- Decorativo: el "404" se dibuja con CSS (amarillo con contorno negro), no es texto. -->
+    <div class="codigo" aria-hidden="true"></div>
+    <h1>Esta página no existe</h1>
+    <p>Puede que el enlace esté mal escrito o que la página se haya movido.</p>
+    <div class="acciones">
+      <TactileButton href="/" tono="esmeralda" icono="home">
+        Volver al inicio
+      </TactileButton>
+      <TactileButton href="/#descargar" icono="download">
+        Descargar la app
+      </TactileButton>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  @layer secciones {
+    .no-encontrada {
+      display: grid;
+      align-content: center;
+      justify-items: start;
+      gap: var(--espacio-4);
+      min-block-size: 80dvh;
+      padding-block: var(--espacio-8);
+
+      & h1 {
+        font-size: var(--texto-h2);
+        font-weight: 800;
+        line-height: 1.05;
+      }
+
+      & > p:not(.codigo) {
+        font-size: var(--texto-grande);
+        color: var(--color-texto-suave);
+      }
+    }
+
+    .codigo {
+      font-family: var(--fuente-titulos);
+      font-weight: 800;
+      font-size: clamp(5rem, 3rem + 10vw, 12rem);
+      line-height: 0.85;
+      color: var(--color-marca);
+      /* El contorno va debajo del relleno: oculta los trazos internos que se superponen en la
+         fuente variable. Se dibuja al doble para que se vean 3 px. */
+      -webkit-text-stroke: 6px var(--color-tinta);
+      paint-order: stroke fill;
+
+      &::before {
+        content: '404';
+      }
+    }
+
+    .acciones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espacio-4);
+    }
+  }
+</style>
