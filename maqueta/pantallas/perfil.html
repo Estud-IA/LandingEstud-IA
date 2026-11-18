@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>Perfil · Pantalla · Maqueta Estud-IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/componentes.css">
+  <link rel="stylesheet" href="../css/pantallas.css">
+</head>
+<body>
+  <div class="app">
+    <div class="barra-estado"><span>9:41</span><span class="estado-iconos" aria-hidden="true"><span class="senal"></span><span class="bateria"></span></span></div>
+    <main class="app-contenido" style="gap: 16px">
+      <header class="app-cabecera">
+        <span class="boton-icono"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#settings"/></svg></span>
+        <h1>Mi perfil</h1>
+        <span class="boton-icono" data-tono="amarillo"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#credit-card"/></svg></span>
+      </header>
+      <div class="perfil-portada escena" data-escena="ingles" aria-hidden="true"></div>
+      <div class="perfil-identidad">
+        <span class="avatar" data-color="amarillo">AT</span>
+        <span class="insignia-nivel"><small>NIVEL</small><strong>12</strong></span>
+        <h1>Ana Torres</h1>
+        <p>@ana.torres · Ing. de Sistemas</p>
+      </div>
+      <div class="estadisticas">
+        <div><strong>248</strong>Seguidores</div>
+        <div><strong>12,4 k</strong>XP total</div>
+        <div><strong>7 días</strong>Racha</div>
+      </div>
+      <div class="titulo-bloque"><h2>Mis Shorts</h2><a href="#">+ Grabar</a></div>
+      <div class="grilla-shorts">
+        <div class="escena" data-escena="programacion"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#play"/></svg>1,2 k</div>
+        <div class="escena" data-escena="mates"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#play"/></svg>860</div>
+        <div class="escena" data-escena="quimica"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#play"/></svg>430</div>
+      </div>
+      <div class="titulo-bloque"><h2>Logros recientes</h2></div>
+      <div class="logros">
+        <div><span class="logro"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#award"/></svg></span>Top 10%</div>
+        <div><span class="logro" style="--c: var(--color-acento)"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#star"/></svg></span>Maestro</div>
+        <div><span class="logro" style="--c: var(--lavanda-100)"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#zap"/></svg></span>Racha 7</div>
+        <div><span class="logro" data-bloqueado><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#lock"/></svg></span>Próximo</div>
+      </div>
+    </main>
+    <nav class="nav-app" aria-label="Navegación de la app">
+      <span role="img" aria-label="Inicio"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#home"/></svg></span>
+      <span role="img" aria-label="Shorts"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#play"/></svg></span>
+      <span class="boton-mas" role="img" aria-label="Crear"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#plus"/></svg></span>
+      <span role="img" aria-label="Cursos"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#book-open"/></svg></span>
+      <span role="img" aria-label="Perfil" aria-current="page"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#user"/></svg></span>
+    </nav>
+  </div>
+</body>
+</html>

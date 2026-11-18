@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>Billetera · Pantalla · Maqueta Estud-IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/componentes.css">
+  <link rel="stylesheet" href="../css/pantallas.css">
+</head>
+<body>
+  <div class="app">
+    <div class="barra-estado"><span>9:41</span><span class="estado-iconos" aria-hidden="true"><span class="senal"></span><span class="bateria"></span></span></div>
+    <main class="app-contenido" style="gap: 18px">
+      <header class="app-cabecera" style="grid-template-columns: 48px 1fr">
+        <span class="boton-icono"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#arrow-left"/></svg></span>
+        <h1 style="text-align: start">Billetera</h1>
+      </header>
+      <div class="pestanas" role="tablist"><span role="tab" aria-selected="true">Monedas</span><span role="tab">Ganancias</span><span role="tab">Vcoins</span></div>
+      <section class="tarjeta" data-tono="amarillo" style="display: grid; justify-items: center; gap: 6px; padding-block: 22px">
+        <span style="font-family: var(--fuente-titulos); font-weight: 700; letter-spacing: var(--tracking-etiqueta)">MIS MONEDAS</span>
+        <span style="display: flex; align-items: center; gap: 14px; font-family: var(--fuente-titulos); font-weight: 800; font-size: 56px; line-height: 1"><span class="moneda"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#star"/></svg></span>120</span>
+        <span style="font-size: 13px; font-weight: 600">1 Moneda = S/ 1.00</span>
+      </section>
+      <span class="btn" data-tono="esmeralda" data-tamano="grande"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#plus"/></svg>Recargar</span>
+      <p style="text-align: center; font-size: 13px; color: var(--color-texto-suave)">Con Monedas pagas la entrada a clases y envías regalos a los creadores.</p>
+      <div class="titulo-bloque"><h2>Movimientos</h2></div>
+      <ul class="movimientos">
+        <li><span class="boton-icono" style="--tam: 40px"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#plus"/></svg></span><span>Recarga<small>15 nov · 18:20</small></span><span class="monto" data-positivo>+50</span></li>
+        <li><span class="boton-icono" style="--tam: 40px"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#radio"/></svg></span><span>Entrada: Física en vivo<small>15 nov · 19:02</small></span><span class="monto">−2</span></li>
+        <li><span class="boton-icono" style="--tam: 40px"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#gift"/></svg></span><span>Regalo a Profe Valeria<small>15 nov · 19:40</small></span><span class="monto">−5</span></li>
+      </ul>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>Ranking · Pantalla · Maqueta Estud-IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/componentes.css">
+  <link rel="stylesheet" href="../css/pantallas.css">
+</head>
+<body>
+  <div class="app">
+    <div class="barra-estado"><span>9:41</span><span class="estado-iconos" aria-hidden="true"><span class="senal"></span><span class="bateria"></span></span></div>
+    <main class="app-contenido" style="gap: 16px">
+      <header class="app-cabecera">
+        <span class="boton-icono"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#arrow-left"/></svg></span>
+        <h1>Ranking</h1>
+        <span></span>
+      </header>
+      <div class="segmentado" role="tablist">
+        <span role="tab" aria-selected="true">Esta clase</span><span role="tab">Semana</span><span role="tab">General</span>
+      </div>
+      <div class="podio">
+        <div class="podio-puesto"><span class="avatar" data-color="lavanda" style="--tam: 56px">LU</span>luciana<span class="podio-bloque" style="--alto: 78px; --c: var(--lavanda-100)">2</span></div>
+        <div class="podio-puesto"><span class="avatar" data-color="menta" style="--tam: 64px">SR</span>sofi.rios<span class="podio-bloque" style="--alto: 104px">1</span></div>
+        <div class="podio-puesto"><span class="avatar" data-color="rosa" style="--tam: 52px">MA</span>mateo_22<span class="podio-bloque" style="--alto: 62px; --c: var(--color-acento)">3</span></div>
+      </div>
+      <ol class="lista-ranking">
+        <li data-propio><span class="posicion">4</span><span class="avatar" data-color="amarillo" style="--tam: 38px">AT</span>Tú · ana.torres<span class="xp">1.240 XP</span></li>
+        <li><span class="posicion">5</span><span class="avatar" data-color="cielo" style="--tam: 38px">JD</span>jdiaz<span class="xp">1.180 XP</span></li>
+        <li><span class="posicion">6</span><span class="avatar" data-color="rosa" style="--tam: 38px">CQ</span>camila.q<span class="xp">1.025 XP</span></li>
+        <li><span class="posicion">7</span><span class="avatar" data-color="gris" style="--tam: 38px">RP</span>rodri_p<span class="xp">990 XP</span></li>
+      </ol>
+      <p style="text-align: center; font-size: 14px; font-weight: 600"><span class="chip-xp"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#trending-up"/></svg>Subiste 2 puestos</span></p>
+    </main>
+    <nav class="nav-app" aria-label="Navegación de la app">
+      <span role="img" aria-label="Inicio"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#home"/></svg></span>
+      <span role="img" aria-label="Shorts"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#play"/></svg></span>
+      <span class="boton-mas" role="img" aria-label="Crear"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#plus"/></svg></span>
+      <span role="img" aria-label="Cursos"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#book-open"/></svg></span>
+      <span role="img" aria-label="Perfil"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#user"/></svg></span>
+    </nav>
+  </div>
+</body>
+</html>

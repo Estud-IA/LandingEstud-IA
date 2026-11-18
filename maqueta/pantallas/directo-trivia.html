@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>Trivia en vivo · Pantalla · Maqueta Estud-IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/componentes.css">
+  <link rel="stylesheet" href="../css/pantallas.css">
+</head>
+<body>
+  <div class="app" data-tema="oscuro">
+    <div class="directo escena" data-escena="fisica" aria-hidden="true">
+      <span class="escena-motivo" style="inset: auto auto 20% -4%; font-size: 9rem">λ</span>
+      <div class="directo-pizarra">
+        <span>Dualidad onda-partícula</span>
+        <strong>λ = h / p</strong>
+        <svg viewBox="0 0 300 60" preserveAspectRatio="none"><path d="M0 30 Q 18.75 0 37.5 30 T 75 30 T 112.5 30 T 150 30 T 187.5 30 T 225 30 T 262.5 30 T 300 30"/></svg>
+      </div>
+      <div class="directo-velo"></div>
+    </div>
+    <div class="barra-estado"><span>9:41</span><span class="estado-iconos" aria-hidden="true"><span class="senal"></span><span class="bateria"></span></span></div>
+    <div class="directo-cabecera">
+      <span class="boton-icono"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#arrow-left"/></svg></span>
+      <div class="directo-titulo">
+        <h1>Física: ondas y partículas</h1>
+        <p>Clase 3 · Profe Valeria</p>
+      </div>
+      <div class="directo-estado">
+        <span class="etiqueta" data-tipo="vivo" style="font-size: 0.85rem"><span class="punto-vivo" aria-hidden="true"></span>En vivo</span>
+        <span class="pildora-dato"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#eye"/></svg>1,2 k</span>
+      </div>
+    </div>
+    <section class="panel-flotante" style="inset-block-end: 96px" aria-label="Trivia">
+      <div class="panel-cabecera">
+        <span class="etiqueta" data-tipo="sistema"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#zap"/></svg> Trivia</span>
+        <span class="pildora-dato"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#clock"/></svg>0:15</span>
+      </div>
+      <h2 style="font-size: 20px">¿Qué demuestra el experimento de la doble rendija?</h2>
+      <ul class="opciones">
+        <li style="--votos: 12%"><span class="letra">A</span>Que la luz es solo una onda<span class="porcentaje">12%</span></li>
+        <li aria-checked="true" style="--votos: 68%"><span class="letra">B</span>La dualidad onda-partícula<span class="porcentaje">68%</span></li>
+        <li style="--votos: 14%"><span class="letra">C</span>La ley de la gravedad<span class="porcentaje">14%</span></li>
+        <li style="--votos: 6%"><span class="letra">D</span>La conservación de la masa<span class="porcentaje">6%</span></li>
+      </ul>
+      <div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 600">
+        <span>214 respuestas</span>
+        <span class="chip-xp"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#zap"/></svg>+15 XP si aciertas</span>
+      </div>
+    </section>
+    <div class="directo-entrada">
+      <span class="campo">Escribe un mensaje…</span>
+      <span class="boton-icono"><svg class="icono" aria-hidden="true"><use href="../assets/iconos/sprite.svg#send"/></svg></span>
+    </div>
+  </div>
+</body>
+</html>
