@@ -1,0 +1,550 @@
+/*
+ * Componentes con el estilo táctil de la app.
+ * Equivalencias con la app Flutter: .btn ↔ TactileButton, .boton-icono ↔ TactileIconButton,
+ * .tarjeta-video ↔ VideoThumbnailCard. Ver docs/04-diseno/design-system.md.
+ */
+
+@layer componentes {
+  /* ── Icono (sprite de Feather) ── */
+  .icono {
+    inline-size: var(--icono-tam, 1.25em);
+    block-size: var(--icono-tam, 1.25em);
+    flex: none;
+    stroke: currentColor;
+  }
+
+  /* ── Botón táctil ── */
+  .btn {
+    --btn-fondo: var(--color-superficie);
+    --btn-texto: var(--color-tinta);
+    --btn-borde: var(--color-tinta);
+    --btn-sombra: var(--sombra-color, var(--color-tinta));
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    padding: 0.85em 1.6em;
+    border: var(--borde) solid var(--btn-borde);
+    border-radius: var(--radio-pildora);
+    background: var(--btn-fondo);
+    color: var(--btn-texto);
+    box-shadow: 0 4px 0 var(--btn-sombra);
+    font-family: var(--fuente-titulos);
+    font-weight: 700;
+    font-size: var(--texto-base);
+    letter-spacing: var(--tracking-etiqueta);
+    line-height: 1.1;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:active {
+      translate: 0 4px;
+      box-shadow: none;
+    }
+
+    &[data-tono="esmeralda"] {
+      --btn-fondo: linear-gradient(180deg, var(--color-accion), var(--color-accion-fin));
+      --btn-texto: var(--gris-50);
+    }
+
+    &[data-tono="amarillo"] {
+      --btn-fondo: var(--color-marca);
+      --btn-borde: var(--color-marca-borde);
+      --btn-sombra: var(--color-marca-borde);
+    }
+
+    &[data-tono="negro"] {
+      --btn-fondo: var(--color-tinta);
+      --btn-texto: var(--gris-50);
+    }
+
+    &[data-tamano="grande"] {
+      font-size: var(--texto-grande);
+      padding: 1em 1.9em;
+    }
+
+    &[data-tamano="chico"] {
+      font-size: var(--texto-chico);
+      padding: 0.55em 1.1em;
+    }
+  }
+
+  .btn-detalle {
+    display: block;
+    font-family: var(--fuente-texto);
+    font-weight: 600;
+    font-size: 0.75em;
+    letter-spacing: 0;
+    text-transform: none;
+    opacity: 0.85;
+  }
+
+  /* ── Botón de icono circular ── */
+  .boton-icono {
+    --tam: 44px;
+    display: inline-grid;
+    place-items: center;
+    inline-size: var(--tam);
+    block-size: var(--tam);
+    border: var(--borde) solid var(--color-tinta);
+    border-radius: 50%;
+    background: var(--color-superficie);
+    color: var(--color-tinta);
+    box-shadow: var(--sombra-dura-chica);
+    --icono-tam: 45%;
+
+    &[data-tono="humo"] {
+      border-color: transparent;
+      background: color-mix(in srgb, var(--gris-50) 18%, transparent);
+      color: var(--gris-50);
+      box-shadow: none;
+    }
+
+    &[data-tono="amarillo"] {
+      background: var(--color-marca);
+      border-color: var(--color-marca-borde);
+      box-shadow: var(--sombra-marca);
+    }
+  }
+
+  /* ── Botón "+" de marca ── */
+  .boton-mas {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 56px;
+    block-size: 56px;
+    border: var(--borde-grueso) solid var(--color-marca-borde);
+    border-radius: 16px;
+    background: var(--color-marca);
+    color: var(--color-tinta);
+    box-shadow: var(--sombra-marca);
+    --icono-tam: 26px;
+  }
+
+  /* ── Tarjeta ── */
+  .tarjeta {
+    background: var(--color-superficie);
+    color: var(--color-texto);
+    border: var(--borde) solid var(--color-tinta);
+    border-radius: var(--radio-tarjeta);
+    box-shadow: 0 4px 0 var(--sombra-color, var(--color-tinta));
+    padding: var(--espacio-5);
+
+    &[data-tono="amarillo"] {
+      background: var(--color-marca);
+    }
+
+    &[data-tono="menta"] {
+      background: var(--color-acento);
+    }
+
+    &[data-tono="lavanda"] {
+      background: var(--lavanda-100);
+    }
+
+    &[data-tono="negro"] {
+      background: var(--color-tinta);
+      color: var(--gris-50);
+      border-color: var(--gris-50);
+    }
+  }
+
+  /* ── Etiqueta ── */
+  .etiqueta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.3em 0.65em;
+    border: var(--borde-fino) solid var(--color-tinta);
+    border-radius: var(--radio-etiqueta);
+    background: var(--color-superficie);
+    color: var(--color-tinta);
+    font-family: var(--fuente-titulos);
+    font-weight: 700;
+    font-size: var(--texto-mini);
+    letter-spacing: var(--tracking-etiqueta);
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    &[data-tipo="vivo"] {
+      background: var(--color-vivo);
+      color: var(--gris-50);
+    }
+
+    &[data-tipo="short"] {
+      background: var(--color-marca);
+    }
+
+    &[data-tipo="grabacion"] {
+      background: var(--lavanda-100);
+    }
+
+    &[data-tipo="pronto"] {
+      background: var(--color-acento);
+    }
+
+    &[data-tipo="sistema"] {
+      background: var(--color-tinta);
+      color: var(--color-marca);
+    }
+  }
+
+  .punto-vivo {
+    inline-size: 0.55em;
+    block-size: 0.55em;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  /* ── Avatar con iniciales ── */
+  .avatar {
+    --tam: 40px;
+    --avatar-fondo: var(--color-marca);
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    inline-size: var(--tam);
+    block-size: var(--tam);
+    border: var(--borde) solid var(--color-tinta);
+    border-radius: 50%;
+    background: var(--avatar-fondo);
+    color: var(--color-tinta);
+    font-family: var(--fuente-titulos);
+    font-weight: 700;
+    font-size: calc(var(--tam) * 0.36);
+    line-height: 1;
+
+    &[data-color="menta"] { --avatar-fondo: var(--color-acento); }
+    &[data-color="lavanda"] { --avatar-fondo: var(--lavanda-100); }
+    &[data-color="rosa"] { --avatar-fondo: var(--rojo-100); }
+    &[data-color="gris"] { --avatar-fondo: var(--gris-200); }
+    &[data-color="cielo"] { --avatar-fondo: var(--ilus-cielo); }
+
+    &[data-vivo] {
+      border-color: var(--color-vivo);
+      box-shadow: 0 0 0 2px var(--gris-50), 0 0 0 4px var(--color-vivo);
+    }
+  }
+
+  /* ── Insignia de nivel ── */
+  .insignia-nivel {
+    display: inline-grid;
+    justify-items: center;
+    padding: 0.35em 1em 0.3em;
+    border: var(--borde) solid var(--color-marca-borde);
+    border-radius: var(--radio-pildora);
+    background: var(--color-marca);
+    color: var(--color-tinta);
+    box-shadow: var(--sombra-marca);
+    font-family: var(--fuente-titulos);
+    font-weight: 700;
+    line-height: 1;
+
+    & small {
+      font-size: 0.6em;
+      letter-spacing: var(--tracking-etiqueta);
+    }
+
+    & strong {
+      font-size: 1.2em;
+    }
+  }
+
+  /* ── Chip de XP ── */
+  .chip-xp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    padding: 0.4em 0.85em;
+    border: var(--borde) solid var(--color-tinta);
+    border-radius: var(--radio-pildora);
+    background: var(--color-marca);
+    color: var(--color-tinta);
+    box-shadow: var(--sombra-dura-chica);
+    font-family: var(--fuente-titulos);
+    font-weight: 700;
+    --icono-tam: 1.1em;
+  }
+
+  /* ── Barra de XP ── */
+  .barra-xp {
+    block-size: 16px;
+    border: 2px solid var(--color-tinta);
+    border-radius: var(--radio-pildora);
+    background: var(--gris-200);
+    overflow: hidden;
+
+    & span {
+      display: block;
+      block-size: 100%;
+      inline-size: var(--progreso, 50%);
+      background: linear-gradient(90deg, var(--color-accion), var(--color-acento));
+      border-inline-end: 2px solid var(--color-tinta);
+    }
+  }
+
+  /* ── Campo de texto en píldora ── */
+  .campo {
+    display: flex;
+    align-items: center;
+    gap: var(--espacio-3);
+    padding: 0.75em 1.1em;
+    border: var(--borde) solid var(--color-tinta);
+    border-radius: var(--radio-pildora);
+    background: var(--color-superficie);
+    color: var(--color-texto-suave);
+    box-shadow: var(--sombra-dura-chica);
+  }
+
+  /* ── Burbuja de chat ── */
+  .burbuja {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--espacio-2);
+
+    & .burbuja-cuerpo {
+      padding: 0.55em 0.9em;
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--gris-50) 92%, transparent);
+      color: var(--color-texto);
+      box-shadow: var(--sombra-dura-chica);
+      font-size: 0.875rem;
+      line-height: 1.35;
+    }
+
+    & .burbuja-autor {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--color-texto-suave);
+    }
+
+    &[data-tipo="sistema"] .burbuja-cuerpo {
+      background: var(--color-marca);
+      font-weight: 600;
+    }
+
+    &[data-tipo="destacado"] .burbuja-cuerpo {
+      background: var(--color-acento);
+    }
+  }
+
+  /* ── Fondos de escena (miniaturas y videos ficticios, sin fotos de personas) ── */
+  .escena {
+    --escena-fondo: linear-gradient(160deg, var(--slate-800), var(--slate));
+    position: relative;
+    background: var(--escena-fondo);
+    color: var(--gris-50);
+    overflow: hidden;
+
+    &[data-escena="fisica"] {
+      --escena-fondo:
+        radial-gradient(circle at 75% 25%, color-mix(in srgb, var(--ilus-cielo) 55%, transparent), transparent 45%),
+        radial-gradient(circle at 20% 80%, color-mix(in srgb, var(--ilus-violeta) 60%, transparent), transparent 50%),
+        linear-gradient(160deg, var(--ilus-indigo), var(--slate));
+    }
+
+    &[data-escena="quimica"] {
+      --escena-fondo:
+        radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--color-acento) 70%, transparent), transparent 45%),
+        linear-gradient(150deg, var(--esmeralda-800), var(--slate));
+    }
+
+    &[data-escena="programacion"] {
+      --escena-fondo:
+        radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-marca) 45%, transparent), transparent 45%),
+        linear-gradient(170deg, var(--slate-800), var(--negro));
+    }
+
+    &[data-escena="mates"] {
+      --escena-fondo:
+        radial-gradient(circle at 25% 30%, color-mix(in srgb, var(--ilus-naranja) 70%, transparent), transparent 50%),
+        linear-gradient(160deg, var(--ilus-coral), var(--ilus-violeta));
+    }
+
+    &[data-escena="ingles"] {
+      --escena-fondo:
+        radial-gradient(circle at 70% 30%, color-mix(in srgb, var(--color-marca) 80%, transparent), transparent 45%),
+        linear-gradient(160deg, var(--ilus-cielo), var(--ilus-indigo));
+    }
+
+    &[data-escena="historia"] {
+      --escena-fondo:
+        radial-gradient(circle at 30% 70%, color-mix(in srgb, var(--color-marca) 60%, transparent), transparent 50%),
+        linear-gradient(160deg, var(--ilus-naranja), var(--oliva-900));
+    }
+  }
+
+  /* Texto decorativo grande dentro de una escena (fórmulas, código) */
+  .escena-motivo {
+    position: absolute;
+    font-family: var(--fuente-titulos);
+    font-weight: 700;
+    color: color-mix(in srgb, var(--gris-50) 22%, transparent);
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* ── Tarjeta de video (VideoThumbnailCard) ── */
+  .tarjeta-video {
+    position: relative;
+    inline-size: var(--tv-ancho, 154px);
+    flex: none;
+    padding-block-end: calc(var(--tv-avatar, 48px) / 2);
+
+    & .tarjeta-video-marco {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      aspect-ratio: 154 / 215;
+      padding: 10px 10px calc(var(--tv-avatar, 48px) / 2 + 8px);
+      border: var(--borde) solid var(--color-tinta);
+      border-radius: var(--radio-tarjeta);
+      box-shadow: 0 4px 0 var(--sombra-color, var(--color-tinta));
+    }
+
+    & .tarjeta-video-marco::after {
+      content: "";
+      position: absolute;
+      inset: 40% 0 0;
+      border-radius: 0 0 calc(var(--radio-tarjeta) - 3px) calc(var(--radio-tarjeta) - 3px);
+      background: linear-gradient(transparent, color-mix(in srgb, var(--negro) 75%, transparent));
+    }
+
+    & .tarjeta-video-info {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 4px;
+    }
+
+    & h3 {
+      font-size: 0.875rem;
+      line-height: 1.2;
+      color: var(--gris-50);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    & .tarjeta-video-datos {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: color-mix(in srgb, var(--gris-50) 85%, transparent);
+      --icono-tam: 0.95em;
+
+      & span {
+        display: inline-flex;
+        gap: 3px;
+        align-items: center;
+      }
+    }
+
+    & .avatar {
+      --tam: var(--tv-avatar, 48px);
+      position: absolute;
+      inset-block-end: 0;
+      inset-inline-start: 50%;
+      translate: -50% 0;
+      z-index: 2;
+      box-shadow: var(--sombra-dura-chica);
+    }
+
+    & .avatar[data-vivo] {
+      box-shadow: 0 0 0 2px var(--gris-50), 0 0 0 4px var(--color-vivo);
+    }
+
+    & .etiqueta {
+      position: relative;
+      z-index: 1;
+      align-self: flex-start;
+    }
+  }
+
+  /* ── Mockup de teléfono: muestra una pantalla de pantallas/ dentro de un iframe ── */
+  .telefono {
+    --escala: 0.72;
+    --marco: 10px;
+    position: relative;
+    flex: none;
+    inline-size: calc(390px * var(--escala) + 2 * var(--marco));
+    block-size: calc(844px * var(--escala) + 2 * var(--marco));
+    border: var(--marco) solid var(--negro);
+    border-radius: calc(var(--radio-telefono) * var(--escala) + var(--marco));
+    background: var(--negro);
+    box-shadow: 0 10px 0 var(--sombra-color, var(--color-tinta));
+    outline: var(--borde) solid var(--telefono-contorno, var(--color-tinta));
+    overflow: clip;
+
+    & iframe {
+      max-inline-size: none;
+      inline-size: 390px;
+      block-size: 844px;
+      border: 0;
+      border-radius: calc(var(--radio-telefono) - 8px);
+      scale: var(--escala);
+      transform-origin: 0 0;
+    }
+
+    &[data-tamano="chico"] { --escala: 0.55; }
+    &[data-tamano="grande"] { --escala: 0.85; }
+  }
+
+  /* ── QR de ejemplo (el QR real se genera en la landing) ── */
+  .qr-ejemplo {
+    --modulo: 6px;
+    position: relative;
+    inline-size: calc(var(--modulo) * 25);
+    aspect-ratio: 1;
+    padding: calc(var(--modulo) * 2);
+    border: var(--borde) solid var(--color-tinta);
+    border-radius: 14px;
+    background:
+      conic-gradient(var(--color-tinta) 25%, transparent 0 50%, var(--color-tinta) 0 75%, transparent 0)
+        0 0 / calc(var(--modulo) * 2) calc(var(--modulo) * 2) content-box,
+      var(--color-superficie);
+    box-shadow: var(--sombra-dura);
+
+    & i {
+      position: absolute;
+      inline-size: calc(var(--modulo) * 7);
+      block-size: calc(var(--modulo) * 7);
+      border: var(--modulo) solid var(--color-tinta);
+      outline: var(--modulo) solid var(--color-superficie);
+      background: radial-gradient(var(--color-tinta) 0 0) center / 50% 50% no-repeat, var(--color-superficie);
+    }
+
+    & i:nth-child(1) { inset-block-start: calc(var(--modulo) * 2); inset-inline-start: calc(var(--modulo) * 2); }
+    & i:nth-child(2) { inset-block-start: calc(var(--modulo) * 2); inset-inline-end: calc(var(--modulo) * 2); }
+    & i:nth-child(3) { inset-block-end: calc(var(--modulo) * 2); inset-inline-start: calc(var(--modulo) * 2); }
+  }
+
+  /* ── Marca: logo + nombre ── */
+  .marca {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: var(--fuente-titulos);
+    font-weight: 700;
+    font-size: 1.375rem;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: inherit;
+
+    & img {
+      inline-size: 1.6em;
+      block-size: auto;
+    }
+  }
+}

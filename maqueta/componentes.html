@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Componentes · Maqueta Estud-IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <style>
+    @layer secciones {
+      .catalogo { max-inline-size: var(--ancho-max); margin-inline: auto; padding: var(--espacio-7) var(--margen-lateral) var(--espacio-8); display: grid; gap: var(--espacio-8); }
+      .catalogo > header h1 { font-size: var(--texto-h2); }
+      .catalogo > header p { color: var(--color-texto-suave); max-inline-size: 60ch; margin-block-start: var(--espacio-3); }
+      .bloque { display: grid; gap: var(--espacio-5); }
+      .bloque > h2 { font-size: var(--texto-h3); padding-block-end: var(--espacio-2); border-block-end: var(--borde) solid var(--color-tinta); }
+      .fila { display: flex; flex-wrap: wrap; gap: var(--espacio-5); align-items: flex-end; }
+      .muestra { display: grid; gap: var(--espacio-2); font-size: var(--texto-chico); }
+      .muestra code { font-size: var(--texto-mini); color: var(--color-texto-suave); }
+      .color { inline-size: 120px; block-size: 72px; border: var(--borde) solid var(--color-tinta); border-radius: 12px; box-shadow: var(--sombra-dura-chica); background: var(--c); }
+      .tipos { display: grid; gap: var(--espacio-4); }
+      .tipos .display { font-family: var(--fuente-titulos); font-weight: 800; font-size: var(--texto-display); line-height: var(--interlineado-display); letter-spacing: var(--tracking-display); }
+      .tipos .h2 { font-family: var(--fuente-titulos); font-weight: 700; font-size: var(--texto-h2); letter-spacing: -0.03em; line-height: 1; }
+      .tipos .h3 { font-family: var(--fuente-titulos); font-weight: 600; font-size: var(--texto-h3); }
+      .tipos .cuerpo { font-size: var(--texto-grande); max-inline-size: 60ch; }
+      .chat-demo { display: grid; gap: var(--espacio-3); max-inline-size: 340px; padding: var(--espacio-4); border-radius: var(--radio-tarjeta); }
+    }
+  </style>
+</head>
+<body>
+  <main class="catalogo">
+    <header>
+      <h1>Componentes</h1>
+      <p>Catálogo del estilo táctil de Estud-IA: bordes negros, sombras duras sin difuminado, píldoras y etiquetas en mayúsculas. Es la referencia para la maqueta y para la landing real.</p>
+    </header>
+
+    <section class="bloque" aria-labelledby="t-colores">
+      <h2 id="t-colores">Colores</h2>
+      <div class="fila">
+        <div class="muestra"><div class="color" style="--c: var(--color-fondo)"></div>Fondo<code>#F9F9F9</code></div>
+        <div class="muestra"><div class="color" style="--c: var(--color-superficie)"></div>Superficie<code>#FFFFFF</code></div>
+        <div class="muestra"><div class="color" style="--c: var(--color-tinta)"></div>Tinta<code>#000000</code></div>
+        <div class="muestra"><div class="color" style="--c: var(--color-accion)"></div>Esmeralda<code>#14B887</code></div>
+        <div class="muestra"><div class="color" style="--c: var(--color-accion-texto)"></div>Esmeralda texto<code>#006C4D</code></div>
+        <div class="muestra"><div class="color" style="--c: var(--color-acento)"></div>Menta<code>#6DF8C2</code></div>
+        <div class="muestra"><div class="color" style="--c: var(--color-marca)"></div>Amarillo<code>#FEE252</code></div>
+        <div class="muestra"><div class="color" style="--c: var(--color-marca-borde)"></div>Oliva<code>#4A3F00</code></div>
+        <div class="muestra"><div class="color" style="--c: var(--color-vivo)"></div>En vivo<code>#BA1A1A</code></div>
+        <div class="muestra"><div class="color" style="--c: var(--lavanda-100)"></div>Lavanda<code>#DAE2FD</code></div>
+        <div class="muestra"><div class="color" style="--c: var(--logo-pizarra)"></div>Logo pizarra<code>#243842</code></div>
+        <div class="muestra"><div class="color" style="--c: var(--logo-lima)"></div>Logo lima<code>#7ED248</code></div>
+      </div>
+    </section>
+
+    <section class="bloque" aria-labelledby="t-tipo">
+      <h2 id="t-tipo">Tipografía</h2>
+      <div class="tipos">
+        <p class="display">Aprende en vivo.</p>
+        <p class="h2">Así se vive una clase</p>
+        <p class="h3">Outfit 600 · títulos de tarjeta</p>
+        <p class="cuerpo">Inter 400 · Clases en directo, chat al instante y XP por participar. Todo desde tu teléfono.</p>
+      </div>
+    </section>
+
+    <section class="bloque" aria-labelledby="t-botones">
+      <h2 id="t-botones">Botones</h2>
+      <div class="fila">
+        <a class="btn" data-tono="esmeralda" data-tamano="grande" href="#">
+          <svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#download"/></svg>
+          <span>Descargar para Android <span class="btn-detalle">v1.0.0 · 48 MB</span></span>
+        </a>
+        <a class="btn" data-tono="esmeralda" href="#">Descargar</a>
+        <a class="btn" data-tono="amarillo" href="#">Únete a la lista</a>
+        <a class="btn" href="#">Ver cómo funciona</a>
+        <a class="btn" data-tono="negro" data-tamano="chico" href="#">Chico</a>
+      </div>
+      <div class="fila">
+        <span class="boton-icono"><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#arrow-left"/></svg></span>
+        <span class="boton-icono"><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#settings"/></svg></span>
+        <span class="boton-icono" data-tono="amarillo"><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#credit-card"/></svg></span>
+        <span class="boton-mas"><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#plus"/></svg></span>
+      </div>
+    </section>
+
+    <section class="bloque" aria-labelledby="t-etiquetas">
+      <h2 id="t-etiquetas">Etiquetas, nivel y XP</h2>
+      <div class="fila">
+        <span class="etiqueta" data-tipo="vivo"><span class="punto-vivo" aria-hidden="true"></span>En vivo</span>
+        <span class="etiqueta" data-tipo="short">Short</span>
+        <span class="etiqueta" data-tipo="grabacion">Grabación</span>
+        <span class="etiqueta" data-tipo="pronto">Próximamente</span>
+        <span class="etiqueta" data-tipo="sistema">Sistema</span>
+        <span class="insignia-nivel"><small>NIVEL</small><strong>12</strong></span>
+        <span class="chip-xp"><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#zap"/></svg>+10 XP</span>
+      </div>
+      <div class="barra-xp" style="--progreso: 72%; max-inline-size: 360px"><span></span></div>
+    </section>
+
+    <section class="bloque" aria-labelledby="t-tarjetas">
+      <h2 id="t-tarjetas">Tarjetas</h2>
+      <div class="fila">
+        <div class="tarjeta" style="max-inline-size: 280px">
+          <h3>Tarjeta blanca</h3>
+          <p>Borde negro de 2,5 px, esquinas de 18 px y sombra dura.</p>
+        </div>
+        <div class="tarjeta" data-tono="amarillo" style="max-inline-size: 280px">
+          <h3>Amarilla</h3>
+          <p>Para Monedas, nivel y lo que protagoniza.</p>
+        </div>
+        <div class="tarjeta" data-tono="menta" style="max-inline-size: 280px">
+          <h3>Menta</h3>
+          <p>Para "Próximamente" y acentos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloque" aria-labelledby="t-video">
+      <h2 id="t-video">Tarjetas de video</h2>
+      <div class="fila">
+        <article class="tarjeta-video">
+          <div class="tarjeta-video-marco escena" data-escena="fisica">
+            <span class="escena-motivo" style="inset: 18% auto auto 10%; font-size: 3rem">E=mc²</span>
+            <span class="etiqueta" data-tipo="vivo"><span class="punto-vivo" aria-hidden="true"></span>En vivo</span>
+            <div class="tarjeta-video-info">
+              <h3>Física: ondas y partículas</h3>
+              <div class="tarjeta-video-datos"><span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#eye"/></svg>1,2 k viendo</span></div>
+            </div>
+          </div>
+          <span class="avatar" data-color="menta" data-vivo>PV</span>
+        </article>
+        <article class="tarjeta-video">
+          <div class="tarjeta-video-marco escena" data-escena="programacion">
+            <span class="escena-motivo" style="inset: 18% auto auto 10%; font-size: 2.6rem">&lt;/&gt;</span>
+            <span class="etiqueta" data-tipo="short">Short</span>
+            <div class="tarjeta-video-info">
+              <h3>Python en 60 segundos: listas</h3>
+              <div class="tarjeta-video-datos">
+                <span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#heart"/></svg>842</span>
+                <span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#message-circle"/></svg>36</span>
+              </div>
+            </div>
+          </div>
+          <span class="avatar" data-color="amarillo">DR</span>
+        </article>
+        <article class="tarjeta-video">
+          <div class="tarjeta-video-marco escena" data-escena="mates">
+            <span class="escena-motivo" style="inset: 18% auto auto 10%; font-size: 3rem">∫ x²</span>
+            <span class="etiqueta" data-tipo="grabacion">Grabación</span>
+            <div class="tarjeta-video-info">
+              <h3>Cálculo: integrales sin miedo</h3>
+              <div class="tarjeta-video-datos"><span><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#clock"/></svg>58 min</span></div>
+            </div>
+          </div>
+          <span class="avatar" data-color="lavanda">LM</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="bloque" aria-labelledby="t-chat">
+      <h2 id="t-chat">Chat, campos y avatares</h2>
+      <div class="fila">
+        <div class="chat-demo escena" data-escena="fisica">
+          <div class="burbuja"><span class="avatar" data-color="amarillo" style="--tam: 32px">MA</span><p class="burbuja-cuerpo"><span class="burbuja-autor">mateo_22</span>¡Ahora sí entendí la dualidad!</p></div>
+          <div class="burbuja" data-tipo="destacado"><span class="avatar" data-color="menta" style="--tam: 32px">SR</span><p class="burbuja-cuerpo"><span class="burbuja-autor">sofi.rios · destacado</span>¿Esto entra en el examen?</p></div>
+          <div class="burbuja" data-tipo="sistema"><span class="avatar" data-color="gris" style="--tam: 32px"><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#bar-chart-2"/></svg></span><p class="burbuja-cuerpo"><span class="burbuja-autor">Sistema</span>Nueva trivia iniciada</p></div>
+        </div>
+        <div style="display: grid; gap: var(--espacio-4); min-inline-size: 280px">
+          <div class="campo"><svg class="icono" aria-hidden="true"><use href="assets/iconos/sprite.svg#search"/></svg>Buscar cuentas…</div>
+          <div class="fila">
+            <span class="avatar">AT</span>
+            <span class="avatar" data-color="menta">PV</span>
+            <span class="avatar" data-color="lavanda">LM</span>
+            <span class="avatar" data-color="rosa">CQ</span>
+            <span class="avatar" data-color="menta" data-vivo>JD</span>
+          </div>
+          <div class="qr-ejemplo" role="img" aria-label="Código QR de ejemplo"><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
