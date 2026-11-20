@@ -68,6 +68,8 @@ import { sitio } from '../content/site';
   @layer secciones {
     .descargar {
       display: grid;
+      /* minmax(0, 1fr): el botón (sin saltos de línea) no ensancha la columna más que la pantalla. */
+      grid-template-columns: minmax(0, 1fr);
       align-content: center;
       justify-items: start;
       gap: var(--espacio-5);
@@ -85,6 +87,18 @@ import { sitio } from '../content/site';
       & p {
         font-size: var(--texto-grande);
         color: var(--color-texto-suave);
+      }
+
+      & :global(.btn) {
+        max-inline-size: 100%;
+      }
+
+      /* En pantallas estrechas el botón ocupa todo el ancho y su texto puede partirse (como en la home). */
+      @media (width < 30rem) {
+        & :global(.btn) {
+          inline-size: 100%;
+          white-space: normal;
+        }
       }
     }
 
